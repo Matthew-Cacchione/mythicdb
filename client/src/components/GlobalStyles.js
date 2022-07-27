@@ -7,13 +7,16 @@ export default createGlobalStyle`
     --color-primary-variant: #3700b3;
     --color-secondary: #03dac6;
     --color-background: #121212;
-    --color-surface: #121212;
+    --color-surface: #292929;
     --color-error: #cf6679;
     --color-on-primary: #000000;
     --color-on-secondary: #000000;
     --color-on-background: #ffffff;
     --color-on-surface: #ffffff;
     --color-on-error: #000000;
+
+    --font-heading: 'Poppins', sans-serif;
+    --font-body: 'Poppins', sans-serif; 
 }
 
 /* CSS Reset */
@@ -40,6 +43,8 @@ time, mark, audio, video {
 	padding: 0;
 	border: 0;
     box-sizing: border-box;
+    color: var(--color-on-background);
+    font-family: var(--font-body);
 	font-size: 100%;
 	vertical-align: baseline;
 }
@@ -51,6 +56,7 @@ footer, header, hgroup, menu, nav, section {
 }
 
 body {
+    background: var(--color-background);
 	line-height: 1;
 }
 
@@ -66,5 +72,9 @@ blockquote:before, blockquote:after,
 q:before, q:after {
 	content: '';
 	content: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
 }
 `;

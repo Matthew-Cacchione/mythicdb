@@ -1,15 +1,17 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import GlobalStyles from "./GlobalStyles";
+import Header from "./Header";
 
 const App = () => {
   return (
     <Router>
       <GlobalStyles />
-      <Switch>
-        <Route path="/">Home</Route>
-        <Route path="">No path found.</Route>
-      </Switch>
+      <Header />
+      <Routes>
+        <Route path="/" element={<>Home</>} />
+        <Route path="" element={<>No path found.</>} />
+      </Routes>
     </Router>
   );
 };

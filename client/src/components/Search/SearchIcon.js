@@ -27,6 +27,7 @@ const Button = styled.button`
 const Icon = styled(AiOutlineSearch)`
   fill: ${({ isVisible }) =>
     isVisible ? "var(--color-primary)" : "var(--color-on-surface)"};
+  transition: fill 500ms;
 `;
 
 export default SearchIcon;

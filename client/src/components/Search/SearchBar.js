@@ -35,6 +35,10 @@ const Input = styled.input`
   &:focus {
     outline: none;
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
 `;
 
 const Wrapper = styled.div`

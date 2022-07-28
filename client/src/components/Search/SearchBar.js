@@ -26,7 +26,7 @@ const slide = keyframes`
 
 const Input = styled.input`
   animation: ${slide} 500ms forwards, ${fade} 500ms;
-  background: #f5f5f5;
+  background: var(--color-on-background);
   border: none;
   height: 2.4em;
   width: 100%;

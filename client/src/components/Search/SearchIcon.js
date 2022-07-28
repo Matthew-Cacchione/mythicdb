@@ -10,7 +10,10 @@ const SearchIcon = ({ isVisible, setIsVisible }) => {
 
   return (
     <Button onPointerDown={handleClick}>
-      <Icon size="2rem" isVisible={isVisible} />
+      <Icon
+        size="2rem"
+        fill={isVisible ? "var(--color-primary)" : "var(--color-on-surface)"}
+      />
     </Button>
   );
 };
@@ -25,8 +28,6 @@ const Button = styled.button`
 `;
 
 const Icon = styled(AiOutlineSearch)`
-  fill: ${({ isVisible }) =>
-    isVisible ? "var(--color-primary)" : "var(--color-on-surface)"};
   transition: fill 500ms;
 `;
 

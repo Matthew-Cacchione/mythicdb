@@ -4,13 +4,15 @@ import { useState } from "react";
 import SearchBar from "../Search/SearchBar";
 import SearchIcon from "../Search/SearchIcon";
 
+import { STRINGS } from "../../constants";
+
 const Header = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   return (
     <>
       <Wrapper>
-        <Title>MythicDB</Title>
+        <Title>{STRINGS.app}</Title>
         <SearchIcon isVisible={isVisible} setIsVisible={setIsVisible} />
       </Wrapper>
       <SearchBar isVisible={isVisible} />

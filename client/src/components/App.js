@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import GlobalStyles from "./GlobalStyles";
 import Header from "./Header";
+import Home from "./Home";
 
 const App = () => {
   return (
@@ -9,7 +10,7 @@ const App = () => {
       <GlobalStyles />
       <Header />
       <Routes>
-        <Route path="/" element={<>Home</>} />
+        <Route exact path="/" element={<Home />} />
         <Route path="" element={<>No path found.</>} />
       </Routes>
     </Router>

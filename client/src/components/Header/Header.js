@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
 
+import { Link } from "react-router-dom";
 import SearchBar from "../Search/SearchBar";
 import SearchIcon from "../Search/SearchIcon";
 
@@ -12,13 +13,19 @@ const Header = () => {
   return (
     <>
       <Wrapper>
-        <Title>{STRINGS.app}</Title>
+        <BlankLink to="/">
+          <Title>{STRINGS.app}</Title>
+        </BlankLink>
         <SearchIcon isVisible={isVisible} setIsVisible={setIsVisible} />
       </Wrapper>
       <SearchBar isVisible={isVisible} />
     </>
   );
 };
+
+const BlankLink = styled(Link)`
+  text-decoration: none;
+`;
 
 const Title = styled.h1`
   font-size: 2rem;

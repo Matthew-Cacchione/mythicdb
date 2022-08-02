@@ -8,6 +8,7 @@ import SearchIcon from "../Search/SearchIcon";
 import { STRINGS } from "../../constants";
 
 const Header = () => {
+  // State to track the visibility of the search bar.
   const [isVisible, setIsVisible] = useState(false);
 
   return (

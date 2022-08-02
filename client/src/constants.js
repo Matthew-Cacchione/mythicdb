@@ -21,4 +21,9 @@ export const STRINGS = {
         "New to Mythic+? Click here to be redirected to the information page.",
     },
   },
+  paths: {
+    affixes: "/affixes",
+    leaderboard: "/leaderboard",
+    newPlayer: "/introduction",
+  },
 };

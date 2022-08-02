@@ -14,14 +14,17 @@ const Home = () => {
       <Card
         description={STRINGS.cards.newPlayer.description}
         title={STRINGS.cards.newPlayer.title}
+        path={STRINGS.paths.newPlayer}
       />
       <Card
         description={STRINGS.cards.affixes.description}
         title={STRINGS.cards.affixes.title}
+        path={STRINGS.paths.affixes}
       />
       <Card
         description={STRINGS.cards.leaderboard.description}
         title={STRINGS.cards.leaderboard.title}
+        path={STRINGS.paths.leaderboard}
       />
     </Wrapper>
   );

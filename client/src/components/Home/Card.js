@@ -1,14 +1,25 @@
 import styled from "styled-components";
 
-const Card = ({ description, title }) => {
+import { Link } from "react-router-dom";
+
+const Card = ({ description, title, path }) => {
   return (
-    <Wrapper>
-      {title && <Title>{title}</Title>}
-      <Divider />
-      {description && <Description>{description}</Description>}
-    </Wrapper>
+    <BlankLink to={path || "/"}>
+      <Wrapper>
+        {title && <Title>{title}</Title>}
+        <Divider />
+        {description && <Description>{description}</Description>}
+      </Wrapper>
+    </BlankLink>
   );
 };
+
+const BlankLink = styled(Link)`
+  display: flex;
+  justify-content: center;
+  text-decoration: none;
+  width: 100%;
+`;
 
 const Description = styled.p`
   text-align: center;

@@ -56,9 +56,11 @@ const getUser = async (req, res) => {
         });
 
       default:
-        return res
-          .status(500)
-          .json({ status: 500, message: e.name, data: { _id } });
+        return res.status(500).json({
+          status: 500,
+          message: "Something went wrong, please try again.",
+          data: { _id },
+        });
     }
   } finally {
     client.close();
@@ -76,7 +78,6 @@ const signIn = async (req, res) => {
     return res.status(400).json({
       status: 400,
       message: "Request is missing data.",
-      data: req.body,
     });
   }
 
@@ -113,10 +114,68 @@ const signIn = async (req, res) => {
     }
   } catch (e) {
     console.error("Error signing in:", e);
-    return res.status(500).json({ status: 500, message: e.name });
+    return res.status(500).json({
+      status: 500,
+      message: "Something went wrong, please try again.",
+    });
   } finally {
     client.close();
   }
 };
 
-module.exports = { getUser, signIn };
+const signUp = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, options);
+
+  // Extract the sign up details from the request.
+  const { username, password } = req.body;
+
+  // If either value is missing, respond with a bad request.
+  if (!username || !password) {
+    return res.status(400).json({
+      status: 400,
+      message: "Request is missing data.",
+    });
+  }
+
+  try {
+    await client.connect();
+    const users = client.db("master").collection("users");
+
+    let user = await users.findOne({ username });
+
+    // If the username is taken respond with a bad request.
+    if (user) {
+      return res.status(400).json({ status: 400, message: "Username taken." });
+    }
+
+    // Create a new user with the given details.
+    const hash = await bcrypt.hash(password, 10);
+    user = { username, password: hash };
+
+    const response = await users.insertOne(user);
+
+    // Verify that the user was inserted successfully.
+    if (response.insertedId) {
+      // Remove the user's password from the response.
+      const clone = { _id: response.insertedId.toString(), ...user };
+      delete clone.password;
+
+      return res.status(201).json({ status: 201, data: { user: clone } });
+    } else {
+      return res.status(500).json({
+        status: 500,
+        message: "Something went wrong, please try again.",
+      });
+    }
+  } catch (e) {
+    console.error("Error signing up:", e);
+    return res.status(500).json({
+      status: 500,
+      message: "Something went wrong, please try again.",
+    });
+  } finally {
+    client.close();
+  }
+};
+
+module.exports = { getUser, signIn, signUp };

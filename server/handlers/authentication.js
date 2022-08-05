@@ -14,6 +14,90 @@ const options = {
   useUnifiedTopology: true,
 };
 
+// Change the user's password.
+const changePassword = async (req, res) => {
+  const client = new MongoClient(MONGO_URI);
+
+  // Extract the necessary details from the request.
+  const { _id } = req.params;
+  const { oldPassword, newPassword } = req.body;
+
+  // If any details are missing respond with a bad request.
+  if ((!oldPassword, !newPassword)) {
+    return res
+      .status(400)
+      .json({ status: 400, message: "Request is missing data." });
+  }
+
+  try {
+    await client.connect();
+    const users = client.db("master").collection("users");
+
+    // Verify that the user exists in the database.
+    const user = await users.findOne({ _id: ObjectId(_id) });
+
+    if (!user) {
+      return res
+        .status(404)
+        .json({ status: 404, message: "No user found.", data: { _id } });
+    }
+
+    // Verify that the password entered is correct.
+    const verify = bcrypt.compare(oldPassword, user.password);
+
+    if (!verify) {
+      return res.status(401).json({
+        status: 401,
+        message: "Incorrect password provided.",
+      });
+    }
+
+    // Request has passed all tests, update the user's password.
+    const hash = bcrypt.hash(newPassword, 10);
+
+    // Setup arguments for update.
+    const query = { _id: ObjectId(_id) };
+    const patch = { $set: { password: hash } };
+
+    // Verify that the update was successful and respond appropriately.
+    const response = await users.updateOne(query, patch);
+
+    if (response.modifiedCount) {
+      // Remove the user's password from the response.
+      const clone = { ...user };
+      delete clone.password;
+
+      return res.status(200).json({ status: 200, data: { user: clone } });
+    } else {
+      return res
+        .status(502)
+        .json({ status: 502, message: "Update failed, please try again." });
+    }
+  } catch (e) {
+    console.error("Error changing password:", e);
+
+    // Respond based on the error thrown.
+    switch (e.name) {
+      // Id provided is not a valid ObjectId.
+      case "BSONTypeError":
+        return res.status(400).json({
+          status: 400,
+          message: "Invalid id provided.",
+          data: { _id },
+        });
+
+      default:
+        return res.status(500).json({
+          status: 500,
+          message: "Something went wrong, please try again.",
+          data: { _id },
+        });
+    }
+  } finally {
+    client.close();
+  }
+};
+
 // Delete the user with given id.
 const deleteUser = async (req, res) => {
   const client = new MongoClient(MONGO_URI);
@@ -38,15 +122,29 @@ const deleteUser = async (req, res) => {
     } else {
       return res.status(502).json({
         status: 502,
-        message: "Database did not receive request, please try again.",
+        message: "Deletion failed, please try again.",
       });
     }
   } catch (e) {
     console.error("Error deleting user:", e);
-    return res.status(500).json({
-      status: 500,
-      message: "Something went wrong, please try again.",
-    });
+
+    // Respond based on the error thrown.
+    switch (e.name) {
+      // Id provided is not a valid ObjectId.
+      case "BSONTypeError":
+        return res.status(400).json({
+          status: 400,
+          message: "Invalid id provided.",
+          data: { _id },
+        });
+
+      default:
+        return res.status(500).json({
+          status: 500,
+          message: "Something went wrong, please try again.",
+          data: { _id },
+        });
+    }
   } finally {
     client.close();
   }
@@ -202,9 +300,9 @@ const signUp = async (req, res) => {
 
       return res.status(201).json({ status: 201, data: { user: clone } });
     } else {
-      return res.status(500).json({
-        status: 500,
-        message: "Something went wrong, please try again.",
+      return res.status(502).json({
+        status: 502,
+        message: "Sign up failed, please try again.",
       });
     }
   } catch (e) {
@@ -218,4 +316,4 @@ const signUp = async (req, res) => {
   }
 };
 
-module.exports = { deleteUser, getUser, signIn, signUp };
+module.exports = { changePassword, deleteUser, getUser, signIn, signUp };

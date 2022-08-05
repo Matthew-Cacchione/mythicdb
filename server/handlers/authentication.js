@@ -69,10 +69,10 @@ const signIn = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
 
   // Extract the sign in details from the request.
-  const { email, password } = req.body;
+  const { username, password } = req.body;
 
   // If either value is missing, respond with a bad request.
-  if (!email || !password) {
+  if (!username || !password) {
     return res.status(400).json({
       status: 400,
       message: "Request is missing data.",
@@ -84,14 +84,14 @@ const signIn = async (req, res) => {
     await client.connect();
     const users = client.db("master").collection("users");
 
-    const user = await users.findOne({ email });
+    const user = await users.findOne({ username });
 
     // Verify that the user attempting to sign in exists.
     if (!user) {
       return res.status(404).json({
         status: 404,
-        message: "No user found with that email.",
-        data: { email },
+        message: "No user found with that username.",
+        data: { username },
       });
     }
 
@@ -102,7 +102,7 @@ const signIn = async (req, res) => {
       return res.status(401).json({
         status: 401,
         message: "Incorrect password provided.",
-        data: { email },
+        data: { username },
       });
     } else {
       // Remove the user's password from the response.

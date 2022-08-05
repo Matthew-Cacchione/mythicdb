@@ -1,25 +1,24 @@
 import styled from "styled-components";
-import { useState } from "react";
 
 import { Link } from "react-router-dom";
-import SearchBar from "../Search/SearchBar";
-import SearchIcon from "../Search/SearchIcon";
+import Sandwich from "./Sandwich";
+import Search from "../Search";
 
 import { STRINGS } from "../../constants";
 
 const Header = () => {
-  // State to track the visibility of the search bar.
-  const [isVisible, setIsVisible] = useState(false);
-
   return (
     <>
       <Wrapper>
-        <BlankLink to="/">
-          <Title>{STRINGS.app}</Title>
-        </BlankLink>
-        <SearchIcon isVisible={isVisible} setIsVisible={setIsVisible} />
+        <Container>
+          <BlankLink to="/">
+            <Title>{STRINGS.app}</Title>
+          </BlankLink>
+          <Sandwich />
+        </Container>
+
+        <Search />
       </Wrapper>
-      <SearchBar isVisible={isVisible} />
     </>
   );
 };
@@ -28,14 +27,22 @@ const BlankLink = styled(Link)`
   text-decoration: none;
 `;
 
+const Container = styled.div`
+  align-items: center;
+  background: var(--color-surface);
+  display: flex;
+  justify-content: space-between;
+`;
+
 const Title = styled.h1`
   font-size: 2rem;
 `;
 
 const Wrapper = styled.header`
-  align-items: center;
   background: var(--color-surface);
   display: flex;
+  flex-direction: column;
+  gap: 0.5em;
   justify-content: space-between;
   padding: 0.6em;
 `;

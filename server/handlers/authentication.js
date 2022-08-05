@@ -43,7 +43,7 @@ const changePassword = async (req, res) => {
     }
 
     // Verify that the password entered is correct.
-    const verify = bcrypt.compare(oldPassword, user.password);
+    const verify = await bcrypt.compare(oldPassword, user.password);
 
     if (!verify) {
       return res.status(401).json({
@@ -53,7 +53,7 @@ const changePassword = async (req, res) => {
     }
 
     // Request has passed all tests, update the user's password.
-    const hash = bcrypt.hash(newPassword, 10);
+    const hash = await bcrypt.hash(newPassword, 10);
 
     // Setup arguments for update.
     const query = { _id: ObjectId(_id) };

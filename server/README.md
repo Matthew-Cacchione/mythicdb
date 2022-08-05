@@ -39,6 +39,34 @@ Response will be in this structure:
 }
 ```
 
+### PATCH /api/users/:id
+
+Change the given user's password.
+
+Expects a body with the following structure:
+
+```json
+{
+  "oldPassword": "oldPassword",
+  "newPassword": "newPassword"
+}
+```
+
+Response will be in this structure:
+
+```json
+{
+  "status": 200,
+  "message": "If a message is required it will be here.",
+  "data": {
+    "user": {
+      "_id": "62ed8d9226d3f14e42d79347",
+      "username": "username"
+    }
+  }
+}
+```
+
 ### POST /api/users
 
 Create a new user.

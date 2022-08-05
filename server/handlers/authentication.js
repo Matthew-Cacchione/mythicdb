@@ -14,6 +14,44 @@ const options = {
   useUnifiedTopology: true,
 };
 
+// Delete the user with given id.
+const deleteUser = async (req, res) => {
+  const client = new MongoClient(MONGO_URI);
+
+  // Extract the user id from the request.
+  const { _id } = req.params;
+
+  try {
+    await client.connect();
+    const users = client.db("master").collection("users");
+
+    // Find the specific user in the collection.
+    const response = await users.deleteOne({ _id: ObjectId(_id) });
+
+    // Verify that the user was deleted and respond appropriately.
+    if (response.deletedCount) {
+      return res.status(204).json();
+    } else if (response.acknowledged) {
+      return res
+        .status(404)
+        .json({ status: 404, message: "No user found.", data: { _id } });
+    } else {
+      return res.status(502).json({
+        status: 502,
+        message: "Database did not receive request, please try again.",
+      });
+    }
+  } catch (e) {
+    console.error("Error deleting user:", e);
+    return res.status(500).json({
+      status: 500,
+      message: "Something went wrong, please try again.",
+    });
+  } finally {
+    client.close();
+  }
+};
+
 // Get the user details given an id.
 const getUser = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
@@ -38,7 +76,7 @@ const getUser = async (req, res) => {
     } else {
       return res.status(404).json({
         status: 404,
-        message: "No user found with that id.",
+        message: "No user found.",
         data: { _id },
       });
     }
@@ -67,6 +105,7 @@ const getUser = async (req, res) => {
   }
 };
 
+// Sign a user in given username and password.
 const signIn = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
 
@@ -123,6 +162,7 @@ const signIn = async (req, res) => {
   }
 };
 
+// Create a new user given username and password.
 const signUp = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
 
@@ -178,4 +218,4 @@ const signUp = async (req, res) => {
   }
 };
 
-module.exports = { getUser, signIn, signUp };
+module.exports = { deleteUser, getUser, signIn, signUp };

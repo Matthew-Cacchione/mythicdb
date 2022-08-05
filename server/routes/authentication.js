@@ -2,9 +2,17 @@
 const router = require("express").Router();
 
 // Require authentication handlers.
-const { getUser, signIn, signUp } = require("../handlers/authentication");
+const {
+  deleteUser,
+  getUser,
+  signIn,
+  signUp,
+} = require("../handlers/authentication");
 
 // #Endpoints.
+
+// Delete the user with given id.
+router.delete("/api/users/:_id", deleteUser);
 
 // Get the user data given an id.
 router.get("/api/users/:_id", getUser);

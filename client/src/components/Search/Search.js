@@ -11,7 +11,8 @@ const Search = () => {
 const Input = styled.input`
   background: var(--color-on-background);
   border: 3px solid var(--color-primary);
-  height: 2.4em;
+  border-radius: 0.2em;
+  height: 3em;
   width: 100%;
   z-index: -1;
 

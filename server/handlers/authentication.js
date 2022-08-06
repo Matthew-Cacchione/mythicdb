@@ -3,10 +3,13 @@ const { MongoClient, ObjectId } = require("mongodb");
 
 // Require environment variables.
 require("dotenv").config();
-const { MONGO_URI } = process.env;
+const { ACCESS_TOKEN_SECRET, MONGO_URI } = process.env;
 
 // Require bcrypt for password encryption.
 const bcrypt = require("bcrypt");
+
+// Require json web tokens for authentication.
+const jwt = require("jsonwebtoken");
 
 // Set Mongo options.
 const options = {
@@ -247,7 +250,10 @@ const signIn = async (req, res) => {
       const clone = { ...user };
       delete clone.password;
 
-      return res.status(200).json({ status: 200, data: { user: clone } });
+      // Create a JSON token for authentication.
+      const token = jwt.sign(user, ACCESS_TOKEN_SECRET);
+
+      return res.status(200).json({ status: 200, data: { token } });
     }
   } catch (e) {
     console.error("Error signing in:", e);

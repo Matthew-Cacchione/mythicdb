@@ -1,15 +1,14 @@
-import { createContext, useReducer } from "react";
+import { createContext, useEffect, useReducer } from "react";
 
 const initialState = {
-  _id: null,
-  username: null,
+  token: null,
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
     case "signed-in":
-      const { _id, username } = action;
-      return { ...state, _id, username };
+      const { token } = action;
+      return { ...state, token };
 
     case "signed-out":
       return { ...initialState };
@@ -25,14 +24,23 @@ export const CurrentUserProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   // User has been signed in.
-  const signedIn = (data) => {
-    dispatch({ type: "signed-in", ...data });
+  const signedIn = (token) => {
+    dispatch({ type: "signed-in", token });
   };
 
   // User has been signed out.
   const signedOut = () => {
     dispatch({ type: "signed-out" });
   };
+
+  // Check if a user is already signed in on initial render.
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      signedIn(token);
+    }
+  }, []);
 
   return (
     <CurrentUserContext.Provider

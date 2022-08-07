@@ -10,7 +10,7 @@ const SignIn = () => {
   const [error, setError] = useState(null);
 
   const navigate = useNavigate();
-  const { signedIn } = useContext(CurrentUserContext);
+  const { signedIn } = useContext(CurrentUserContext).actions;
 
   // Sign the user in when the form is submitted.
   const handleSubmit = async (e) => {
@@ -34,7 +34,7 @@ const SignIn = () => {
       case 200:
         // Cookies would be more secure but for now local storage works.
         localStorage.setItem("token", data.data.token);
-        console.log(localStorage.getItem("token"));
+        signedIn(data.data.token);
         navigate("/");
         break;
 

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import Card from "./Card";
 
-import { STRINGS } from "../../constants";
+import { STRINGS } from "../constants";
 
 const Home = () => {
   return (

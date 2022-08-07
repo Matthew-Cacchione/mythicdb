@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 import { Link } from "react-router-dom";
 
-import { CurrentUserContext } from "../../context/CurrentUserContext";
-import { STRINGS } from "../../constants";
+import { CurrentUserContext } from "../context/CurrentUserContext";
+import { STRINGS } from "../constants";
 
 const Menu = ({ open, setOpen }) => {
   // Context that determines if a user is logged in.

@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import { Link } from "react-router-dom";
 import Menu from "./Menu";
-import Sandwich from "./Menu/Sandwich";
+import Sandwich from "./Sandwich";
 import Search from "./Search";
 
 import { STRINGS } from "../constants";

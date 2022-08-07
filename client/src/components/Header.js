@@ -2,11 +2,11 @@ import styled from "styled-components";
 import { useState } from "react";
 
 import { Link } from "react-router-dom";
-import Menu from "../Menu";
-import Sandwich from "../Menu/Sandwich";
-import Search from "../Search";
+import Menu from "./Menu";
+import Sandwich from "./Menu/Sandwich";
+import Search from "./Search";
 
-import { STRINGS } from "../../constants";
+import { STRINGS } from "../constants";
 
 const Header = () => {
   // State to track whether the menu is open.

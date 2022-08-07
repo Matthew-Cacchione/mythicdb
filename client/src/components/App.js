@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import GlobalStyles from "./GlobalStyles";
 import Header from "./Header";
 import Home from "./Home";
-import SignIn from "./Sign In/";
+import SignIn from "./SignIn";
 import SignUp from "../pages/SignUp";
 
 import { STRINGS } from "../constants";

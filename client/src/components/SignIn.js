@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { CurrentUserContext } from "../../context/CurrentUserContext";
-import { STRINGS } from "../../constants";
+import { CurrentUserContext } from "../context/CurrentUserContext";
+import { STRINGS } from "../constants";
 
 const SignIn = () => {
   // Track if any errors have occurred during sign in.

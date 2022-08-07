@@ -21,8 +21,8 @@ router.delete("/api/user", authenticateToken, deleteUser);
 // Get the user data given an id.
 router.get("/api/users/:_id", getUser);
 
-// Change the user's password.
-router.patch("/api/users/:_id", changePassword);
+// Change the user's password given access token.
+router.patch("/api/user", authenticateToken, changePassword);
 
 // Sign up a new user.
 router.post("/api/users", signUp);

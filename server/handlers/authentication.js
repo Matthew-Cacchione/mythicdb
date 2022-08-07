@@ -22,7 +22,7 @@ const changePassword = async (req, res) => {
   const client = new MongoClient(MONGO_URI);
 
   // Extract the necessary details from the request.
-  const { _id } = req.params;
+  const { _id } = req.user;
   const { oldPassword, newPassword } = req.body;
 
   // If any details are missing respond with a bad request.

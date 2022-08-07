@@ -51,6 +51,14 @@ Response will be in this structure:
 
 Change the given user's password.
 
+Expects a header with the following structure:
+
+```json
+{
+  "Authorization": "Bearer eyJhbGciOiJIUzI1..."
+}
+```
+
 Expects a body with the following structure:
 
 ```json

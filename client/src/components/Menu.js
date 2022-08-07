@@ -39,19 +39,19 @@ const Menu = ({ open, setOpen }) => {
         // Render different menu items if the user is signed in.
         token ? (
           <>
-            <MenuLink to="/user/main-character" onClick={closeMenu}>
+            <Navigate to="/user/main-character" onClick={closeMenu}>
               {STRINGS.viewMain}
-            </MenuLink>
-            <MenuButton onClick={signOut}>Sign Out</MenuButton>
+            </Navigate>
+            <Button onClick={signOut}>Sign Out</Button>
           </>
         ) : (
           <>
-            <MenuLink to={STRINGS.paths.login} onClick={closeMenu}>
+            <Navigate to={STRINGS.paths.login} onClick={closeMenu}>
               {STRINGS.login}
-            </MenuLink>
-            <MenuLink to={STRINGS.paths.signUp} onClick={closeMenu}>
+            </Navigate>
+            <Navigate to={STRINGS.paths.signUp} onClick={closeMenu}>
               {STRINGS.signUp}
-            </MenuLink>
+            </Navigate>
           </>
         )
       }
@@ -59,7 +59,7 @@ const Menu = ({ open, setOpen }) => {
   );
 };
 
-const MenuButton = styled.button`
+const Button = styled.button`
   background: transparent;
   border: none;
   color: var(--color-on-surface);
@@ -77,7 +77,7 @@ const MenuButton = styled.button`
   }
 `;
 
-const MenuLink = styled(Link)`
+const Navigate = styled(Link)`
   color: var(--color-on-surface);
   font-size: 2rem;
   font-weight: bold;

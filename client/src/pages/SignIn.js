@@ -2,6 +2,10 @@ import styled from "styled-components";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import Button from "../components/Button";
+import Error from "../components/Error";
+import Input from "../components/Input";
+
 import { CurrentUserContext } from "../context/CurrentUserContext";
 import { STRINGS } from "../constants";
 
@@ -67,55 +71,18 @@ const SignIn = () => {
   return (
     <Wrapper onSubmit={handleSubmit}>
       <Label htmlFor="username">{STRINGS.username}</Label>
-      <Input id="username" type="text" required />
+      <Input id="username" type="text" />
       <Label htmlFor="password">{STRINGS.password}</Label>
-      <Input id="password" type="password" required />
-      <Submit>{STRINGS.login.toUpperCase()}</Submit>
-      {error && <Error>{error}</Error>}
+      <Input id="password" type="password" />
+      <Button label={STRINGS.login.toUpperCase()} type="submit" />
+      {error && <Error message={error} />}
     </Wrapper>
   );
 };
 
-const Error = styled.h2`
-  background: var(--color-error);
-  border: 3px solid var(--color-error);
-  border-radius: 0.2rem;
-  color: var(--color-on-error);
-  font-size: 1.2rem;
-  margin: 1em 0;
-  padding: 0.2em;
-  text-align: center;
-  width: 80%;
-`;
-
-const Input = styled.input`
-  background: var(--color-on-background);
-  border: 2px solid var(--color-secondary);
-  border-radius: 0.2em;
-  height: 3em;
-  margin-bottom: 1em;
-  width: 80%;
-
-  &:focus {
-    outline: none;
-  }
-`;
-
 const Label = styled.label`
   font-size: 1.3rem;
   margin: 0.4em 0;
-`;
-
-const Submit = styled.button`
-  background: var(--color-secondary);
-  border: 3px solid var(--color-secondary);
-  border-radius: 0.2rem;
-  color: var(--color-on-secondary);
-  cursor: pointer;
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-top: 0.6em;
-  width: 80%;
 `;
 
 const Wrapper = styled.form`

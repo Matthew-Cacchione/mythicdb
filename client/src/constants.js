@@ -5,6 +5,7 @@ export const STRINGS = {
   password: "Password",
   signUp: "Sign Up",
   username: "Username",
+  viewMain: "View Main",
   cards: {
     affixes: {
       title: "Affixes",

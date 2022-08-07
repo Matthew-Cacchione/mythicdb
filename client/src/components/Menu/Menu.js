@@ -40,17 +40,17 @@ const Menu = ({ open, setOpen }) => {
         token ? (
           <>
             <MenuLink to="/user/main-character" onClick={closeMenu}>
-              View Main
+              {STRINGS.viewMain}
             </MenuLink>
             <MenuButton onClick={signOut}>Sign Out</MenuButton>
           </>
         ) : (
           <>
             <MenuLink to={STRINGS.paths.login} onClick={closeMenu}>
-              Sign In
+              {STRINGS.login}
             </MenuLink>
             <MenuLink to={STRINGS.paths.signUp} onClick={closeMenu}>
-              Sign Up
+              {STRINGS.signUp}
             </MenuLink>
           </>
         )

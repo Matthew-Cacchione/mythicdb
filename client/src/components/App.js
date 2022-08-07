@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import GlobalStyles from "./GlobalStyles";
+import GlobalStyles from "./styles/GlobalStyles";
 import Header from "./Header";
 import Home from "./Home";
 import SignIn from "./SignIn";

@@ -10,6 +10,8 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Endpoints.
+app.use(require("./routes/authentication"));
+
 app.get("*", (req, res) => {
   return res.status(404).json({ status: 404, message: "No endpoint found." });
 });

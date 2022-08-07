@@ -3,8 +3,15 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 const Card = ({ description, title, path }) => {
+  // Disable the link when no path is provided.
+  const disableLink = (e) => {
+    if (!path) {
+      e.preventDefault();
+    }
+  };
+
   return (
-    <BlankLink to={path || "/"}>
+    <BlankLink to={path || "/"} onClick={disableLink}>
       <Wrapper>
         {title && <Title>{title}</Title>}
         <Divider />
@@ -15,6 +22,7 @@ const Card = ({ description, title, path }) => {
 };
 
 const BlankLink = styled(Link)`
+  cursor: ${({ to }) => (to === "/" ? "default" : "pointer")};
   display: flex;
   justify-content: center;
   text-decoration: none;

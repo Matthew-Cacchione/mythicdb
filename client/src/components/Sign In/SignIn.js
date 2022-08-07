@@ -1,8 +1,15 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 import { STRINGS } from "../../constants";
 
 const SignIn = () => {
+  // Track if any errors have occurred during sign in.
+  const [error, setError] = useState(null);
+
+  const navigate = useNavigate();
+
   // Sign the user in when the form is submitted.
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -10,15 +17,38 @@ const SignIn = () => {
     const username = e.target[0].value;
     const password = e.target[1].value;
 
-    fetch("/api/users/signIn", {
+    const response = await fetch("/api/users/signIn", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ username, password }),
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
+    });
+
+    const data = await response.json();
+
+    switch (data.status) {
+      // User signed in successfully.
+      case 200:
+        // Cookies would be more secure but for now local storage works.
+        localStorage.setItem("token", data.data.token);
+        navigate("/");
+        break;
+
+      // User entered the wrong password.
+      case 401:
+        setError("Incorrect password provided.");
+        break;
+
+      // Username entered does not exist.
+      case 404:
+        setError("No account exists with that username.");
+        break;
+
+      default:
+        setError("Something went wrong, please try again.");
+        break;
+    }
   };
 
   return (
@@ -28,9 +58,22 @@ const SignIn = () => {
       <Label htmlFor="password">{STRINGS.password}</Label>
       <Input id="password" type="password" required />
       <Submit>{STRINGS.login.toUpperCase()}</Submit>
+      {error && <Error>{error}</Error>}
     </Wrapper>
   );
 };
+
+const Error = styled.h2`
+  background: var(--color-error);
+  border: 3px solid var(--color-error);
+  border-radius: 0.2rem;
+  color: var(--color-on-error);
+  font-size: 1.2rem;
+  margin: 1em 0;
+  padding: 0.2em;
+  text-align: center;
+  width: 80%;
+`;
 
 const Input = styled.input`
   background: var(--color-on-background);

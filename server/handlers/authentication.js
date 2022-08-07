@@ -251,7 +251,7 @@ const signIn = async (req, res) => {
       delete clone.password;
 
       // Create a JSON token for authentication.
-      const token = jwt.sign(user, ACCESS_TOKEN_SECRET);
+      const token = jwt.sign(clone, ACCESS_TOKEN_SECRET);
 
       return res.status(200).json({ status: 200, data: { token } });
     }

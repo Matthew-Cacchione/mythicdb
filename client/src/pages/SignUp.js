@@ -67,7 +67,7 @@ const SignUp = () => {
       <Input id="password" type="password" required />
       <Label htmlFor="confirm-password">{STRINGS.confirmPassword}</Label>
       <Input id="confirm-password" type="password" required />
-      <Submit>{STRINGS.login.toUpperCase()}</Submit>
+      <Submit>{STRINGS.signUp.toUpperCase()}</Submit>
       {error && <Error>{error}</Error>}
     </Wrapper>
   );

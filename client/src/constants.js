@@ -3,6 +3,7 @@ export const STRINGS = {
   confirmPassword: "Confirm Password",
   login: "Sign In",
   password: "Password",
+  signUp: "Sign Up",
   username: "Username",
   cards: {
     affixes: {

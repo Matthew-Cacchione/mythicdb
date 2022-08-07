@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import { Link } from "react-router-dom";
 
-const Card = ({ description, title, path }) => {
+const Card = ({ children, description, title, path }) => {
   // Disable the link when no path is provided.
   const disableLink = (e) => {
     if (!path) {
@@ -16,6 +16,7 @@ const Card = ({ description, title, path }) => {
         {title && <Title>{title}</Title>}
         <Divider />
         {description && <Description>{description}</Description>}
+        {children}
       </Wrapper>
     </BlankLink>
   );
@@ -30,6 +31,7 @@ const BlankLink = styled(Link)`
 `;
 
 const Description = styled.p`
+  line-height: 1.3em;
   text-align: center;
   white-space: pre-wrap;
 `;

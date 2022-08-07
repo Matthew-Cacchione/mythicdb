@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 
+import { CurrentUserContext } from "../../context/CurrentUserContext";
 import { STRINGS } from "../../constants";
 
 const SignIn = () => {
@@ -9,6 +10,7 @@ const SignIn = () => {
   const [error, setError] = useState(null);
 
   const navigate = useNavigate();
+  const { signedIn } = useContext(CurrentUserContext);
 
   // Sign the user in when the form is submitted.
   const handleSubmit = async (e) => {
@@ -32,6 +34,7 @@ const SignIn = () => {
       case 200:
         // Cookies would be more secure but for now local storage works.
         localStorage.setItem("token", data.data.token);
+        console.log(localStorage.getItem("token"));
         navigate("/");
         break;
 

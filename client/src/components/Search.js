@@ -1,9 +1,11 @@
 import styled from "styled-components";
 
+import { STRINGS } from "../constants";
+
 const Search = () => {
   return (
     <Wrapper>
-      <Input />
+      <Input placeholder={STRINGS.searchCharacters} />
     </Wrapper>
   );
 };

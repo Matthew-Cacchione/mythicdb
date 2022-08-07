@@ -101,12 +101,12 @@ const changePassword = async (req, res) => {
   }
 };
 
-// Delete the user with given id.
+// Delete the user with given access token.
 const deleteUser = async (req, res) => {
   const client = new MongoClient(MONGO_URI);
 
   // Extract the user id from the request.
-  const { _id } = req.params;
+  const { _id } = req.user;
 
   try {
     await client.connect();

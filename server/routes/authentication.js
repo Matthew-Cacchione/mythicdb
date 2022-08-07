@@ -1,6 +1,9 @@
 // Authentication related routes will be hosted here.
 const router = require("express").Router();
 
+// Require token authentication middleware.
+const { authenticateToken } = require("../helpers/tokens");
+
 // Require authentication handlers.
 const {
   changePassword,
@@ -12,8 +15,8 @@ const {
 
 // #Endpoints.
 
-// Delete the user with given id.
-router.delete("/api/users/:_id", deleteUser);
+// Delete the user with given access token.
+router.delete("/api/user", authenticateToken, deleteUser);
 
 // Get the user data given an id.
 router.get("/api/users/:_id", getUser);

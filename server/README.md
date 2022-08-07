@@ -23,9 +23,17 @@ Response will be in this structure:
 }
 ```
 
-### DELETE /api/users/:id
+### DELETE /api/user
 
-Delete the user with given id.
+Delete the user with given authentication token.
+
+Expects a header with the following structure:
+
+```json
+{
+  "Authorization": "Bearer eyJhbGciOiJIUzI1..."
+}
+```
 
 Response will be in this structure:
 

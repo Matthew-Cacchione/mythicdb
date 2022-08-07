@@ -55,6 +55,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   gap: 1em;
   justify-content: center;
+  margin-bottom: 1.5em;
   padding: 1em;
   transition: box-shadow 200ms;
   width: 80%;

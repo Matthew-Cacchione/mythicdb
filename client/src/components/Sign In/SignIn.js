@@ -9,8 +9,13 @@ const SignIn = () => {
   // Track if any errors have occurred during sign in.
   const [error, setError] = useState(null);
 
-  const navigate = useNavigate();
+  // Context that determines if a user is already signed in.
+  const { token } = useContext(CurrentUserContext).state;
+
+  // Import sign in dispatch from context.
   const { signedIn } = useContext(CurrentUserContext).actions;
+
+  const navigate = useNavigate();
 
   // Sign the user in when the form is submitted.
   const handleSubmit = async (e) => {
@@ -53,6 +58,11 @@ const SignIn = () => {
         break;
     }
   };
+
+  // If a user is already signed in redirect them to the homepage.
+  if (token) {
+    navigate("/");
+  }
 
   return (
     <Wrapper onSubmit={handleSubmit}>

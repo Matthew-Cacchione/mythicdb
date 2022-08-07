@@ -14,7 +14,6 @@ const Input = styled.input`
   border-radius: 0.2em;
   height: 3em;
   width: 100%;
-  z-index: -1;
 
   &:focus {
     outline: none;

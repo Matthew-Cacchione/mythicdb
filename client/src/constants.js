@@ -1,5 +1,8 @@
 export const STRINGS = {
   app: "MythicDB",
+  login: "Sign In",
+  password: "Password",
+  username: "Username",
   cards: {
     affixes: {
       title: "Affixes",
@@ -24,6 +27,8 @@ export const STRINGS = {
   paths: {
     affixes: "/affixes",
     leaderboard: "/leaderboard",
+    login: "/login",
     newPlayer: "/introduction",
+    signUp: "/signup",
   },
 };

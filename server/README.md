@@ -115,10 +115,7 @@ Response will be in this structure:
   "status": 200,
   "message": "If a message is required it will be here.",
   "data": {
-    "user": {
-      "_id": "62ed3ff815cec80011eaca27",
-      "username": "username"
-    }
+    "token": "eyJhbGciOiJIUzI1..."
   }
 }
 ```

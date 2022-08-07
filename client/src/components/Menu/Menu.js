@@ -2,11 +2,21 @@ import styled from "styled-components";
 
 import { Link } from "react-router-dom";
 
-const Menu = ({ open }) => {
+import { STRINGS } from "../../constants";
+
+const Menu = ({ open, setOpen }) => {
+  const handleClick = () => {
+    setOpen(false);
+  };
+
   return (
     <Wrapper open={open}>
-      <MenuLink to="/">Sign In</MenuLink>
-      <MenuLink to="/">Sign Up</MenuLink>
+      <MenuLink to={STRINGS.paths.login} onClick={handleClick}>
+        Sign In
+      </MenuLink>
+      <MenuLink to={STRINGS.paths.signUp} onClick={handleClick}>
+        Sign Up
+      </MenuLink>
     </Wrapper>
   );
 };

@@ -20,7 +20,7 @@ const Header = () => {
             <Title>{STRINGS.app}</Title>
           </BlankLink>
           <Sandwich open={open} setOpen={setOpen} />
-          <Menu open={open} />
+          <Menu open={open} setOpen={setOpen} />
         </Container>
         <Search />
       </Wrapper>

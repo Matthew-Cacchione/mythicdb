@@ -4,6 +4,7 @@ import GlobalStyles from "./GlobalStyles";
 import Header from "./Header";
 import Home from "./Home";
 import SignIn from "./Sign In/";
+import SignUp from "../pages/SignUp";
 
 import { STRINGS } from "../constants";
 
@@ -26,7 +27,7 @@ const App = () => {
           element={<>Leaderboard</>}
         />
         <Route exact path={STRINGS.paths.login} element={<SignIn />} />
-        <Route exact path={STRINGS.paths.signUp} element={<>Sign Up</>} />
+        <Route exact path={STRINGS.paths.signUp} element={<SignUp />} />
         <Route path="" element={<>No path found.</>} />
       </Routes>
     </Router>

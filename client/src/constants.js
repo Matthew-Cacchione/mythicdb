@@ -1,5 +1,6 @@
 export const STRINGS = {
   app: "MythicDB",
+  confirmPassword: "Confirm Password",
   login: "Sign In",
   password: "Password",
   username: "Username",

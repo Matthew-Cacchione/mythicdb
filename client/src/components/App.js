@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import GlobalStyles from "./styles/GlobalStyles";
 import Header from "./Header";
 import Home from "../pages/Home";
+import Introduction from "../pages/Introduction";
 import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
 
@@ -18,7 +19,7 @@ const App = () => {
         <Route
           exact
           path={STRINGS.paths.newPlayer}
-          element={<>Introduction</>}
+          element={<Introduction />}
         />
         <Route exact path={STRINGS.paths.affixes} element={<>Affixes</>} />
         <Route

@@ -17,8 +17,8 @@ const Introduction = () => {
       >
         <Table>
           <Row>
-            <th>Keystone Level</th>
-            <th>Increased Health and Damage</th>
+            <th>{STRINGS.newPlayer.keystoneHeader}</th>
+            <th>{STRINGS.newPlayer.scaleHeader}</th>
           </Row>
           {DATA.keystones.map((keystone) => {
             return (
@@ -29,7 +29,7 @@ const Introduction = () => {
             );
           })}
         </Table>
-        <Note>Note: This list is not comprehensive</Note>
+        <Note>{STRINGS.newPlayer.keyExplanation.note}</Note>
       </Card>
       <Card
         description={STRINGS.newPlayer.gear.description}
@@ -37,9 +37,9 @@ const Introduction = () => {
       >
         <Table>
           <Row>
-            <th>Keystone Level</th>
-            <th>Dungeon Chest</th>
-            <th>Great Vault</th>
+            <th>{STRINGS.newPlayer.keystoneHeader}</th>
+            <th>{STRINGS.newPlayer.chestHeader}</th>
+            <th>{STRINGS.newPlayer.vaultHeader}</th>
           </Row>
           {DATA.keystones
             .slice(0, DATA.keystones.length - 1)
@@ -53,7 +53,7 @@ const Introduction = () => {
               );
             })}
         </Table>
-        <Note>Note: Gear rewards cap at +15</Note>
+        <Note>{STRINGS.newPlayer.gear.note}</Note>
       </Card>
       <Card
         description={STRINGS.newPlayer.affixes.description}

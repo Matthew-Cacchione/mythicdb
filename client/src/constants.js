@@ -64,6 +64,10 @@ export const STRINGS = {
     },
   },
   newPlayer: {
+    chestHeader: "Dungeon Chest",
+    keystoneHeader: "Keystone Level",
+    scaleHeader: "Increased Health and Damage",
+    vaultHeader: "Great Vault",
     affixes: {
       title: "Affixes",
       description:
@@ -73,6 +77,7 @@ export const STRINGS = {
       title: "Gear!",
       description:
         "As a reward for completing these challenging dungeons you'll also receive progressively better gear.\n\nGear is obtained in two ways, from the end of dungeon chest and from your weekly great vault options. Here's the breakdown;",
+      note: "Note: Gear rewards cap at +15",
     },
     introduction: {
       title: "What is Mythic+?",
@@ -83,6 +88,7 @@ export const STRINGS = {
       title: "How it works",
       description:
         "When you complete a mythic dungeon you will receive a keystone. A keystone can only be used at the corresponding dungeon and has a level associated to it.\n\nAs the keystone level increases enemies in the dungeon will have progressively more health and damage. Here's the breakdown;",
+      note: "Note: This list is not comprehensive",
     },
   },
   paths: {

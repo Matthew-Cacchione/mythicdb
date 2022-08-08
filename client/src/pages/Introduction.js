@@ -42,7 +42,9 @@ const Introduction = () => {
             <th>{STRINGS.newPlayer.vaultHeader}</th>
           </Row>
           {DATA.keystones
-            .slice(0, DATA.keystones.length - 1)
+            .filter((keystone) => {
+              return keystone.level < 16;
+            })
             .map((keystone) => {
               return (
                 <Row>

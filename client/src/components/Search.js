@@ -5,7 +5,7 @@ import { STRINGS } from "../constants";
 const Search = () => {
   return (
     <Wrapper>
-      <Input placeholder={STRINGS.searchCharacters} />
+      <Input placeholder={STRINGS.searchPlaceholder} />
     </Wrapper>
   );
 };

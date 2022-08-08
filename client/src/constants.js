@@ -38,7 +38,7 @@ export const STRINGS = {
   confirmPassword: "Confirm Password",
   login: "Sign In",
   password: "Password",
-  searchCharacters: "Search characters",
+  searchPlaceholder: "Search characters",
   signUp: "Sign Up",
   username: "Username",
   viewMain: "View Main",

@@ -7,7 +7,7 @@ import Introduction from "../pages/Introduction";
 import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
 
-import { STRINGS } from "../constants";
+import { PATHS } from "../constants";
 
 const App = () => {
   return (
@@ -16,19 +16,12 @@ const App = () => {
       <Header />
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route
-          exact
-          path={STRINGS.paths.newPlayer}
-          element={<Introduction />}
-        />
-        <Route exact path={STRINGS.paths.affixes} element={<>Affixes</>} />
-        <Route
-          exact
-          path={STRINGS.paths.leaderboard}
-          element={<>Leaderboard</>}
-        />
-        <Route exact path={STRINGS.paths.login} element={<SignIn />} />
-        <Route exact path={STRINGS.paths.signUp} element={<SignUp />} />
+        <Route exact path={PATHS.newPlayer} element={<Introduction />} />
+        <Route exact path={PATHS.character} element={<>Character page</>} />
+        <Route exact path={PATHS.affixes} element={<>Affixes</>} />
+        <Route exact path={PATHS.leaderboard} element={<>Leaderboard</>} />
+        <Route exact path={PATHS.login} element={<SignIn />} />
+        <Route exact path={PATHS.signUp} element={<SignUp />} />
         <Route path="" element={<>No path found.</>} />
       </Routes>
     </Router>

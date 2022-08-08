@@ -33,6 +33,15 @@ export const DATA = {
   ],
 };
 
+export const PATHS = {
+  affixes: "/affixes",
+  character: "/character/us/:realm/:name",
+  leaderboard: "/leaderboard",
+  login: "/login",
+  newPlayer: "/introduction",
+  signUp: "/signup",
+};
+
 export const STRINGS = {
   app: "MythicDB",
   confirmPassword: "Confirm Password",
@@ -90,12 +99,5 @@ export const STRINGS = {
         "When you complete a mythic dungeon you will receive a keystone. A keystone can only be used at the corresponding dungeon and has a level associated to it.\n\nAs the keystone level increases enemies in the dungeon will have progressively more health and damage. Here's the breakdown;",
       note: "Note: This list is not comprehensive",
     },
-  },
-  paths: {
-    affixes: "/affixes",
-    leaderboard: "/leaderboard",
-    login: "/login",
-    newPlayer: "/introduction",
-    signUp: "/signup",
   },
 };

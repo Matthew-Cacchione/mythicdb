@@ -7,7 +7,7 @@ import Error from "../components/Error";
 import Input from "../components/Input";
 
 import { CurrentUserContext } from "../context/CurrentUserContext";
-import { STRINGS } from "../constants";
+import { PATHS, STRINGS } from "../constants";
 
 const SignUp = () => {
   // Track if any errors have occurred during sign up.
@@ -43,7 +43,7 @@ const SignUp = () => {
       switch (data.status) {
         // User signed up successfully.
         case 201:
-          navigate(STRINGS.paths.login);
+          navigate(PATHS.login);
           break;
 
         // Chosen username is taken.

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import Card from "../components/Card";
 
-import { DATA, STRINGS } from "../constants";
+import { DATA, PATHS, STRINGS } from "../constants";
 
 const Introduction = () => {
   return (
@@ -59,7 +59,7 @@ const Introduction = () => {
       </Card>
       <Card
         description={STRINGS.newPlayer.affixes.description}
-        path={STRINGS.paths.affixes}
+        path={PATHS.affixes}
         title={STRINGS.newPlayer.affixes.title}
       />
     </Wrapper>

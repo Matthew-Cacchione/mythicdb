@@ -2,7 +2,50 @@
 
 Endpoints are grouped into the following categories:
 
+- **character** - relating to warcraft characters
 - **user** - relating to users
+
+## Character Endpoints
+
+### GET /api/characters
+
+Get the data of the specified character.
+
+Expects the following variables as a query:
+
+```js
+name = "character name";
+realm = "realm slug";
+```
+
+Response will be in this structure:
+
+```json
+{
+  "status": 200,
+  "message": "If a message is required it will be here.",
+  "data": {
+    "profile": {
+      "name": "Kyrasis",
+      "realm": "Area 52",
+      "faction": "Alliance",
+      "race": "Dwarf",
+      "class": "Death Knight",
+      "spec": "Blood",
+      "guild": "Not Idiot"
+    },
+    "mythic_plus": {
+      "rating": 2072.3765,
+      "rating_color": {
+        "r": 0,
+        "g": 112,
+        "b": 221,
+        "a": 1
+      }
+    }
+  }
+}
+```
 
 ## User Endpoints
 

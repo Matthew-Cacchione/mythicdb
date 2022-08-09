@@ -11,25 +11,60 @@ const Character = () => {
 
   useEffect(() => {
     const getCharacter = async () => {
+      // Reset the character so the loading indicator is displayed.
+      await setCharacter(null);
+
+      // Fetch the character from the server.
       const response = await fetch(
         `/api/characters?name=${name}&realm=${realm}`
       );
 
       const data = await response.json();
-      setCharacter(data.data);
+
+      // Only set the character if the response is OK.
+      switch (data.status) {
+        case 200:
+          setCharacter(data.data);
+          break;
+
+        case 404:
+          setCharacter("not found");
+          break;
+
+        default:
+          setCharacter("error");
+          break;
+      }
     };
 
     getCharacter();
     //eslint-disable-next-line
-  }, []);
+  }, [name, realm]);
 
-  // Return a loading indicator if the character isn't set.
-  if (!character) {
-    return (
-      <Wrapper>
-        <Container>Loading...</Container>
-      </Wrapper>
-    );
+  switch (character) {
+    case null:
+      return (
+        <Wrapper>
+          <Container>Loading...</Container>
+        </Wrapper>
+      );
+
+    case "not found":
+      return (
+        <Wrapper>
+          <Container>No character found.</Container>
+        </Wrapper>
+      );
+
+    case "error":
+      return (
+        <Wrapper>
+          <Container>An error occurred, please try again.</Container>
+        </Wrapper>
+      );
+
+    default:
+      break;
   }
 
   // Deconstruct the data after it's loaded.

@@ -34,7 +34,7 @@ const getCharacter = async (req, res) => {
     const media = await (await fetch(characterMediaUri(name, realm))).json();
 
     // If no character was found return a 404.
-    if (profile.code === 404) {
+    if (mplus.code === 404 || profile.code === 404) {
       return res.status(404).json({
         status: 404,
         message: "Character not found.",

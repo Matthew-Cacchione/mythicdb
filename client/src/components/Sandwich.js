@@ -46,7 +46,7 @@ const Wrapper = styled.button`
   cursor: pointer;
   position: absolute;
   right: 1em;
-  z-index: 1;
+  z-index: 3;
 
   &:focus {
     outline: none;

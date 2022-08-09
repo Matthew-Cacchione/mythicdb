@@ -109,6 +109,7 @@ const Wrapper = styled.nav`
   transform: ${({ open }) => (open ? " translateX(0)" : " translateX(100%)")};
   transition: all 300ms ease-in-out;
   width: 100%;
+  z-index: 2;
 `;
 
 export default Menu;

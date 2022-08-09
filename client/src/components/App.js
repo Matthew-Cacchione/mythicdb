@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+import Character from "../pages/Character";
 import GlobalStyles from "./styles/GlobalStyles";
 import Header from "./Header";
 import Home from "../pages/Home";
@@ -17,7 +18,7 @@ const App = () => {
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path={PATHS.newPlayer} element={<Introduction />} />
-        <Route exact path={PATHS.character} element={<>Character page</>} />
+        <Route exact path={PATHS.character} element={<Character />} />
         <Route exact path={PATHS.affixes} element={<>Affixes</>} />
         <Route exact path={PATHS.leaderboard} element={<>Leaderboard</>} />
         <Route exact path={PATHS.login} element={<SignIn />} />

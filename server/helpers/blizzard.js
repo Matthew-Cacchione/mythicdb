@@ -7,9 +7,14 @@ const characterUri = (name, realm) => {
   return `https://us.api.blizzard.com/profile/wow/character/${realm}/${name}?namespace=profile-us&locale=en_US&access_token=${BLIZZARD_ACCESS_TOKEN}`;
 };
 
+// Character media API endpoint.
+const characterMediaUri = (name, realm) => {
+  return `https://us.api.blizzard.com/profile/wow/character/${realm}/${name}/character-media?namespace=profile-us&locale=en_US&access_token=${BLIZZARD_ACCESS_TOKEN}`;
+};
+
 // Character mythic plus profile API endpoint.
 const mythicPlusUri = (name, realm) => {
   return `https://us.api.blizzard.com/profile/wow/character/${realm}/${name}/mythic-keystone-profile/season/8?namespace=profile-us&locale=en_US&access_token=${BLIZZARD_ACCESS_TOKEN}`;
 };
 
-module.exports = { characterUri, mythicPlusUri };
+module.exports = { characterUri, characterMediaUri, mythicPlusUri };

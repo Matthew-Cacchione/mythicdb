@@ -5,16 +5,21 @@ const fetch = (...args) =>
 
 // Require helper functions.
 const { capitalize } = require("../helpers/strings");
-const { characterUri, mythicPlusUri } = require("../helpers/blizzard");
+const {
+  characterUri,
+  characterMediaUri,
+  mythicPlusUri,
+} = require("../helpers/blizzard");
 
 // Retrieve the given character's data from the API.
 const getCharacter = async (req, res) => {
   const { name, realm } = req.query;
 
   try {
-    // Fetch the character's profile and mythic plus data from the API.
+    // Fetch the character's profile, media, and mythic plus data from the API.
     const mplus = await (await fetch(mythicPlusUri(name, realm))).json();
     const profile = await (await fetch(characterUri(name, realm))).json();
+    const media = await (await fetch(characterMediaUri(name, realm))).json();
 
     // If no character was found return a 404.
     if (profile.code === 404) {
@@ -39,6 +44,9 @@ const getCharacter = async (req, res) => {
     // Extract the required mythic plus data from the response.
     const { rating, color: rating_color } = mplus.mythic_rating;
 
+    // Extract the media from the response.
+    const img_src = media.assets[2].value;
+
     // Respond with the required data.
     return res.status(200).json({
       status: 200,
@@ -51,6 +59,7 @@ const getCharacter = async (req, res) => {
           class: character_class,
           spec,
           guild,
+          img_src,
         },
         mythic_plus: { rating, rating_color },
       },

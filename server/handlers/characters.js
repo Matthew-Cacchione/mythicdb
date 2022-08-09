@@ -35,7 +35,7 @@ const getCharacter = async (req, res) => {
       active_spec: { name: spec },
       character_class: { name: character_class },
       faction: { name: faction },
-      guild: { name: guild },
+      guild: { name: guild } = { name: null },
       name: character_name,
       race: { name: race },
       realm: { name: character_realm },

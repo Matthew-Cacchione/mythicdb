@@ -49,7 +49,9 @@ const Character = () => {
 
   // Determine the class color.
   const classColor = (characterClass) => {
-    switch (characterClass.toLowerCase()) {
+    const lower = characterClass.toLowerCase();
+
+    switch (lower) {
       case "death knight":
         return "var(--color-death-knight)";
 
@@ -57,7 +59,7 @@ const Character = () => {
         return "var(--color-demon-hunter)";
 
       default:
-        return `var(--color-${characterClass})`;
+        return `var(--color-${lower})`;
     }
   };
 
@@ -69,14 +71,17 @@ const Character = () => {
           <Rating rating_color={rating_color}>{rating.toFixed(1)}</Rating>
         </Head>
         <Media src={img_src} alt={`${characterName}'s character.`} />
-        <Details faction={faction}>
-          <p>{`<${guild}>`}</p>
-          <p>
-            <span>{race}</span>{" "}
-            <CharacterClass color={classColor(characterClass)}>
+        <Details>
+          {guild && <p>{`<${guild}>`}</p>}
+          <CharacterClass
+            classColor={classColor(characterClass)}
+            faction={faction}
+          >
+            {race}{" "}
+            <span>
               {spec} {characterClass}
-            </CharacterClass>
-          </p>
+            </span>
+          </CharacterClass>
           <p>{`(US) ${characterRealm}`}</p>
         </Details>
       </Container>
@@ -85,8 +90,12 @@ const Character = () => {
 };
 
 const CharacterClass = styled.p`
-  color: ${({ color }) => color};
-  display: inline;
+  color: ${({ faction }) =>
+    faction === "Alliance" ? "var(--color-alliance)" : "var(--color-horde)"};
+
+  & > span {
+    color: ${({ classColor }) => classColor};
+  }
 `;
 
 const Container = styled.div`
@@ -110,12 +119,6 @@ const Details = styled.div`
   flex-direction: column;
   gap: 0.6em;
   letter-spacing: 0.1rem;
-
-  & span {
-    color: ${({ faction }) =>
-      faction === "Alliance" ? "var(--color-alliance)" : "var(--color-horde)"};
-    text-shadow: 1px 2px black;
-  }
 `;
 
 const Head = styled.div`
@@ -126,9 +129,9 @@ const Head = styled.div`
 
 const Media = styled.img`
   border: 3px solid var(--color-background);
-  height: 150px;
+  height: 200px;
   object-fit: cover;
-  object-position: 0 -75px;
+  object-position: 0 -35px;
 `;
 
 const Name = styled.h2`
@@ -138,7 +141,7 @@ const Name = styled.h2`
 
 const Rating = styled.p`
   color: ${({ rating_color }) =>
-    `rgba(${rating_color.r}, ${rating_color.g}, ${rating_color.b}, ${rating_color.a})`};
+    `rgb(${rating_color.r}, ${rating_color.g}, ${rating_color.b})`};
   font-size: 1.3rem;
   font-weight: bold;
   text-shadow: 2px 2px black;

@@ -102,7 +102,7 @@ const Character = () => {
     <Wrapper>
       <Container>
         <Head>
-          <Name>{characterName}</Name>
+          <Name faction={faction}>{characterName}</Name>
           <Rating rating_color={rating_color}>{rating.toFixed(1)}</Rating>
         </Head>
         <Media src={img_src} alt={`${characterName}'s character.`} />
@@ -127,9 +127,11 @@ const Character = () => {
 const CharacterClass = styled.p`
   color: ${({ faction }) =>
     faction === "Alliance" ? "var(--color-alliance)" : "var(--color-horde)"};
+  text-shadow: 1px 1px black;
 
   & > span {
     color: ${({ classColor }) => classColor};
+    text-shadow: none;
   }
 `;
 
@@ -170,6 +172,8 @@ const Media = styled.img`
 `;
 
 const Name = styled.h2`
+  color: ${({ faction }) =>
+    faction === "Alliance" ? "var(--color-alliance)" : "var(--color-horde)"};
   font-size: 1.3rem;
   text-shadow: 2px 2px black;
 `;

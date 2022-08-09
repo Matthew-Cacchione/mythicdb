@@ -47,6 +47,32 @@ Response will be in this structure:
 }
 ```
 
+### GET /api/characters/suggestions
+
+Get an array of suggested character names and realms.
+
+Response will be in this structure:
+
+```json
+{
+  "status": 200,
+  "data": [
+    {
+      "_id": "62f2b205df290eb3669307b7",
+      "name": "kyrasis",
+      "realm": "area-52",
+      "class": "death knight"
+    },
+    {
+      "_id": "62f2b205df290eb3669307b7",
+      "name": "yumy",
+      "realm": "kiljaeden",
+      "class": "priest"
+    }
+  ]
+}
+```
+
 ## User Endpoints
 
 ### GET /api/users/:id

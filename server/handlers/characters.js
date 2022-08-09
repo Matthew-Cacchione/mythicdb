@@ -1,7 +1,13 @@
 // Character related handlers will be hosted here.
+const { MongoClient, Db } = require("mongodb");
+
 // Allows the use of the fetch API in Node.
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
+
+// Require environment variables.
+require("dotenv").config();
+const { MONGO_URI } = process.env;
 
 // Require helper functions.
 const { capitalize } = require("../helpers/strings");
@@ -10,6 +16,12 @@ const {
   characterMediaUri,
   mythicPlusUri,
 } = require("../helpers/blizzard");
+
+// Set Mongo options.
+const options = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+};
 
 // Retrieve the given character's data from the API.
 const getCharacter = async (req, res) => {
@@ -74,4 +86,33 @@ const getCharacter = async (req, res) => {
   }
 };
 
-module.exports = { getCharacter };
+// Retrieve a list of character suggestions from Mongo.
+const getSuggestions = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, options);
+
+  try {
+    await client.connect();
+    const suggestions = client.db("master").collection("suggestions");
+
+    // Fetch and respond with the suggestions if they exist.
+    const response = await suggestions.find().toArray();
+
+    if (response.length) {
+      return res.status(200).json({ status: 200, data: response });
+    } else {
+      return res
+        .status(404)
+        .json({ status: 404, message: "No suggestions found." });
+    }
+  } catch (e) {
+    console.error("Error fetching suggestions:", e);
+    return res.status(500).json({
+      status: 500,
+      message: "Something went wrong, please try again.",
+    });
+  } finally {
+    client.close();
+  }
+};
+
+module.exports = { getCharacter, getSuggestions };

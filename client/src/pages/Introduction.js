@@ -23,8 +23,8 @@ const Introduction = () => {
           {DATA.keystones.map((keystone) => {
             return (
               <Row>
-                <td>{keystone.level}</td>
-                <td>{keystone.scaling}%</td>
+                <td>+{keystone.level}</td>
+                <td>+{keystone.scaling}%</td>
               </Row>
             );
           })}
@@ -48,7 +48,7 @@ const Introduction = () => {
             .map((keystone) => {
               return (
                 <Row>
-                  <td>{keystone.level}</td>
+                  <td>+{keystone.level}</td>
                   <td>{keystone.chest}</td>
                   <td>{keystone.vault}</td>
                 </Row>

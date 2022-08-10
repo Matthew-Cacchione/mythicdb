@@ -2,9 +2,45 @@
 
 Endpoints are grouped into the following categories:
 
+- **affix** - relating to warcraft affixes
 - **character** - relating to warcraft characters
 - **realm** - relating to warcraft realms
 - **user** - relating to users
+
+## Affix Endpoints
+
+### GET /api/affixes
+
+Get the affixes currently in rotation.
+
+Response will be in the following structure:
+
+```json
+{
+  "status": 200,
+  "data": {
+    "rotation": [10, 8, 12, 131]
+  }
+}
+```
+
+### GET /api/affixes/:id
+
+Get the data about the specified affix.
+
+Response will be in the following structure:
+
+```json
+{
+  "status": 200,
+  "message": "If a message is required it will be here.",
+  "data": {
+    "name": "Grievous",
+    "description": "Injured players suffer increasing damage over time until healed.",
+    "imgSrc": "https://render.worldofwarcraft.com/us/icons/56/ability_backstab.jpg"
+  }
+}
+```
 
 ## Character Endpoints
 

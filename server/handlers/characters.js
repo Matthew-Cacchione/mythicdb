@@ -12,6 +12,8 @@ const {
   mythicPlusUri,
 } = require("../helpers/blizzard");
 
+// #Handlers.
+
 // Retrieve the given character's data from the API.
 const getCharacter = async (req, res) => {
   const { name, realm } = req.query;

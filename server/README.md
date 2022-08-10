@@ -110,9 +110,17 @@ Response will be in this structure:
 
 ## User Endpoints
 
-### GET /api/users/:id
+### GET /api/user
 
-Get the user with given id.
+Get the user with given authentication token.
+
+Expects a header with the following structure:
+
+```json
+{
+  "Authorization": "Bearer eyJhbGciOiJIUzI1..."
+}
+```
 
 Response will be in this structure:
 
@@ -151,9 +159,44 @@ Response will be in this structure:
 }
 ```
 
-### PATCH /api/users/:id
+### PATCH /api/user/main-character
 
-Change the given user's password.
+Set the user's main character.
+
+Expects a header with the following structure:
+
+```json
+{
+  "Authorization": "Bearer eyJhbGciOiJIUzI1...",
+  "Content-Type": "application/json"
+}
+```
+
+Expects a body with the following structure:
+
+```json
+{
+  "name": "name",
+  "realm": "realm slug"
+}
+```
+
+Response will be in this structure:
+
+```json
+{
+  "status": 200,
+  "message": "If a message is required it will be here.",
+  "data": {
+    "name": "name",
+    "realm": "realm slug"
+  }
+}
+```
+
+### PATCH /api/user
+
+Change the user's password with given authentication token.
 
 Expects a header with the following structure:
 

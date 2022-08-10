@@ -19,14 +19,14 @@ const options = {
 
 // Change the user's password.
 const changePassword = async (req, res) => {
-  const client = new MongoClient(MONGO_URI);
+  const client = new MongoClient(MONGO_URI, options);
 
   // Extract the necessary details from the request.
   const { _id } = req.user;
   const { oldPassword, newPassword } = req.body;
 
   // If any details are missing respond with a bad request.
-  if ((!oldPassword, !newPassword)) {
+  if (!oldPassword || !newPassword) {
     return res
       .status(400)
       .json({ status: 400, message: "Request is missing data." });
@@ -103,7 +103,7 @@ const changePassword = async (req, res) => {
 
 // Delete the user with given access token.
 const deleteUser = async (req, res) => {
-  const client = new MongoClient(MONGO_URI);
+  const client = new MongoClient(MONGO_URI, options);
 
   // Extract the user id from the request.
   const { _id } = req.user;
@@ -153,12 +153,12 @@ const deleteUser = async (req, res) => {
   }
 };
 
-// Get the user details given an id.
+// Get the user details given an access token.
 const getUser = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
 
   // Extract the search id from the request.
-  const { _id } = req.params;
+  const { _id } = req.user;
 
   try {
     await client.connect();
@@ -201,6 +201,55 @@ const getUser = async (req, res) => {
           data: { _id },
         });
     }
+  } finally {
+    client.close();
+  }
+};
+
+// Set the user's main character in the database.
+const setMainCharacter = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, options);
+
+  // Extract the necessary details from the request.
+  const { _id } = req.user;
+  const { name, realm } = req.body;
+
+  // If any details are missing respond with a bad request.
+  if (!name || !realm) {
+    return res
+      .status(400)
+      .json({ status: 400, message: "Request is missing data." });
+  }
+
+  try {
+    await client.connect();
+    const users = client.db("master").collection("users");
+
+    // Setup variables for update.
+    const query = { _id: ObjectId(_id) };
+    const patch = { $set: { main: { name, realm } } };
+
+    const response = await users.updateOne(query, patch);
+
+    // Verify that the update was successful and respond appropriately.
+    if (!response.matchedCount) {
+      return res
+        .status(404)
+        .json({ status: 404, message: "No user found.", data: { _id } });
+    } else if (!response.modifiedCount) {
+      return res.status(502).json({
+        status: 502,
+        message: "User was not updated, please try again.",
+      });
+    }
+
+    return res.status(200).json({ status: 200, data: { name, realm } });
+  } catch (e) {
+    console.error("Error occurred setting main character:", e);
+    return res.status(500).json({
+      status: 500,
+      message: "Something went wrong, please try again.",
+    });
   } finally {
     client.close();
   }
@@ -322,4 +371,11 @@ const signUp = async (req, res) => {
   }
 };
 
-module.exports = { changePassword, deleteUser, getUser, signIn, signUp };
+module.exports = {
+  changePassword,
+  deleteUser,
+  getUser,
+  setMainCharacter,
+  signIn,
+  signUp,
+};

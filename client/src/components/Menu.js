@@ -39,7 +39,7 @@ const Menu = ({ open, setOpen }) => {
         // Render different menu items if the user is signed in.
         token ? (
           <>
-            <Navigate to="/user/main-character" onClick={closeMenu}>
+            <Navigate to={PATHS.mainCharacter} onClick={closeMenu}>
               {STRINGS.viewMain}
             </Navigate>
             <Button onClick={signOut}>Sign Out</Button>

@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+import Affixes from "../pages/Affixes";
 import Character from "../pages/Character";
 import GlobalStyles from "./styles/GlobalStyles";
 import Header from "./Header";
@@ -19,7 +20,7 @@ const App = () => {
         <Route exact path="/" element={<Home />} />
         <Route exact path={PATHS.newPlayer} element={<Introduction />} />
         <Route exact path={PATHS.character} element={<Character />} />
-        <Route exact path={PATHS.affixes} element={<>Affixes</>} />
+        <Route exact path={PATHS.affixes} element={<Affixes />} />
         <Route exact path={PATHS.leaderboard} element={<>Leaderboard</>} />
         <Route exact path={PATHS.login} element={<SignIn />} />
         <Route exact path={PATHS.signUp} element={<SignUp />} />

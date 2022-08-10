@@ -202,7 +202,8 @@ Expects a header with the following structure:
 
 ```json
 {
-  "Authorization": "Bearer eyJhbGciOiJIUzI1..."
+  "Authorization": "Bearer eyJhbGciOiJIUzI1...",
+  "Content-Type": "application/json"
 }
 ```
 

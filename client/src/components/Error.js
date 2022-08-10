@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-const Error = ({ message }) => {
-  return <Wrapper>{message}</Wrapper>;
+const Error = ({ message, width }) => {
+  return <Wrapper width={width}>{message}</Wrapper>;
 };
 
 const Wrapper = styled.h2`
@@ -13,7 +13,7 @@ const Wrapper = styled.h2`
   margin: 1em 0;
   padding: 0.2em;
   text-align: center;
-  width: 80%;
+  width: ${({ width }) => (width ? width : "80%")};
 `;
 
 export default Error;

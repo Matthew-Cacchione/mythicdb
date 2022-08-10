@@ -1,27 +1,88 @@
 import styled from "styled-components";
+import { useContext, useState } from "react";
 
 import Button from "../components/Button";
-import Card from "../components/Card";
+import Error from "../components/Error";
 import Input from "../components/Input";
 
+import { CurrentUserContext } from "../context/CurrentUserContext";
 import { STRINGS } from "../constants";
 
 const Settings = () => {
+  // Track if any errors have occurred during password change.
+  const [error, setError] = useState(null);
+
+  // Fetch currently logged in user from context.
+  const { token } = useContext(CurrentUserContext).state;
+
+  // Change the user's password.
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Clear previous error.
+    await setError(null);
+
+    // Extract the details from the form.
+    const oldPassword = e.target[0].value;
+    const newPassword = e.target[1].value;
+    const confirmNewPassword = e.target[2].value;
+
+    // Verify that the new passwords match.
+    if (newPassword !== confirmNewPassword) {
+      setError("Passwords must match.");
+      return;
+    }
+
+    // Attempt to change the user's password in the database.
+    const response = await fetch("/api/user", {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ oldPassword, newPassword }),
+    });
+
+    const data = await response.json();
+
+    // Verify that the password was changed successfully.
+    if (data.status === 200) {
+      // Reset the form inputs on success.
+      e.target[0].value = "";
+      e.target[1].value = "";
+      e.target[2].value = "";
+    } else if (data.status === 401) {
+      setError("Incorrect password provided.");
+    } else {
+      setError("An error occurred, please try again.");
+    }
+  };
+
   return (
     <Wrapper>
-      <Card title={STRINGS.changePassword}>
-        <Form>
+      <Card>
+        <Title>{STRINGS.changePassword}</Title>
+        <Divider />
+        <Form onSubmit={handleSubmit}>
           <Label htmlFor="current-password">{STRINGS.currentPassword}</Label>
           <Input id="current-password" type="password" width="100%" />
           <Label htmlFor="password">{STRINGS.password}</Label>
           <Input id="password" type="password" width="100%" />
           <Label htmlFor="confirm-password">{STRINGS.confirmPassword}</Label>
           <Input id="confirm-password" type="password" width="100%" />
-          <Button label="Submit" type="submit" width="100%" />
+          <Button
+            label="Submit"
+            type="submit"
+            width="100%"
+            onClick={handleSubmit}
+          />
         </Form>
+        {error && <Error message={error} width="100%" />}
       </Card>
-      <Card title={STRINGS.deleteAccount}>
-        <Note>{STRINGS.deleteAccountWarning}</Note>
+      <Card>
+        <Title>{STRINGS.deleteAccount}</Title>
+        <Divider />
+        <Description>{STRINGS.deleteAccountWarning}</Description>
         <Button
           color="var(--color-error)"
           label="Delete"
@@ -32,6 +93,36 @@ const Settings = () => {
     </Wrapper>
   );
 };
+
+const Card = styled.div`
+  align-items: center;
+  background: var(--color-surface);
+  border-radius: 0.2em;
+  box-shadow: 0 2px 4px 0 var(--color-on-primary);
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  justify-content: center;
+  margin-bottom: 1.5em;
+  padding: 1em;
+  transition: box-shadow 200ms;
+  width: 80%;
+
+  &:hover {
+    box-shadow: 0 4px 8px 0 var(--color-on-primary);
+  }
+`;
+
+const Description = styled.p`
+  line-height: 1.3em;
+  text-align: center;
+  white-space: pre-wrap;
+`;
+
+const Divider = styled.div`
+  border-bottom: 3px solid var(--color-secondary);
+  width: 15%;
+`;
 
 const Form = styled.form`
   align-items: center;
@@ -46,11 +137,9 @@ const Label = styled.label`
   font-size: 1.1rem;
 `;
 
-const Note = styled.p`
-  color: var(--color-error);
-  line-height: 1.3em;
+const Title = styled.h2`
+  font-size: 1.6rem;
   text-align: center;
-  white-space: pre-wrap;
 `;
 
 const Wrapper = styled.div`

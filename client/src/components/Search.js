@@ -34,6 +34,10 @@ const Search = () => {
         case 404:
           navigate(`/characters/us/null/${name}`);
           break;
+
+        default:
+          navigate("/characters/us/error/error");
+          break;
       }
     }
   };

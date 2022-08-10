@@ -50,7 +50,7 @@ export const STRINGS = {
   confirmPassword: "Confirm Password",
   currentPassword: "Current Password",
   deleteAccount: "Delete account",
-  deleteAccountWarning: "Warning, this process is irreversible!",
+  deleteAccountWarning: "Warning, this action is irreversible!",
   login: "Sign In",
   password: "Password",
   searchPlaceholder: "Search characters",

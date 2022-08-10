@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import Button from "../components/Button";
 import Error from "../components/Error";
@@ -14,6 +15,8 @@ const Settings = () => {
 
   // Fetch currently logged in user from context.
   const { token } = useContext(CurrentUserContext).state;
+
+  const navigate = useNavigate();
 
   // Change the user's password.
   const handleSubmit = async (e) => {
@@ -58,6 +61,32 @@ const Settings = () => {
     }
   };
 
+  // Delete the user's account.
+  const handleDelete = async (e) => {
+    e.preventDefault();
+
+    const response = await fetch("/api/user", {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    // Verify that the deletion was successful.
+    if (response.status === 204) {
+      // Sign the current user out and redirect to homepage.
+      localStorage.removeItem("token");
+      navigate("/");
+    }
+  };
+
+  // If the user isn't signed in redirect them to the homepage.
+  if (!token) {
+    navigate("/");
+    return;
+  }
+
   return (
     <Wrapper>
       <Card>
@@ -70,12 +99,7 @@ const Settings = () => {
           <Input id="password" type="password" width="100%" />
           <Label htmlFor="confirm-password">{STRINGS.confirmPassword}</Label>
           <Input id="confirm-password" type="password" width="100%" />
-          <Button
-            label="Submit"
-            type="submit"
-            width="100%"
-            onClick={handleSubmit}
-          />
+          <Button label="Submit" type="submit" width="100%" />
         </Form>
         {error && <Error message={error} width="100%" />}
       </Card>
@@ -86,6 +110,7 @@ const Settings = () => {
         <Button
           color="var(--color-error)"
           label="Delete"
+          onClick={handleDelete}
           type="button"
           width="100%"
         />

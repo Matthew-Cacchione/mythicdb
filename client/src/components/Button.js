@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-const Button = ({ color, label, type, width }) => {
+const Button = ({ color, label, onClick, type, width }) => {
   return (
-    <Wrapper color={color} type={type} width={width}>
+    <Wrapper color={color} onClick={onClick} type={type} width={width}>
       {label}
     </Wrapper>
   );

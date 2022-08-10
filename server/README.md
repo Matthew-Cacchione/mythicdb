@@ -152,10 +152,7 @@ Response will be in this structure:
 ```json
 {
   "status": 204,
-  "message": "If a message is required it will be here.",
-  "data": {
-    "_id": "62ed7a9decd60c19d0a0c6e4"
-  }
+  "message": "If a message is required it will be here."
 }
 ```
 

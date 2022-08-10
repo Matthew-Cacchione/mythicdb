@@ -48,6 +48,12 @@ const Character = () => {
         <Container>No realm found.</Container>
       </Wrapper>
     );
+  } else if (realm === "error") {
+    return (
+      <Wrapper>
+        <Container>An error occurred, please try again.</Container>
+      </Wrapper>
+    );
   }
 
   switch (character) {

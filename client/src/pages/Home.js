@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import Card from "../components/Card";
 
-import { STRINGS } from "../constants";
+import { PATHS, STRINGS } from "../constants";
 
 const Home = () => {
   return (
@@ -14,17 +14,17 @@ const Home = () => {
       <Card
         description={STRINGS.cards.newPlayer.description}
         title={STRINGS.cards.newPlayer.title}
-        path={STRINGS.paths.newPlayer}
+        path={PATHS.newPlayer}
       />
       <Card
         description={STRINGS.cards.affixes.description}
         title={STRINGS.cards.affixes.title}
-        path={STRINGS.paths.affixes}
+        path={PATHS.affixes}
       />
       <Card
         description={STRINGS.cards.leaderboard.description}
         title={STRINGS.cards.leaderboard.title}
-        path={STRINGS.paths.leaderboard}
+        path={PATHS.leaderboard}
       />
     </Wrapper>
   );

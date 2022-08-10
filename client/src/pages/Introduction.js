@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import Card from "../components/Card";
 
-import { DATA, STRINGS } from "../constants";
+import { DATA, PATHS, STRINGS } from "../constants";
 
 const Introduction = () => {
   return (
@@ -16,18 +16,22 @@ const Introduction = () => {
         title={STRINGS.newPlayer.keyExplanation.title}
       >
         <Table>
-          <Row>
-            <th>{STRINGS.newPlayer.keystoneHeader}</th>
-            <th>{STRINGS.newPlayer.scaleHeader}</th>
-          </Row>
-          {DATA.keystones.map((keystone) => {
-            return (
-              <Row>
-                <td>{keystone.level}</td>
-                <td>{keystone.scaling}%</td>
-              </Row>
-            );
-          })}
+          <thead>
+            <Row>
+              <th>{STRINGS.newPlayer.keystoneHeader}</th>
+              <th>{STRINGS.newPlayer.scaleHeader}</th>
+            </Row>
+          </thead>
+          <tbody>
+            {DATA.keystones.map((keystone) => {
+              return (
+                <Row key={keystone.level}>
+                  <td>+{keystone.level}</td>
+                  <td>+{keystone.scaling}%</td>
+                </Row>
+              );
+            })}
+          </tbody>
         </Table>
         <Note>{STRINGS.newPlayer.keyExplanation.note}</Note>
       </Card>
@@ -36,30 +40,34 @@ const Introduction = () => {
         title={STRINGS.newPlayer.gear.title}
       >
         <Table>
-          <Row>
-            <th>{STRINGS.newPlayer.keystoneHeader}</th>
-            <th>{STRINGS.newPlayer.chestHeader}</th>
-            <th>{STRINGS.newPlayer.vaultHeader}</th>
-          </Row>
-          {DATA.keystones
-            .filter((keystone) => {
-              return keystone.level < 16;
-            })
-            .map((keystone) => {
-              return (
-                <Row>
-                  <td>{keystone.level}</td>
-                  <td>{keystone.chest}</td>
-                  <td>{keystone.vault}</td>
-                </Row>
-              );
-            })}
+          <thead>
+            <Row>
+              <th>{STRINGS.newPlayer.keystoneHeader}</th>
+              <th>{STRINGS.newPlayer.chestHeader}</th>
+              <th>{STRINGS.newPlayer.vaultHeader}</th>
+            </Row>
+          </thead>
+          <tbody>
+            {DATA.keystones
+              .filter((keystone) => {
+                return keystone.level < 16;
+              })
+              .map((keystone) => {
+                return (
+                  <Row key={keystone.level}>
+                    <td>+{keystone.level}</td>
+                    <td>{keystone.chest}</td>
+                    <td>{keystone.vault}</td>
+                  </Row>
+                );
+              })}
+          </tbody>
         </Table>
         <Note>{STRINGS.newPlayer.gear.note}</Note>
       </Card>
       <Card
         description={STRINGS.newPlayer.affixes.description}
-        path={STRINGS.paths.affixes}
+        path={PATHS.affixes}
         title={STRINGS.newPlayer.affixes.title}
       />
     </Wrapper>

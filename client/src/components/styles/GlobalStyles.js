@@ -15,6 +15,23 @@ export default createGlobalStyle`
     --color-on-surface: #ffffff;
     --color-on-error: #000000;
 
+    --color-alliance: #4580f7;
+    --color-horde: #cf1d1d;
+
+    --color-death-knight: #c41e3a;
+    --color-demon-hunter: #a330c9;
+    --color-druid: #ff7c0a;
+    --color-evoker: #33937f;
+    --color-hunter: #aad372;
+    --color-mage: #3fc7eb;
+    --color-monk: #00ff98;
+    --color-paladin: #f48cba;
+    --color-priest: #ffffff;
+    --color-rogue: #fff468;
+    --color-shaman: #0070dd;
+    --color-warlock: #8788ee;
+    --color-warrior: #c69b6d;
+
     --font-heading: 'Poppins', sans-serif;
     --font-body: 'Poppins', sans-serif; 
 }

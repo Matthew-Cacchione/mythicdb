@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 import { CurrentUserContext } from "../context/CurrentUserContext";
-import { STRINGS } from "../constants";
+import { PATHS, STRINGS } from "../constants";
 
 const Menu = ({ open, setOpen }) => {
   // Context that determines if a user is logged in.
@@ -46,10 +46,10 @@ const Menu = ({ open, setOpen }) => {
           </>
         ) : (
           <>
-            <Navigate to={STRINGS.paths.login} onClick={closeMenu}>
+            <Navigate to={PATHS.login} onClick={closeMenu}>
               {STRINGS.login}
             </Navigate>
-            <Navigate to={STRINGS.paths.signUp} onClick={closeMenu}>
+            <Navigate to={PATHS.signUp} onClick={closeMenu}>
               {STRINGS.signUp}
             </Navigate>
           </>
@@ -109,6 +109,7 @@ const Wrapper = styled.nav`
   transform: ${({ open }) => (open ? " translateX(0)" : " translateX(100%)")};
   transition: all 300ms ease-in-out;
   width: 100%;
+  z-index: 2;
 `;
 
 export default Menu;

@@ -1,16 +1,17 @@
 import styled from "styled-components";
 
-const Button = ({ label, type, width }) => {
+const Button = ({ color, label, type, width }) => {
   return (
-    <Wrapper type={type} width={width}>
+    <Wrapper color={color} type={type} width={width}>
       {label}
     </Wrapper>
   );
 };
 
 const Wrapper = styled.button`
-  background: var(--color-secondary);
-  border: 3px solid var(--color-secondary);
+  background: ${({ color }) => (color ? color : "var(--color-secondary)")};
+  border: ${({ color }) =>
+    color ? `3px solid ${color}` : "3px solid var(--color-secondary)"};
   border-radius: 0.2rem;
   color: var(--color-on-secondary);
   cursor: pointer;

@@ -42,6 +42,9 @@ const Menu = ({ open, setOpen }) => {
             <Navigate to={PATHS.mainCharacter} onClick={closeMenu}>
               {STRINGS.viewMain}
             </Navigate>
+            <Navigate to={PATHS.settings} onClick={closeMenu}>
+              {STRINGS.settings}
+            </Navigate>
             <Button onClick={signOut}>Sign Out</Button>
           </>
         ) : (

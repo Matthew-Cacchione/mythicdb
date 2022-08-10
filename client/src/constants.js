@@ -40,15 +40,21 @@ export const PATHS = {
   login: "/login",
   mainCharacter: "/user/main-character",
   newPlayer: "/introduction",
+  settings: "/settings",
   signUp: "/signup",
 };
 
 export const STRINGS = {
   app: "MythicDB",
+  changePassword: "Change Password",
   confirmPassword: "Confirm Password",
+  currentPassword: "Current Password",
+  deleteAccount: "Delete account",
+  deleteAccountWarning: "Warning, this process is irreversible!",
   login: "Sign In",
   password: "Password",
   searchPlaceholder: "Search characters",
+  settings: "Settings",
   signUp: "Sign Up",
   username: "Username",
   viewMain: "View Main",

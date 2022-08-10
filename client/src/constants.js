@@ -38,6 +38,7 @@ export const PATHS = {
   character: "/characters/us/:realm/:name",
   leaderboard: "/leaderboard",
   login: "/login",
+  mainCharacter: "/user/main-character",
   newPlayer: "/introduction",
   signUp: "/signup",
 };

@@ -9,8 +9,7 @@ const { realmsUri } = require("../helpers/blizzard");
 
 // Get the proper realm slug given a realm name.
 const getSlug = async (req, res) => {
-  // Query must use underscores in place of spaces.
-  const realm = req.query.realm.replaceAll("_", " ");
+  const { realm } = req.query;
 
   try {
     // Fetch the realm data from the API.
@@ -18,7 +17,10 @@ const getSlug = async (req, res) => {
     const realms = response.realms;
 
     const match = realms.find((element) => {
-      return element.name.toLowerCase() === realm.toLowerCase();
+      // Remove spaces from the realm name.
+      const apiRealm = element.name.toLowerCase().replaceAll(" ", "");
+
+      return apiRealm === realm.toLowerCase();
     });
 
     // Verify that a match was found and respond appropriately.

@@ -54,10 +54,10 @@ Response will be in this structure:
 
 Get the proper realm slug given realm name.
 
-Expects the following variables as a query.
+Expects the following variables as a query. Do not use spaces in the realm name, e.g. Cenarion Circle should be cenarioncircle.
 
 ```js
-realm = "realm name, replacing spaces with _";
+realm = "realm name";
 ```
 
 Response will be in this structure:

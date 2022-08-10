@@ -3,6 +3,7 @@
 Endpoints are grouped into the following categories:
 
 - **character** - relating to warcraft characters
+- **realm** - relating to warcraft realms
 - **user** - relating to users
 
 ## Character Endpoints
@@ -47,29 +48,27 @@ Response will be in this structure:
 }
 ```
 
-### GET /api/characters/suggestions
+## Realm Endpoints
 
-Get an array of suggested character names and realms.
+### GET /api/realms/slug
+
+Get the proper realm slug given realm name.
+
+Expects the following variables as a query.
+
+```js
+realm = "realm name, replacing spaces with _";
+```
 
 Response will be in this structure:
 
 ```json
 {
   "status": 200,
-  "data": [
-    {
-      "_id": "62f2b205df290eb3669307b7",
-      "name": "kyrasis",
-      "realm": "area-52",
-      "class": "death knight"
-    },
-    {
-      "_id": "62f2b205df290eb3669307b7",
-      "name": "yumy",
-      "realm": "kiljaeden",
-      "class": "priest"
-    }
-  ]
+  "message": "If a message is required it will be here.",
+  "data": {
+    "slug": "cenarion-circle"
+  }
 }
 ```
 

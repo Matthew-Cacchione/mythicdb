@@ -41,6 +41,15 @@ const Character = () => {
     //eslint-disable-next-line
   }, [name, realm]);
 
+  // If the realm is set as null then we know it wasn't found.
+  if (realm === "null") {
+    return (
+      <Wrapper>
+        <Container>No realm found.</Container>
+      </Wrapper>
+    );
+  }
+
   switch (character) {
     case null:
       return (

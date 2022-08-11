@@ -343,7 +343,7 @@ const signUp = async (req, res) => {
 
     // Create a new user with the given details.
     const hash = await bcrypt.hash(password, 10);
-    user = { username, password: hash };
+    user = { username, password: hash, main: { name: "", realm: "" } };
 
     const response = await users.insertOne(user);
 

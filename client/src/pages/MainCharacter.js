@@ -7,6 +7,7 @@ import Error from "../components/Error";
 import Input from "../components/Input";
 
 import { CurrentUserContext } from "../context/CurrentUserContext";
+import { STRINGS } from "../constants";
 
 const MainCharacter = () => {
   // Track if any errors have occurred.
@@ -90,11 +91,11 @@ const MainCharacter = () => {
 
   return (
     <Wrapper onSubmit={handleSubmit}>
-      <Label htmlFor="name">Name</Label>
+      <Label htmlFor="name">{STRINGS.name}</Label>
       <Input id="name" type="text" />
-      <Label htmlFor="realm">Realm</Label>
+      <Label htmlFor="realm">{STRINGS.realm}</Label>
       <Input id="realm" type="text" />
-      <Button label="SET MAIN" type="submit" />
+      <Button label={STRINGS.setMain.toUpperCase()} type="submit" />
       {error && <Error message={error} />}
     </Wrapper>
   );

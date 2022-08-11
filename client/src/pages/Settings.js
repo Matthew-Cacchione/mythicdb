@@ -103,7 +103,11 @@ const Settings = () => {
           <Input id="password" type="password" width="100%" />
           <Label htmlFor="confirm-password">{STRINGS.confirmPassword}</Label>
           <Input id="confirm-password" type="password" width="100%" />
-          <Button label="Submit" type="submit" width="100%" />
+          <Button
+            label={STRINGS.update.toUpperCase()}
+            type="submit"
+            width="100%"
+          />
         </Form>
         {error && <Error message={error} width="100%" />}
       </Card>
@@ -113,7 +117,7 @@ const Settings = () => {
         <Description>{STRINGS.deleteAccountWarning}</Description>
         <Button
           color="var(--color-error)"
-          label="Delete"
+          label={STRINGS.delete.toUpperCase()}
           onClick={handleDelete}
           type="button"
           width="100%"

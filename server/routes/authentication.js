@@ -9,6 +9,7 @@ const {
   changePassword,
   deleteUser,
   getUser,
+  setMainCharacter,
   signIn,
   signUp,
 } = require("../handlers/authentication");
@@ -18,11 +19,14 @@ const {
 // Delete the user with given access token.
 router.delete("/api/user", authenticateToken, deleteUser);
 
-// Get the user data given an id.
-router.get("/api/users/:_id", getUser);
+// Get the user data with given access token.
+router.get("/api/user", authenticateToken, getUser);
 
 // Change the user's password given access token.
 router.patch("/api/user", authenticateToken, changePassword);
+
+// Set the user's main character.
+router.patch("/api/user/main-character", authenticateToken, setMainCharacter);
 
 // Sign up a new user.
 router.post("/api/users", signUp);

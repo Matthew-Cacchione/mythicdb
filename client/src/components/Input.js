@@ -1,8 +1,14 @@
 import styled from "styled-components";
 
-const Input = ({ id, placeholder, type }) => {
+const Input = ({ id, placeholder, type, width }) => {
   return (
-    <Wrapper id={id} placeholder={placeholder} type={type} required></Wrapper>
+    <Wrapper
+      id={id}
+      placeholder={placeholder}
+      type={type}
+      width={width}
+      required
+    ></Wrapper>
   );
 };
 
@@ -12,7 +18,7 @@ const Wrapper = styled.input`
   border-radius: 0.2em;
   height: 3em;
   margin-bottom: 1em;
-  width: 80%;
+  width: ${({ width }) => (width ? width : "80%")};
 
   &:focus {
     outline: none;

@@ -9,7 +9,7 @@ import Input from "../components/Input";
 import { CurrentUserContext } from "../context/CurrentUserContext";
 
 const MainCharacter = () => {
-  // State to track if any errors have occurred.
+  // Track if any errors have occurred.
   const [error, setError] = useState(null);
 
   // Get token identifying the current user from context.
@@ -28,17 +28,15 @@ const MainCharacter = () => {
     const realm = e.target[1].value.toLowerCase();
 
     // Fetch the proper realm slug from the server.
-    const slugResponse = await fetch(`/api/realms/slug?realm=${realm}`);
-    const slugData = await slugResponse.json();
+    const slug = await (await fetch(`/api/realms/slug?realm=${realm}`)).json();
 
     // Fetch the character from the server.
-    const response = await fetch(
-      `/api/characters?name=${name}&realm=${slugData.data.slug}`
-    );
-    const data = await response.json();
+    const character = await (
+      await fetch(`/api/characters?name=${name}&realm=${slug.data.slug}`)
+    ).json();
 
     // Only set the user's main if the character was found.
-    switch (data.status) {
+    switch (character.status) {
       case 200:
         fetch("/api/user/main-character", {
           method: "PATCH",
@@ -46,9 +44,9 @@ const MainCharacter = () => {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ name, realm: slugData.data.slug }),
+          body: JSON.stringify({ name, realm: slug.data.slug }),
         });
-        navigate(`/characters/us/${slugData.data.slug}/${name}`);
+        navigate(`/characters/us/${slug.data.slug}/${name}`);
         break;
 
       case 404:

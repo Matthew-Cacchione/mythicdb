@@ -14,7 +14,10 @@ const Settings = () => {
   const [error, setError] = useState(null);
 
   // Fetch currently logged in user from context.
-  const { token } = useContext(CurrentUserContext).state;
+  const {
+    state: { token },
+    actions: { signedOut },
+  } = useContext(CurrentUserContext);
 
   const navigate = useNavigate();
 
@@ -77,6 +80,7 @@ const Settings = () => {
     if (response.status === 204) {
       // Sign the current user out and redirect to homepage.
       localStorage.removeItem("token");
+      signedOut();
       navigate("/");
     }
   };

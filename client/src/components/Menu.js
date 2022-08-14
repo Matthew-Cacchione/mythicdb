@@ -78,6 +78,10 @@ const Button = styled.button`
   &:hover {
     color: var(--color-primary);
   }
+
+  @media only screen and (min-width: 1000px) {
+    font-size: 4rem;
+  }
 `;
 
 const Navigate = styled(Link)`
@@ -94,6 +98,14 @@ const Navigate = styled(Link)`
 
   &:hover {
     color: var(--color-primary);
+  }
+
+  @media only screen and (min-width: 1000px) {
+    font-size: 4rem;
+
+    &:first-child {
+      margin-top: 1em;
+    }
   }
 `;
 
@@ -113,6 +125,11 @@ const Wrapper = styled.nav`
   transition: all 300ms ease-in-out;
   width: 100%;
   z-index: 2;
+
+  @media only screen and (min-width: 1000px) {
+    border-left: 2px solid var(--color-background);
+    width: 20%;
+  }
 `;
 
 export default Menu;

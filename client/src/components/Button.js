@@ -19,6 +19,10 @@ const Wrapper = styled.button`
   font-weight: bold;
   margin-top: 0.6em;
   width: ${({ width }) => (width ? width : "80%")};
+
+  @media only screen and (min-width: 1000px) {
+    font-size: 3rem;
+  }
 `;
 
 export default Button;

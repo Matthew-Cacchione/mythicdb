@@ -64,10 +64,17 @@ const Input = styled.input`
   &:focus {
     outline: none;
   }
+
+  @media only screen and (min-width: 1000px) {
+    font-size: 1.6rem;
+    width: 1000px;
+  }
 `;
 
 const Wrapper = styled.div`
   align-self: center;
+  display: flex;
+  justify-content: center;
   padding: 0.4em 0.6em;
   width: 100vw;
 `;

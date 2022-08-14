@@ -21,11 +21,11 @@ const Home = () => {
         title={STRINGS.cards.affixes.title}
         path={PATHS.affixes}
       />
-      <Card
+      {/* <Card
         description={STRINGS.cards.leaderboard.description}
         title={STRINGS.cards.leaderboard.title}
         path={PATHS.leaderboard}
-      />
+      /> */}
     </Wrapper>
   );
 };

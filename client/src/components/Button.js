@@ -21,7 +21,7 @@ const Wrapper = styled.button`
   width: ${({ width }) => (width ? width : "80%")};
 
   @media only screen and (min-width: 1000px) {
-    font-size: 3rem;
+    font-size: 2.4rem;
   }
 `;
 

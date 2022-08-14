@@ -1,12 +1,5 @@
 // Affix related handlers will be hosted here.
 
-// Allows the use of the fetch API in Node.
-const fetch = (...args) =>
-  import("node-fetch").then(({ default: fetch }) => fetch(...args));
-
-// Require helper functions.
-const { affixMediaUri } = require("../helpers/blizzard");
-
 // Require constants.
 const { AFFIX_ROTATION, AFFIXES } = require("../constants");
 

@@ -5,29 +5,27 @@ const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
 
 // Require helper functions.
-const { affixUri, affixMediaUri } = require("../helpers/blizzard");
+const { affixMediaUri } = require("../helpers/blizzard");
 
-// Keep the rotation as an array of ids.
-const rotation = [10, 8, 12, 131];
+// Require constants.
+const { AFFIX_ROTATION, AFFIXES } = require("../constants");
 
 // Get the affix data given an id.
 const getAffix = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const affix = await (await fetch(affixUri(id))).json();
-    const media = await (await fetch(affixMediaUri(id))).json();
+    const affix = AFFIXES.find((affix) => affix.id === Number(id));
 
     // Respond with a 404 if the affix wasn't found.
-    if (affix.code === 404 || media.code === 404) {
+    if (!affix) {
       return res
         .status(404)
         .json({ status: 404, message: "Affix not found.", data: { id } });
     }
 
-    // Extract the required data from the fetches.
-    const { name, description } = affix;
-    const imgSrc = media.assets[0].value;
+    // Extract the required data.
+    const { name, description, imgSrc } = affix;
 
     return res.status(200).json({
       status: 200,
@@ -44,7 +42,9 @@ const getAffix = async (req, res) => {
 
 // Get the affixes in rotation this week.
 const getAffixRotation = (req, res) => {
-  return res.status(200).json({ status: 200, data: { rotation } });
+  return res
+    .status(200)
+    .json({ status: 200, data: { rotation: AFFIX_ROTATION } });
 };
 
 module.exports = { getAffix, getAffixRotation };

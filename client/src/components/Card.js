@@ -27,7 +27,13 @@ const BlankLink = styled(Link)`
   display: flex;
   justify-content: center;
   text-decoration: none;
-  width: 100%;
+  margin: 0 2em;
+
+  @media only screen and (min-width: 1000px) {
+    &:first-child {
+      margin-top: 2em;
+    }
+  }
 `;
 
 const Description = styled.p`
@@ -44,6 +50,10 @@ const Divider = styled.div`
 const Title = styled.h2`
   font-size: 1.6rem;
   text-align: center;
+
+  @media only screen and (min-width: 1000px) {
+    font-size: 3rem;
+  }
 `;
 
 const Wrapper = styled.div`
@@ -58,10 +68,15 @@ const Wrapper = styled.div`
   margin-bottom: 1.5em;
   padding: 1em;
   transition: box-shadow 200ms;
-  width: 80%;
+  width: 100%;
 
   &:hover {
     box-shadow: 0 4px 8px 0 var(--color-on-primary);
+  }
+
+  @media only screen and (min-width: 1000px) {
+    font-size: 2rem;
+    max-width: 1000px;
   }
 `;
 

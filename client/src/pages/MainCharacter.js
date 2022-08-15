@@ -104,6 +104,10 @@ const MainCharacter = () => {
 const Label = styled.label`
   font-size: 1.3rem;
   margin: 0.4em 0;
+
+  @media only screen and (min-width: 1000px) {
+    font-size: 2.4rem;
+  }
 `;
 
 const Wrapper = styled.form`
@@ -111,6 +115,11 @@ const Wrapper = styled.form`
   display: flex;
   flex-direction: column;
   margin: 1em 0;
+
+  @media only screen and (min-width: 1000px) {
+    margin: 1em auto;
+    max-width: 1000px;
+  }
 `;
 
 export default MainCharacter;

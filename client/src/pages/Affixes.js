@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 
+import Card from "../components/Card";
+
 const Affixes = () => {
   // Track the data of affixes that are in rotation.
   const [rotation, setRotation] = useState([]);
@@ -33,65 +35,31 @@ const Affixes = () => {
     <Wrapper>
       {rotation.map((affix) => {
         return (
-          <Container key={affix.name}>
-            <div>
-              <Media src={affix.imgSrc} alt={`${affix.name} icon.`} />
-              <Title>{affix.name}</Title>
-            </div>
-            <Divider />
-            <Description>{affix.description}</Description>
-          </Container>
+          <Card
+            title={
+              <Centered>
+                <Media src={affix.imgSrc} alt={`${affix.name} icon.`} />
+                {affix.name}
+              </Centered>
+            }
+            description={affix.description}
+          />
         );
       })}
     </Wrapper>
   );
 };
 
-const Container = styled.div`
+const Centered = styled.div`
   align-items: center;
-  background: var(--color-surface);
-  border-radius: 0.2em;
-  box-shadow: 0 2px 4px 0 var(--color-on-primary);
   display: flex;
-  flex-direction: column;
-  gap: 1em;
-  justify-content: center;
-  margin-bottom: 1.5em;
-  padding: 1em;
-  transition: box-shadow 200ms;
-  width: 80%;
-
-  &:hover {
-    box-shadow: 0 4px 8px 0 var(--color-on-primary);
-  }
-
-  & > div {
-    align-items: center;
-    display: flex;
-    gap: 0.6em;
-    justify-content: center;
-  }
-`;
-
-const Description = styled.p`
-  line-height: 1.3em;
-  text-align: center;
-  white-space: pre-wrap;
-`;
-
-const Divider = styled.div`
-  border-bottom: 3px solid var(--color-secondary);
-  width: 15%;
+  gap: 0.3em;
 `;
 
 const Media = styled.img`
-  height: 2.5em;
-  width: 2.5em;
-`;
-
-const Title = styled.h2`
-  font-size: 1.6rem;
-  text-align: center;
+  border: 3px solid var(--color-background);
+  height: 1.5em;
+  width: 1.5em;
 `;
 
 const Wrapper = styled.div`

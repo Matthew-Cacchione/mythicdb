@@ -14,6 +14,10 @@ const Wrapper = styled.h2`
   padding: 0.2em;
   text-align: center;
   width: ${({ width }) => (width ? width : "80%")};
+
+  @media only screen and (min-width: 1000px) {
+    font-size: 2.4rem;
+  }
 `;
 
 export default Error;

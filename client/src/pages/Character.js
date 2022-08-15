@@ -163,6 +163,11 @@ const Container = styled.div`
   padding: 1em;
   transition: box-shadow 200ms;
   width: 90%;
+
+  @media only screen and (min-width: 1000px) {
+    font-size: 1.6rem;
+    max-width: 1000px;
+  }
 `;
 
 const Details = styled.div`
@@ -184,6 +189,11 @@ const Media = styled.img`
   height: 200px;
   object-fit: cover;
   object-position: 0 -35px;
+
+  @media only screen and (min-width: 1000px) {
+    height: 500px;
+    object-position: 0 -125px;
+  }
 `;
 
 const Name = styled.h2`
@@ -191,6 +201,10 @@ const Name = styled.h2`
     faction === "Alliance" ? "var(--color-alliance)" : "var(--color-horde)"};
   font-size: 1.3rem;
   text-shadow: 2px 2px black;
+
+  @media only screen and (min-width: 1000px) {
+    font-size: 2.4rem;
+  }
 `;
 
 const Rating = styled.p`
@@ -199,6 +213,10 @@ const Rating = styled.p`
   font-size: 1.3rem;
   font-weight: bold;
   text-shadow: 2px 2px black;
+
+  @media only screen and (min-width: 1000px) {
+    font-size: 2.4rem;
+  }
 `;
 
 const Wrapper = styled.div`

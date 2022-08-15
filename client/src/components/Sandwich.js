@@ -38,6 +38,19 @@ const Bar = styled.div`
     opacity: ${({ open }) => (open ? "0" : "1")};
     transform: ${({ open }) => (open ? "rotate(45deg)" : "rotate(0)")};
   }
+
+  @media only screen and (min-width: 1000px) {
+    height: 10px;
+    width: 4.4em;
+
+    :nth-child(1) {
+      margin-top: ${({ open }) => (open ? "35px" : "5px")};
+    }
+
+    :nth-child(2) {
+      margin-top: ${({ open }) => (open ? "-14px" : "5px")};
+    }
+  }
 `;
 
 const Wrapper = styled.button`

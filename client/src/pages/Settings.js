@@ -144,6 +144,11 @@ const Card = styled.div`
   &:hover {
     box-shadow: 0 4px 8px 0 var(--color-on-primary);
   }
+
+  @media only screen and (min-width: 1000px) {
+    font-size: 1.6rem;
+    max-width: 1000px;
+  }
 `;
 
 const Description = styled.p`
@@ -168,11 +173,19 @@ const Form = styled.form`
 
 const Label = styled.label`
   font-size: 1.1rem;
+
+  @media only screen and (min-width: 1000px) {
+    font-size: 1.6rem;
+  }
 `;
 
 const Title = styled.h2`
   font-size: 1.6rem;
   text-align: center;
+
+  @media only screen and (min-width: 1000px) {
+    font-size: 2.4rem;
+  }
 `;
 
 const Wrapper = styled.div`

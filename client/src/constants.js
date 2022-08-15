@@ -56,7 +56,7 @@ export const STRINGS = {
   name: "Name",
   password: "Password",
   realm: "Realm",
-  searchPlaceholder: "Search characters",
+  searchPlaceholder: "Search characters as name-realm",
   settings: "Settings",
   setMain: "Set main",
   signUp: "Sign Up",

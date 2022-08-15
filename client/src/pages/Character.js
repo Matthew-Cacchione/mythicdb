@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
+import Loader from "../components/Loader";
+
 const Character = () => {
   // Extract the name and realm from the url.
   const { name, realm } = useParams();
@@ -60,7 +62,9 @@ const Character = () => {
     case null:
       return (
         <Wrapper>
-          <Container>Loading...</Container>
+          <Container>
+            <Loader />
+          </Container>
         </Wrapper>
       );
 

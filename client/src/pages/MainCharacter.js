@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Error from "../components/Error";
 import Input from "../components/Input";
+import Label from "../components/Label";
 
 import { CurrentUserContext } from "../context/CurrentUserContext";
 import { STRINGS } from "../constants";
@@ -100,15 +101,6 @@ const MainCharacter = () => {
     </Wrapper>
   );
 };
-
-const Label = styled.label`
-  font-size: 1.3rem;
-  margin: 0.4em 0;
-
-  @media only screen and (min-width: 1000px) {
-    font-size: 2.4rem;
-  }
-`;
 
 const Wrapper = styled.form`
   align-items: center;

@@ -71,7 +71,7 @@ const Wrapper = styled.div`
   width: 100%;
 
   &:hover {
-    box-shadow: 0 4px 8px 0 var(--color-on-primary);
+    box-shadow: 0 8px 16px 0 var(--color-on-primary);
   }
 
   @media only screen and (min-width: 1000px) {

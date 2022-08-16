@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 
 import Card from "../components/Card";
+import Loader from "../components/Loader";
 
 const Affixes = () => {
   // Track the data of affixes that are in rotation.
@@ -28,7 +29,11 @@ const Affixes = () => {
   }, []);
 
   if (!rotation.length) {
-    return <Wrapper>Loading...</Wrapper>;
+    return (
+      <Wrapper>
+        <Loader />
+      </Wrapper>
+    );
   }
 
   return (

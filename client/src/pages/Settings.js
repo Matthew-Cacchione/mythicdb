@@ -3,8 +3,10 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Button from "../components/Button";
+import Card from "../components/Card";
 import Error from "../components/Error";
 import Input from "../components/Input";
+import Label from "../components/Label";
 
 import { CurrentUserContext } from "../context/CurrentUserContext";
 import { STRINGS } from "../constants";
@@ -93,9 +95,7 @@ const Settings = () => {
 
   return (
     <Wrapper>
-      <Card>
-        <Title>{STRINGS.changePassword}</Title>
-        <Divider />
+      <Card title={STRINGS.changePassword}>
         <Form onSubmit={handleSubmit}>
           <Label htmlFor="current-password">{STRINGS.currentPassword}</Label>
           <Input id="current-password" type="password" width="100%" />
@@ -111,10 +111,10 @@ const Settings = () => {
         </Form>
         {error && <Error message={error} width="100%" />}
       </Card>
-      <Card>
-        <Title>{STRINGS.deleteAccount}</Title>
-        <Divider />
-        <Description>{STRINGS.deleteAccountWarning}</Description>
+      <Card
+        title={STRINGS.deleteAccount}
+        description={STRINGS.deleteAccountWarning}
+      >
         <Button
           color="var(--color-error)"
           label={STRINGS.delete.toUpperCase()}
@@ -127,65 +127,12 @@ const Settings = () => {
   );
 };
 
-const Card = styled.div`
-  align-items: center;
-  background: var(--color-surface);
-  border-radius: 0.2em;
-  box-shadow: 0 2px 4px 0 var(--color-on-primary);
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-  justify-content: center;
-  margin-bottom: 1.5em;
-  padding: 1em;
-  transition: box-shadow 200ms;
-  width: 80%;
-
-  &:hover {
-    box-shadow: 0 4px 8px 0 var(--color-on-primary);
-  }
-
-  @media only screen and (min-width: 1000px) {
-    font-size: 1.6rem;
-    max-width: 1000px;
-  }
-`;
-
-const Description = styled.p`
-  line-height: 1.3em;
-  text-align: center;
-  white-space: pre-wrap;
-`;
-
-const Divider = styled.div`
-  border-bottom: 3px solid var(--color-secondary);
-  width: 15%;
-`;
-
 const Form = styled.form`
   align-items: center;
   display: flex;
   flex-direction: column;
-  gap: 0.4em;
   justify-content: center;
   width: 100%;
-`;
-
-const Label = styled.label`
-  font-size: 1.1rem;
-
-  @media only screen and (min-width: 1000px) {
-    font-size: 1.6rem;
-  }
-`;
-
-const Title = styled.h2`
-  font-size: 1.6rem;
-  text-align: center;
-
-  @media only screen and (min-width: 1000px) {
-    font-size: 2.4rem;
-  }
 `;
 
 const Wrapper = styled.div`

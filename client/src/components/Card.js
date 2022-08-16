@@ -76,7 +76,7 @@ const Wrapper = styled.div`
 
   @media only screen and (min-width: 1000px) {
     font-size: 2rem;
-    max-width: 1000px;
+    width: 1000px;
   }
 `;
 

@@ -11,7 +11,6 @@ app.use(express.static("public"));
 
 // Endpoints.
 app.use(require("./routes/affixes"));
-app.use(require("./routes/authentication"));
 app.use(require("./routes/characters"));
 app.use(require("./routes/realms"));
 

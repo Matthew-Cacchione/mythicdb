@@ -37,33 +37,12 @@ export const PATHS = {
   affixes: "/affixes",
   character: "/characters/us/:realm/:name",
   leaderboard: "/leaderboard",
-  login: "/login",
-  mainCharacter: "/user/main-character",
   newPlayer: "/introduction",
-  settings: "/settings",
-  signUp: "/signup",
 };
 
 export const STRINGS = {
   app: "MythicDB",
-  changePassword: "Change Password",
-  confirmPassword: "Confirm Password",
-  currentPassword: "Current Password",
-  delete: "Delete",
-  deleteAccount: "Delete account",
-  deleteAccountWarning: "Warning, this action is irreversible!",
-  login: "Sign In",
-  name: "Name",
-  password: "Password",
-  realm: "Realm",
   searchPlaceholder: "Search characters as name-realm",
-  settings: "Settings",
-  setMain: "Set main",
-  signUp: "Sign Up",
-  submit: "Submit",
-  update: "Update",
-  username: "Username",
-  viewMain: "View Main",
   cards: {
     affixes: {
       title: "Affixes",

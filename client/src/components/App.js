@@ -19,6 +19,7 @@ const App = () => {
         <Route exact path={PATHS.affixes} element={<Affixes />} />
         <Route exact path={PATHS.character} element={<Character />} />
         <Route exact path={PATHS.newPlayer} element={<Introduction />} />
+        {/* TODO: Implement leaderboard page. */}
         <Route path="" element={<>No path found.</>} />
       </Routes>
     </Router>

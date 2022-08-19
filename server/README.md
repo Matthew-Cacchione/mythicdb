@@ -36,7 +36,7 @@ Response will be in the following structure:
   "data": {
     "name": "Grievous",
     "description": "Injured players suffer increasing damage over time until healed.",
-    "imgSrc": "https://render.worldofwarcraft.com/us/icons/56/ability_backstab.jpg"
+    "imgSrc": "/assets/icon-grievous.png"
   }
 }
 ```

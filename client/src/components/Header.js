@@ -1,17 +1,11 @@
 import styled from "styled-components";
-import { useState } from "react";
 
 import { Link } from "react-router-dom";
-import Menu from "./Menu";
-import Sandwich from "./Sandwich";
 import Search from "./Search";
 
 import { STRINGS } from "../constants";
 
 const Header = () => {
-  // State to track whether the menu is open.
-  const [open, setOpen] = useState(false);
-
   return (
     <>
       <Wrapper>
@@ -19,8 +13,6 @@ const Header = () => {
           <BlankLink to="/">
             <Title>{STRINGS.app}</Title>
           </BlankLink>
-          <Sandwich open={open} setOpen={setOpen} />
-          <Menu open={open} setOpen={setOpen} />
         </Container>
         <Search />
       </Wrapper>

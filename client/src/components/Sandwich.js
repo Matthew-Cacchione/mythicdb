@@ -1,3 +1,4 @@
+// This component is no longer used, kept here in case it is needed in the future.
 import styled from "styled-components";
 
 const Sandwich = ({ open, setOpen }) => {

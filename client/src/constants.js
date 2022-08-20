@@ -52,7 +52,7 @@ export const STRINGS = {
     intro: {
       title: "Welcome to the database!",
       description:
-        "Not sure where to go? Keep scrolling to find links to various pages.\n\nYou can also type a name into the search bar to find a character!",
+        "Not sure where to go? You can find links to various pages below.\n\nYou can also type a name into the search bar to find a character!",
     },
     leaderboard: {
       title: "Leaderboard",

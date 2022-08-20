@@ -1,40 +1,15 @@
 import styled from "styled-components";
 
-import { Link } from "react-router-dom";
-
-const Card = ({ children, description, title, path }) => {
-  // Disable the link when no path is provided.
-  const disableLink = (e) => {
-    if (!path) {
-      e.preventDefault();
-    }
-  };
-
+const Card = ({ children, description, title }) => {
   return (
-    <BlankLink to={path || "/"} onClick={disableLink}>
-      <Wrapper>
-        {title && <Title>{title}</Title>}
-        <Divider />
-        {description && <Description>{description}</Description>}
-        {children}
-      </Wrapper>
-    </BlankLink>
+    <Wrapper>
+      {title && <Title>{title}</Title>}
+      <Divider />
+      {description && <Description>{description}</Description>}
+      {children}
+    </Wrapper>
   );
 };
-
-const BlankLink = styled(Link)`
-  cursor: ${({ to }) => (to === "/" ? "default" : "pointer")};
-  display: flex;
-  justify-content: center;
-  text-decoration: none;
-  margin: 0 2em;
-
-  @media only screen and (min-width: 1000px) {
-    &:first-child {
-      margin-top: 2em;
-    }
-  }
-`;
 
 const Description = styled.p`
   line-height: 1.3em;

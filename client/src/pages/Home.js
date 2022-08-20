@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+import BlankLink from "../components/BlankLink";
 import Card from "../components/Card";
 
 import { PATHS, STRINGS } from "../constants";
@@ -11,16 +12,20 @@ const Home = () => {
         description={STRINGS.cards.intro.description}
         title={STRINGS.cards.intro.title}
       />
-      <Card
-        description={STRINGS.cards.newPlayer.description}
-        title={STRINGS.cards.newPlayer.title}
-        path={PATHS.newPlayer}
-      />
-      <Card
-        description={STRINGS.cards.affixes.description}
-        title={STRINGS.cards.affixes.title}
-        path={PATHS.affixes}
-      />
+      <BlankLink path={PATHS.newPlayer}>
+        <Card
+          description={STRINGS.cards.newPlayer.description}
+          title={STRINGS.cards.newPlayer.title}
+          filled
+        />
+      </BlankLink>
+      <BlankLink path={PATHS.affixes}>
+        <Card
+          description={STRINGS.cards.affixes.description}
+          title={STRINGS.cards.affixes.title}
+          filled
+        />
+      </BlankLink>
     </Wrapper>
   );
 };
@@ -28,6 +33,7 @@ const Home = () => {
 const Wrapper = styled.div`
   align-items: center;
   display: flex;
+  gap: 1.5em;
   flex-direction: column;
   margin-top: 1em;
 `;

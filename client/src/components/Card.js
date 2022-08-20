@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-const Card = ({ children, description, fill, title }) => {
+const Card = ({ children, description, filled, title }) => {
   return (
-    <Wrapper fill={fill}>
+    <Wrapper filled={filled}>
       {title && <Title>{title}</Title>}
       <Divider />
       {description && <Description>{description}</Description>}
@@ -33,18 +33,18 @@ const Title = styled.h2`
 
 const Wrapper = styled.div`
   align-items: center;
-  background: ${({ fill }) => (fill ? "var(--color-surface)" : "transparent")};
+  background: ${({ filled }) =>
+    filled ? "var(--color-surface)" : "transparent"};
   border-radius: 0.2em;
-  box-shadow: ${({ fill }) =>
-    fill ? "0 2px 4px 0 var(--color-on-primary)" : "none"};
+  box-shadow: ${({ filled }) =>
+    filled ? "0 2px 4px 0 var(--color-on-primary)" : "none"};
   display: flex;
   flex-direction: column;
   gap: 1em;
   justify-content: center;
-  margin-bottom: 1.5em;
   padding: 1em;
   transition: box-shadow 200ms;
-  width: 90%;
+  width: 90vw;
 
   &:hover {
     box-shadow: 0 8px 16px 0 var(--color-on-primary);

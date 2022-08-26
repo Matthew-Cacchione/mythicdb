@@ -7,6 +7,7 @@ import Header from "./Header";
 import Home from "../pages/Home";
 import Introduction from "../pages/Introduction";
 
+import { AffixProvider } from "../context/AffixContext";
 import { PATHS } from "../constants";
 
 const App = () => {
@@ -16,7 +17,15 @@ const App = () => {
       <Header />
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route exact path={PATHS.affixes} element={<Affixes />} />
+        <Route
+          exact
+          path={PATHS.affixes}
+          element={
+            <AffixProvider>
+              <Affixes />
+            </AffixProvider>
+          }
+        />
         <Route exact path={PATHS.character} element={<Character />} />
         <Route exact path={PATHS.newPlayer} element={<Introduction />} />
         {/* TODO: Implement leaderboard page. */}

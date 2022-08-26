@@ -1,34 +1,37 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 
 import Card from "../components/Card";
 import Loader from "../components/Loader";
 
+import { AffixContext } from "../context/AffixContext";
+
 const Affixes = () => {
-  // Track the data of affixes that are in rotation.
-  const [rotation, setRotation] = useState([]);
+  // Import the required affix data and functions.
+  const {
+    state: { data, hasLoaded },
+    actions: { affixesFetched },
+  } = useContext(AffixContext);
 
   useEffect(() => {
-    // Set the affix data in the state.
-    const setAffixes = async () => {
-      const result = [];
-      const affixes = await (await fetch("/api/affixes")).json();
+    // Fetch the affix data from the API.
+    const fetchAffixes = async () => {
+      const response = await fetch(
+        "https://raider.io/api/v1/mythic-plus/affixes?region=us&locale=en"
+      );
 
-      // Push each affix object into the result array.
-      const rotation = affixes.data.rotation;
-      for (let i = 0; i < rotation.length; i++) {
-        const data = await (await fetch(`/api/affixes/${rotation[i]}`)).json();
+      const data = await response.json();
 
-        result.push(data.data);
-      }
-
-      setRotation(result);
+      // Set the affix data in context.
+      affixesFetched(data);
     };
 
-    setAffixes();
+    fetchAffixes();
+    //eslint-disable-next-line
   }, []);
 
-  if (!rotation.length) {
+  // Render a loading indicator if the data is still loading.
+  if (!hasLoaded) {
     return (
       <Wrapper>
         <Loader />
@@ -38,12 +41,16 @@ const Affixes = () => {
 
   return (
     <Wrapper>
-      {rotation.map((affix) => {
+      {data.affix_details.map((affix) => {
         return (
           <Card
+            key={affix.id}
             title={
               <Centered>
-                <Media src={affix.imgSrc} alt={`${affix.name} icon.`} />
+                <Media
+                  src={`/assets/${affix.icon}.png`}
+                  alt={`${affix.name} icon.`}
+                />
                 {affix.name}
               </Centered>
             }

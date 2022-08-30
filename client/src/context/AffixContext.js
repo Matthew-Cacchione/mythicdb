@@ -1,7 +1,7 @@
 import { createContext, useReducer } from "react";
 
 const initialState = {
-  data: null,
+  affixes: null,
   hasLoaded: false,
 };
 
@@ -10,7 +10,7 @@ const reducer = (state, action) => {
     case "affixes-fetched":
       return {
         ...state,
-        data: action.data,
+        affixes: action.affixes,
         hasLoaded: true,
       };
 
@@ -28,7 +28,7 @@ export const AffixProvider = ({ children }) => {
   const affixesFetched = (data) => {
     dispatch({
       type: "affixes-fetched",
-      data,
+      ...data,
     });
   };
 

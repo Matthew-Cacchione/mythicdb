@@ -9,21 +9,17 @@ import { AffixContext } from "../context/AffixContext";
 const Affixes = () => {
   // Import the required affix data and functions.
   const {
-    state: { data, hasLoaded },
+    state: { affixes, hasLoaded },
     actions: { affixesFetched },
   } = useContext(AffixContext);
 
   useEffect(() => {
     // Fetch the affix data from the API.
     const fetchAffixes = async () => {
-      const response = await fetch(
-        "https://raider.io/api/v1/mythic-plus/affixes?region=us&locale=en"
-      );
-
-      const data = await response.json();
+      const response = await (await fetch(`/api/affixes?region=us`)).json();
 
       // Set the affix data in context.
-      affixesFetched(data);
+      affixesFetched({ affixes: response.data.affixes });
     };
 
     fetchAffixes();
@@ -41,7 +37,7 @@ const Affixes = () => {
 
   return (
     <Wrapper>
-      {data.affix_details.map((affix) => {
+      {affixes.map((affix) => {
         return (
           <Card
             key={affix.id}

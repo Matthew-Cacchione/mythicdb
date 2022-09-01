@@ -27,7 +27,7 @@ const getAffixes = async (req, res) => {
     if (response.statusCode === 400) {
       return res
         .status(400)
-        .json({ status: 400, data: { region }, message: "No region found." });
+        .json({ status: 400, message: "No region found.", data: { region } });
     }
 
     // Extract the required data from the response.

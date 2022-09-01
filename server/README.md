@@ -15,7 +15,7 @@ Get the current affixes in rotation.
 Expects the following variables as a query:
 
 ```js
-region = "us, eu, kr, or tw";
+region = "region code";
 ```
 
 Response will be in this structure:
@@ -49,6 +49,7 @@ Expects the following variables as a query:
 ```js
 name = "character name";
 realm = "realm slug";
+region = "region code";
 ```
 
 Response will be in this structure:
@@ -58,23 +59,18 @@ Response will be in this structure:
   "status": 200,
   "message": "If a message is required it will be here.",
   "data": {
-    "profile": {
+    "character": {
       "name": "Kyrasis",
-      "realm": "Area 52",
-      "faction": "Alliance",
       "race": "Dwarf",
       "class": "Death Knight",
       "spec": "Blood",
+      "faction": "Alliance",
+      "realm": "Area 52",
       "guild": "Not Idiot"
     },
     "mythic_plus": {
-      "rating": 2072.3765,
-      "rating_color": {
-        "r": 0,
-        "g": 112,
-        "b": 221,
-        "a": 1
-      }
+      "score": 3112.6,
+      "color": "#fe7e15"
     }
   }
 }

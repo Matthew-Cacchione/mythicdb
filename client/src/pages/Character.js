@@ -8,8 +8,9 @@ const Character = () => {
   // Extract the name and realm from the url.
   const { name, realm } = useParams();
 
-  // State to track the character details.
+  // States to track the character's details.
   const [character, setCharacter] = useState(null);
+  const [mythicPlus, setMythicPlus] = useState(null);
 
   useEffect(() => {
     const getCharacter = async () => {
@@ -26,7 +27,8 @@ const Character = () => {
       // Only set the character if the response is OK.
       switch (data.status) {
         case 200:
-          setCharacter(data.data);
+          setCharacter(data.data.character);
+          setMythicPlus(data.data.mythic_plus);
           break;
 
         case 404:
@@ -86,21 +88,6 @@ const Character = () => {
       break;
   }
 
-  // Deconstruct the data after it's loaded.
-  const {
-    profile: {
-      class: characterClass,
-      faction,
-      guild,
-      img_src,
-      name: characterName,
-      race,
-      realm: characterRealm,
-      spec,
-    },
-    mythic_plus: { rating, rating_color },
-  } = character;
-
   // Determine the class color.
   const classColor = (characterClass) => {
     const lower = characterClass.toLowerCase();
@@ -121,22 +108,22 @@ const Character = () => {
     <Wrapper>
       <Container>
         <Head>
-          <Name faction={faction}>{characterName}</Name>
-          <Rating rating_color={rating_color}>{rating.toFixed(1)}</Rating>
+          <Name faction={character.faction}>{character.name}</Name>
+          <Rating color={mythicPlus.color}>{mythicPlus.score}</Rating>
         </Head>
-        <Media src={img_src} alt={`${characterName}'s character.`} />
+        {/* <Media src={img_src} alt={`${character.name}'s character.`} /> */}
         <Details>
-          {guild && <p>{`<${guild}>`}</p>}
+          {character.guild && <p>{`<${character.guild}>`}</p>}
           <CharacterClass
-            classColor={classColor(characterClass)}
-            faction={faction}
+            classColor={classColor(character.class)}
+            faction={character.faction}
           >
-            {race}{" "}
+            {character.race}{" "}
             <span>
-              {spec} {characterClass}
+              {character.spec} {character.class}
             </span>
           </CharacterClass>
-          <p>{`(US) ${characterRealm}`}</p>
+          <p>{`(US) ${character.realm}`}</p>
         </Details>
       </Container>
     </Wrapper>
@@ -212,8 +199,6 @@ const Name = styled.h2`
 `;
 
 const Rating = styled.p`
-  color: ${({ rating_color }) =>
-    `rgb(${rating_color.r}, ${rating_color.g}, ${rating_color.b})`};
   font-size: 1.3rem;
   font-weight: bold;
   text-shadow: 2px 2px black;

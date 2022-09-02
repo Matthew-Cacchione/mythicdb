@@ -21,13 +21,13 @@ const Search = () => {
       const [name, realm] = value.toLowerCase().split("-");
 
       // Fetch the proper realm slug from the server.
-      const response = await fetch(`/api/realms/slug?realm=${realm}`);
-      const data = await response.json();
+      // const response = await fetch(`/api/realms/slug?realm=${realm}`);
+      // const data = await response.json();
 
       // If the realm name is correct redirect the user.
-      switch (data.status) {
+      switch (200) {
         case 200:
-          navigate(`/characters/us/${data.data.slug}/${name}`);
+          navigate(`/characters/us/${realm}/${name}`);
           setValue("");
           break;
 

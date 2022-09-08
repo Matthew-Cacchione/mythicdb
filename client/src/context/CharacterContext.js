@@ -9,19 +9,19 @@ const initialState = {
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case "character-error":
+      return {
+        ...state,
+        error: action.error,
+        hasLoaded: false,
+      };
+
     case "character-fetched":
       return {
         ...state,
         character: action.character,
         mythicPlus: action.mythicPlus,
         hasLoaded: true,
-      };
-
-    case "error-occurred":
-      return {
-        ...state,
-        error: action.error,
-        hasLoaded: false,
       };
 
     case "reset-character":
@@ -48,9 +48,9 @@ export const CharacterProvider = ({ children }) => {
   };
 
   // Indicate that an error has occurred.
-  const errorOccurred = (data) => {
+  const characterError = (data) => {
     dispatch({
-      type: "error-occurred",
+      type: "character-error",
       ...data,
     });
   };
@@ -64,7 +64,7 @@ export const CharacterProvider = ({ children }) => {
     <CharacterContext.Provider
       value={{
         state,
-        actions: { characterFetched, errorOccurred, resetCharacter },
+        actions: { characterFetched, characterError, resetCharacter },
       }}
     >
       {children}

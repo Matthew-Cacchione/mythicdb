@@ -13,7 +13,7 @@ const Character = () => {
   // Context to track the character's details.
   const {
     state: { character, mythicPlus, error, hasLoaded },
-    actions: { characterFetched, errorOccurred, resetCharacter },
+    actions: { characterError, characterFetched, resetCharacter },
   } = useContext(CharacterContext);
 
   useEffect(() => {
@@ -38,11 +38,11 @@ const Character = () => {
           break;
 
         case 404:
-          errorOccurred({ error: "No character found." });
+          characterError({ error: "No character found." });
           break;
 
         default:
-          errorOccurred({
+          characterError({
             error: "An unknown error occurred, please try again.",
           });
           break;

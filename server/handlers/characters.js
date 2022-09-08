@@ -27,7 +27,6 @@ const getCharacter = async (req, res) => {
   try {
     // Fetch the character's data from the API.
     const response = await (await fetch(uri, options)).json();
-    // const media = await (await fetch(characterMediaUri(name, realm))).json();
 
     // Verify if the API returned a bad request.
     if (response.statusCode === 400) {

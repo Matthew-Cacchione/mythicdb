@@ -2,41 +2,37 @@
 
 Endpoints are grouped into the following categories:
 
-- **affix** - relating to warcraft affixes
+- **affix** - relating to mythic+ affixes
 - **character** - relating to warcraft characters
-- **realm** - relating to warcraft realms
 
 ## Affix Endpoints
 
 ### GET /api/affixes
 
-Get the affixes currently in rotation.
+Get the current affixes in rotation.
 
-Response will be in the following structure:
+Expects the following variables as a query:
 
-```json
-{
-  "status": 200,
-  "data": {
-    "rotation": [10, 8, 12, 131]
-  }
-}
+```js
+region = "<region code>";
 ```
 
-### GET /api/affixes/:id
-
-Get the data about the specified affix.
-
-Response will be in the following structure:
+Response will be in this structure:
 
 ```json
 {
   "status": 200,
   "message": "If a message is required it will be here.",
   "data": {
-    "name": "Grievous",
-    "description": "Injured players suffer increasing damage over time until healed.",
-    "imgSrc": "/assets/icon-grievous.png"
+    "affixes": [
+      {
+        "id": 10,
+        "name": "Fortified",
+        "description": "Non-boss enemies have 20% more health and inflict up to 30% increased damage.",
+        "icon": "ability_toughness",
+        "wowhead_url": "https://wowhead.com/affix=10"
+      }
+    ]
   }
 }
 ```
@@ -50,8 +46,9 @@ Get the data of the specified character.
 Expects the following variables as a query:
 
 ```js
-name = "character name";
-realm = "realm slug";
+name = "<character name>";
+realm = "<realm slug>";
+region = "<region code>";
 ```
 
 Response will be in this structure:
@@ -61,48 +58,19 @@ Response will be in this structure:
   "status": 200,
   "message": "If a message is required it will be here.",
   "data": {
-    "profile": {
+    "character": {
       "name": "Kyrasis",
-      "realm": "Area 52",
-      "faction": "Alliance",
       "race": "Dwarf",
       "class": "Death Knight",
       "spec": "Blood",
+      "faction": "Alliance",
+      "realm": "Area 52",
       "guild": "Not Idiot"
     },
     "mythic_plus": {
-      "rating": 2072.3765,
-      "rating_color": {
-        "r": 0,
-        "g": 112,
-        "b": 221,
-        "a": 1
-      }
+      "score": 3112.6,
+      "color": "#fe7e15"
     }
-  }
-}
-```
-
-## Realm Endpoints
-
-### GET /api/realms/slug
-
-Get the proper realm slug given realm name.
-
-Expects the following variables as a query. Do not use spaces in the realm name, e.g. Cenarion Circle should be cenarioncircle.
-
-```js
-realm = "realm name";
-```
-
-Response will be in this structure:
-
-```json
-{
-  "status": 200,
-  "message": "If a message is required it will be here.",
-  "data": {
-    "slug": "cenarion-circle"
   }
 }
 ```

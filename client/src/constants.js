@@ -35,7 +35,7 @@ export const DATA = {
 
 export const PATHS = {
   affixes: "/affixes",
-  character: "/characters/us/:realm/:name",
+  character: "/characters/:region/:realm/:name",
   leaderboard: "/leaderboard",
   newPlayer: "/introduction",
 };

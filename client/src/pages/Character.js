@@ -1,105 +1,57 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import Loader from "../components/Loader";
 
+import { CharacterContext } from "../context/CharacterContext";
+
 const Character = () => {
   // Extract the name and realm from the url.
-  const { name, realm } = useParams();
+  const { name, realm, region } = useParams();
 
-  // State to track the character details.
-  const [character, setCharacter] = useState(null);
+  // Context to track the character's details.
+  const {
+    state: { character, mythicPlus, error, hasLoaded },
+    actions: { characterError, characterFetched, resetCharacter },
+  } = useContext(CharacterContext);
 
   useEffect(() => {
     const getCharacter = async () => {
       // Reset the character so the loading indicator is displayed.
-      await setCharacter(null);
+      resetCharacter();
 
       // Fetch the character from the server.
-      const response = await fetch(
-        `/api/characters?name=${name}&realm=${realm}`
-      );
-
-      const data = await response.json();
+      const response = await (
+        await fetch(
+          `/api/characters?name=${name}&realm=${realm}&region=${region}`
+        )
+      ).json();
 
       // Only set the character if the response is OK.
-      switch (data.status) {
+      switch (response.status) {
         case 200:
-          setCharacter(data.data);
+          characterFetched({
+            character: response.data.character,
+            mythicPlus: response.data.mythic_plus,
+          });
           break;
 
         case 404:
-          setCharacter("not found");
+          characterError({ error: "No character found." });
           break;
 
         default:
-          setCharacter("error");
+          characterError({
+            error: "An unknown error occurred, please try again.",
+          });
           break;
       }
     };
 
     getCharacter();
     //eslint-disable-next-line
-  }, [name, realm]);
-
-  // If the realm is set as null then we know it wasn't found.
-  if (realm === "null") {
-    return (
-      <Wrapper>
-        <Container>No realm found.</Container>
-      </Wrapper>
-    );
-  } else if (realm === "error") {
-    return (
-      <Wrapper>
-        <Container>An error occurred, please try again.</Container>
-      </Wrapper>
-    );
-  }
-
-  switch (character) {
-    case null:
-      return (
-        <Wrapper>
-          <Container>
-            <Loader />
-          </Container>
-        </Wrapper>
-      );
-
-    case "not found":
-      return (
-        <Wrapper>
-          <Container>No character found.</Container>
-        </Wrapper>
-      );
-
-    case "error":
-      return (
-        <Wrapper>
-          <Container>An error occurred, please try again.</Container>
-        </Wrapper>
-      );
-
-    default:
-      break;
-  }
-
-  // Deconstruct the data after it's loaded.
-  const {
-    profile: {
-      class: characterClass,
-      faction,
-      guild,
-      img_src,
-      name: characterName,
-      race,
-      realm: characterRealm,
-      spec,
-    },
-    mythic_plus: { rating, rating_color },
-  } = character;
+  }, [name, realm, region]);
 
   // Determine the class color.
   const classColor = (characterClass) => {
@@ -117,26 +69,46 @@ const Character = () => {
     }
   };
 
+  // Display the error if one has occurred.
+  if (error) {
+    return (
+      <Wrapper>
+        <Container>{error}</Container>
+      </Wrapper>
+    );
+  }
+
+  // Return a loading indicator if the data isn't available.
+  if (!hasLoaded) {
+    return (
+      <Wrapper>
+        <Container>
+          <Loader />
+        </Container>
+      </Wrapper>
+    );
+  }
+
   return (
     <Wrapper>
       <Container>
         <Head>
-          <Name faction={faction}>{characterName}</Name>
-          <Rating rating_color={rating_color}>{rating.toFixed(1)}</Rating>
+          <Name faction={character.faction}>{character.name}</Name>
+          <Rating color={mythicPlus.color}>{mythicPlus.score}</Rating>
         </Head>
-        <Media src={img_src} alt={`${characterName}'s character.`} />
+        {/* <Media src={img_src} alt={`${character.name}'s character.`} /> */}
         <Details>
-          {guild && <p>{`<${guild}>`}</p>}
+          {character.guild && <p>{`<${character.guild}>`}</p>}
           <CharacterClass
-            classColor={classColor(characterClass)}
-            faction={faction}
+            classColor={classColor(character.class)}
+            faction={character.faction}
           >
-            {race}{" "}
+            {character.race}{" "}
             <span>
-              {spec} {characterClass}
+              {character.spec} {character.class}
             </span>
           </CharacterClass>
-          <p>{`(US) ${characterRealm}`}</p>
+          <p>{`(US) ${character.realm}`}</p>
         </Details>
       </Container>
     </Wrapper>
@@ -188,18 +160,6 @@ const Head = styled.div`
   justify-content: space-between;
 `;
 
-const Media = styled.img`
-  border: 3px solid var(--color-background);
-  height: 200px;
-  object-fit: cover;
-  object-position: 0 -35px;
-
-  @media only screen and (min-width: 1000px) {
-    height: 500px;
-    object-position: 0 -125px;
-  }
-`;
-
 const Name = styled.h2`
   color: ${({ faction }) =>
     faction === "Alliance" ? "var(--color-alliance)" : "var(--color-horde)"};
@@ -212,8 +172,7 @@ const Name = styled.h2`
 `;
 
 const Rating = styled.p`
-  color: ${({ rating_color }) =>
-    `rgb(${rating_color.r}, ${rating_color.g}, ${rating_color.b})`};
+  color: ${({ color }) => color};
   font-size: 1.3rem;
   font-weight: bold;
   text-shadow: 2px 2px black;

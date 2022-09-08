@@ -24,6 +24,11 @@ const reducer = (state, action) => {
         hasLoaded: false,
       };
 
+    case "reset-character":
+      return {
+        ...initialState,
+      };
+
     default:
       throw new Error("Unrecognized action:", action.type);
   }
@@ -50,9 +55,17 @@ export const CharacterProvider = ({ children }) => {
     });
   };
 
+  // Reset the character data.
+  const resetCharacter = () => {
+    dispatch({ type: "reset-character" });
+  };
+
   return (
     <CharacterContext.Provider
-      value={{ state, actions: { characterFetched, errorOccurred } }}
+      value={{
+        state,
+        actions: { characterFetched, errorOccurred, resetCharacter },
+      }}
     >
       {children}
     </CharacterContext.Provider>

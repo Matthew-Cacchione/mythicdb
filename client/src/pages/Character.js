@@ -1,92 +1,57 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import Loader from "../components/Loader";
 
+import { CharacterContext } from "../context/CharacterContext";
+
 const Character = () => {
   // Extract the name and realm from the url.
-  const { name, realm } = useParams();
+  const { name, realm, region } = useParams();
 
-  // States to track the character's details.
-  const [character, setCharacter] = useState(null);
-  const [mythicPlus, setMythicPlus] = useState(null);
+  // Context to track the character's details.
+  const {
+    state: { character, mythicPlus, error, hasLoaded },
+    actions: { characterFetched, errorOccurred, resetCharacter },
+  } = useContext(CharacterContext);
 
   useEffect(() => {
     const getCharacter = async () => {
       // Reset the character so the loading indicator is displayed.
-      await setCharacter(null);
+      resetCharacter();
 
       // Fetch the character from the server.
-      const response = await fetch(
-        `/api/characters?name=${name}&realm=${realm}`
-      );
-
-      const data = await response.json();
+      const response = await (
+        await fetch(
+          `/api/characters?name=${name}&realm=${realm}&region=${region}`
+        )
+      ).json();
 
       // Only set the character if the response is OK.
-      switch (data.status) {
+      switch (response.status) {
         case 200:
-          setCharacter(data.data.character);
-          setMythicPlus(data.data.mythic_plus);
+          characterFetched({
+            character: response.data.character,
+            mythicPlus: response.data.mythic_plus,
+          });
           break;
 
         case 404:
-          setCharacter("not found");
+          errorOccurred({ error: "No character found." });
           break;
 
         default:
-          setCharacter("error");
+          errorOccurred({
+            error: "An unknown error occurred, please try again.",
+          });
           break;
       }
     };
 
     getCharacter();
     //eslint-disable-next-line
-  }, [name, realm]);
-
-  // If the realm is set as null then we know it wasn't found.
-  if (realm === "null") {
-    return (
-      <Wrapper>
-        <Container>No realm found.</Container>
-      </Wrapper>
-    );
-  } else if (realm === "error") {
-    return (
-      <Wrapper>
-        <Container>An error occurred, please try again.</Container>
-      </Wrapper>
-    );
-  }
-
-  switch (character) {
-    case null:
-      return (
-        <Wrapper>
-          <Container>
-            <Loader />
-          </Container>
-        </Wrapper>
-      );
-
-    case "not found":
-      return (
-        <Wrapper>
-          <Container>No character found.</Container>
-        </Wrapper>
-      );
-
-    case "error":
-      return (
-        <Wrapper>
-          <Container>An error occurred, please try again.</Container>
-        </Wrapper>
-      );
-
-    default:
-      break;
-  }
+  }, [name, realm, region]);
 
   // Determine the class color.
   const classColor = (characterClass) => {
@@ -103,6 +68,26 @@ const Character = () => {
         return `var(--color-${lower})`;
     }
   };
+
+  // Display the error if one has occurred.
+  if (error) {
+    return (
+      <Wrapper>
+        <Container>{error}</Container>
+      </Wrapper>
+    );
+  }
+
+  // Return a loading indicator if the data isn't available.
+  if (!hasLoaded) {
+    return (
+      <Wrapper>
+        <Container>
+          <Loader />
+        </Container>
+      </Wrapper>
+    );
+  }
 
   return (
     <Wrapper>
@@ -199,6 +184,7 @@ const Name = styled.h2`
 `;
 
 const Rating = styled.p`
+  color: ${({ color }) => color};
   font-size: 1.3rem;
   font-weight: bold;
   text-shadow: 2px 2px black;

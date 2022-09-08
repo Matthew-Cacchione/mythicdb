@@ -160,18 +160,6 @@ const Head = styled.div`
   justify-content: space-between;
 `;
 
-const Media = styled.img`
-  border: 3px solid var(--color-background);
-  height: 200px;
-  object-fit: cover;
-  object-position: 0 -35px;
-
-  @media only screen and (min-width: 1000px) {
-    height: 500px;
-    object-position: 0 -125px;
-  }
-`;
-
 const Name = styled.h2`
   color: ${({ faction }) =>
     faction === "Alliance" ? "var(--color-alliance)" : "var(--color-horde)"};

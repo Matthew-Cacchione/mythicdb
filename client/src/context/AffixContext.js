@@ -15,7 +15,7 @@ const reducer = (state, action) => {
       };
 
     default:
-      throw new Error(`Unrecognized action: ${action.type}`);
+      throw new Error("Unrecognized action:", action.type);
   }
 };
 
@@ -24,7 +24,7 @@ export const AffixContext = createContext(null);
 export const AffixProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  // Indicate that affix data has been fetched from the API.
+  // Indicate that the affix data has been fetched.
   const affixesFetched = (data) => {
     dispatch({
       type: "affixes-fetched",

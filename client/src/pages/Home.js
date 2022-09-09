@@ -33,7 +33,6 @@ const Home = () => {
 const Wrapper = styled.div`
   align-items: center;
   display: flex;
-  gap: 1.5em;
   flex-direction: column;
   margin-top: 1em;
 `;

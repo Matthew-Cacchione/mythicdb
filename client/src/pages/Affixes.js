@@ -74,7 +74,6 @@ const Wrapper = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
-  gap: 1.5em;
   margin: 1em 0;
 `;
 

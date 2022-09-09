@@ -33,11 +33,12 @@ const Title = styled.h2`
 
 const Wrapper = styled.div`
   align-items: center;
-  background: ${({ filled }) =>
-    filled ? "var(--color-surface)" : "transparent"};
+  background: ${(props) =>
+    props.filled ? "var(--color-surface)" : "transparent"};
+  border: ${(props) => (props.filled ? "" : "3px solid var(--color-surface)")};
   border-radius: 0.2em;
-  box-shadow: ${({ filled }) =>
-    filled ? "0 2px 4px 0 var(--color-on-primary)" : "none"};
+  box-shadow: ${(props) =>
+    props.filled ? "0 2px 4px 0 var(--color-on-primary)" : "none"};
   display: flex;
   flex-direction: column;
   gap: 1em;

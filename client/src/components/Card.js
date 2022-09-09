@@ -35,7 +35,10 @@ const Wrapper = styled.div`
   align-items: center;
   background: ${(props) =>
     props.filled ? "var(--color-surface)" : "transparent"};
-  border: ${(props) => (props.filled ? "" : "3px solid var(--color-surface)")};
+  border: ${(props) =>
+    props.filled
+      ? "2px solid var(--color-primary)"
+      : "2px solid var(--color-surface-variant)"};
   border-radius: 0.2em;
   box-shadow: ${(props) =>
     props.filled ? "0 2px 4px 0 var(--color-on-primary)" : "none"};
@@ -43,6 +46,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   gap: 1em;
   justify-content: center;
+  margin-bottom: 1.5em;
   padding: 1em;
   transition: box-shadow 200ms;
   width: 90vw;

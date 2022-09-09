@@ -8,7 +8,8 @@ export default createGlobalStyle`
     --color-secondary: #03dac6;
     --color-secondary-variant: #007066;
     --color-background: #121212;
-    --color-surface: #4a4a4a;
+    --color-surface: #2b2b2b;
+    --color-surface-variant: #737373;
     --color-error: #cf6679;
     --color-on-primary: #000000;
     --color-on-secondary: #000000;

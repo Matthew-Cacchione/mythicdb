@@ -1,5 +1,3 @@
-// Affix related handlers will be hosted here.
-
 // Allows the use of the fetch API in Node.
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
@@ -25,9 +23,11 @@ const getAffixes = async (req, res) => {
 
     // Verify that the region provided exists.
     if (response.statusCode === 400) {
-      return res
-        .status(400)
-        .json({ status: 400, message: "No region found.", data: { region } });
+      return res.status(400).json({
+        status: 400,
+        message: "No region found.",
+        data: { region },
+      });
     }
 
     // Extract the required data from the response.
@@ -35,8 +35,12 @@ const getAffixes = async (req, res) => {
 
     return res.status(200).json({ status: 200, data: { affixes } });
   } catch (e) {
-    console.error("Error occurred getting affixes: ", e);
-    return res.status(500).json({ status: 500, data: { region } });
+    console.error("Error getting affixes:", e);
+    return res.status(500).json({
+      status: 500,
+      message: "An unknown error occurred.",
+      data: { region },
+    });
   }
 };
 

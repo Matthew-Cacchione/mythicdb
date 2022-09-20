@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+import BlankLink from "../components/BlankLink";
 import Card from "../components/Card";
 
 import { DATA, PATHS, STRINGS } from "../constants";
@@ -65,11 +66,13 @@ const Introduction = () => {
         </Table>
         <Note>{STRINGS.newPlayer.gear.note}</Note>
       </Card>
-      <Card
-        description={STRINGS.newPlayer.affixes.description}
-        path={PATHS.affixes}
-        title={STRINGS.newPlayer.affixes.title}
-      />
+      <BlankLink path={PATHS.affixes}>
+        <Card
+          description={STRINGS.newPlayer.affixes.description}
+          title={STRINGS.newPlayer.affixes.title}
+          filled
+        />
+      </BlankLink>
     </Wrapper>
   );
 };

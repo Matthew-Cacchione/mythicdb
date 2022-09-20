@@ -20,25 +20,9 @@ const Search = () => {
     if (e.key === "Enter") {
       const [name, realm] = value.toLowerCase().split("-");
 
-      // Fetch the proper realm slug from the server.
-      // const response = await fetch(`/api/realms/slug?realm=${realm}`);
-      // const data = await response.json();
-
-      // If the realm name is correct redirect the user.
-      switch (200) {
-        case 200:
-          navigate(`/characters/us/${realm}/${name}`);
-          setValue("");
-          break;
-
-        case 404:
-          navigate(`/characters/us/null/${name}`);
-          break;
-
-        default:
-          navigate("/characters/us/error/error");
-          break;
-      }
+      // Redirect the user to the entered character's page.
+      navigate(`/characters/us/${realm}/${name}`);
+      setValue("");
     }
   };
 
@@ -58,6 +42,7 @@ const Input = styled.input`
   background: var(--color-on-background);
   border: 3px solid var(--color-primary);
   border-radius: 0.2em;
+  font-size: 1rem;
   height: 3em;
   width: 100%;
 

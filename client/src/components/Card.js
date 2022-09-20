@@ -1,40 +1,15 @@
 import styled from "styled-components";
 
-import { Link } from "react-router-dom";
-
-const Card = ({ children, description, title, path }) => {
-  // Disable the link when no path is provided.
-  const disableLink = (e) => {
-    if (!path) {
-      e.preventDefault();
-    }
-  };
-
+const Card = ({ children, description, filled, title }) => {
   return (
-    <BlankLink to={path || "/"} onClick={disableLink}>
-      <Wrapper>
-        {title && <Title>{title}</Title>}
-        <Divider />
-        {description && <Description>{description}</Description>}
-        {children}
-      </Wrapper>
-    </BlankLink>
+    <Wrapper filled={filled}>
+      {title && <Title>{title}</Title>}
+      <Divider />
+      {description && <Description>{description}</Description>}
+      {children}
+    </Wrapper>
   );
 };
-
-const BlankLink = styled(Link)`
-  cursor: ${({ to }) => (to === "/" ? "default" : "pointer")};
-  display: flex;
-  justify-content: center;
-  text-decoration: none;
-  margin: 0 2em;
-
-  @media only screen and (min-width: 1000px) {
-    &:first-child {
-      margin-top: 2em;
-    }
-  }
-`;
 
 const Description = styled.p`
   line-height: 1.3em;
@@ -58,9 +33,15 @@ const Title = styled.h2`
 
 const Wrapper = styled.div`
   align-items: center;
-  background: var(--color-surface);
+  background: ${(props) =>
+    props.filled ? "var(--color-surface)" : "transparent"};
+  border: ${(props) =>
+    props.filled
+      ? "2px solid var(--color-primary)"
+      : "2px solid var(--color-surface-variant)"};
   border-radius: 0.2em;
-  box-shadow: 0 2px 4px 0 var(--color-on-primary);
+  box-shadow: ${(props) =>
+    props.filled ? "0 2px 4px 0 var(--color-on-primary)" : "none"};
   display: flex;
   flex-direction: column;
   gap: 1em;
@@ -68,7 +49,7 @@ const Wrapper = styled.div`
   margin-bottom: 1.5em;
   padding: 1em;
   transition: box-shadow 200ms;
-  width: 100%;
+  width: 90vw;
 
   &:hover {
     box-shadow: 0 8px 16px 0 var(--color-on-primary);

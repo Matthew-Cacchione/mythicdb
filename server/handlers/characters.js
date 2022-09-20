@@ -1,5 +1,3 @@
-// Character related handlers will be hosted here.
-
 // Allows the use of the fetch API in Node.
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
@@ -15,7 +13,7 @@ const options = {
   },
 };
 
-// #Handlers.
+// Handlers.
 
 // Retrieve the given character's data from the API.
 const getCharacter = async (req, res) => {
@@ -33,9 +31,10 @@ const getCharacter = async (req, res) => {
       switch (response.message) {
         // Properly return a 404 if the character is not found.
         case "Could not find requested character":
-          return res
-            .status(404)
-            .json({ status: 404, message: "No character found." });
+          return res.status(404).json({
+            status: 404,
+            message: "No character found.",
+          });
 
         default:
           return res.status(400).json({
@@ -56,9 +55,6 @@ const getCharacter = async (req, res) => {
       guild: character_guild,
       mythic_plus_scores_by_season,
     } = response;
-
-    // Extract the media from the response.
-    // const img_src = media.assets[2].value;
 
     // Respond with the required data.
     return res.status(200).json({
@@ -83,7 +79,7 @@ const getCharacter = async (req, res) => {
     console.error("Error fetching character:", e);
     return res.status(500).json({
       status: 500,
-      message: "Something went wrong, please try again.",
+      message: "An unknown error occurred.",
       data: { name, realm, region },
     });
   }

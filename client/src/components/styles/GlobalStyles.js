@@ -6,8 +6,10 @@ export default createGlobalStyle`
     --color-primary: #bb86fc;
     --color-primary-variant: #3700b3;
     --color-secondary: #03dac6;
+    --color-secondary-variant: #007066;
     --color-background: #121212;
-    --color-surface: #292929;
+    --color-surface: #2b2b2b;
+    --color-surface-variant: #737373;
     --color-error: #cf6679;
     --color-on-primary: #000000;
     --color-on-secondary: #000000;

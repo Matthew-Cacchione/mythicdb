@@ -70,6 +70,7 @@ const Introduction = () => {
         <Card
           description={STRINGS.newPlayer.affixes.description}
           title={STRINGS.newPlayer.affixes.title}
+          filled
         />
       </BlankLink>
     </Wrapper>

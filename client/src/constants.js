@@ -42,6 +42,8 @@ export const PATHS = {
 
 export const STRINGS = {
   app: "MythicDB",
+  dungeon: "Dungeon",
+  keyLevel: "Level",
   searchPlaceholder: "Search characters as name-realm",
   cards: {
     affixes: {

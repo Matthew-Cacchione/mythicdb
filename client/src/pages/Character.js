@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import Loader from "../components/Loader";
 
 import { CharacterContext } from "../context/CharacterContext";
+import { STRINGS } from "../constants";
 
 const Character = () => {
   // Extract the name and realm from the url.
@@ -115,6 +116,24 @@ const Character = () => {
             </span>
           </CharacterClass>
         </Details>
+        <Table>
+          <thead>
+            <Row>
+              <th>{STRINGS.dungeon}</th>
+              <th>{STRINGS.keyLevel}</th>
+            </Row>
+          </thead>
+          <tbody>
+            {mythicPlus.bestRuns.map((run) => {
+              return (
+                <Row key={run.dungeon}>
+                  <td>{run.dungeon}</td>
+                  <td>+{run.level}</td>
+                </Row>
+              );
+            })}
+          </tbody>
+        </Table>
       </Container>
     </Wrapper>
   );
@@ -123,11 +142,9 @@ const Character = () => {
 const CharacterClass = styled.p`
   color: ${({ faction }) =>
     faction === "Alliance" ? "var(--color-alliance)" : "var(--color-horde)"};
-  text-shadow: 1px 1px black;
 
   & > span {
     color: ${({ classColor }) => classColor};
-    text-shadow: none;
   }
 `;
 
@@ -156,12 +173,14 @@ const Details = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.6em;
+  text-shadow: 1px 1px black;
 `;
 
 const Head = styled.div`
   align-items: center;
   display: flex;
   justify-content: space-between;
+  text-shadow: 2px 2px black;
 
   & > div {
     align-items: center;
@@ -174,7 +193,6 @@ const Name = styled.h2`
   color: ${({ faction }) =>
     faction === "Alliance" ? "var(--color-alliance)" : "var(--color-horde)"};
   font-size: 1.3rem;
-  text-shadow: 2px 2px black;
 
   @media only screen and (min-width: 1000px) {
     font-size: 2.4rem;
@@ -185,11 +203,30 @@ const Rating = styled.p`
   color: ${({ color }) => color};
   font-size: 1.3rem;
   font-weight: bold;
-  text-shadow: 2px 2px black;
 
   @media only screen and (min-width: 1000px) {
     font-size: 2.4rem;
   }
+`;
+
+const Row = styled.tr`
+  text-shadow: none;
+
+  & > th {
+    background: var(--color-background);
+  }
+
+  & > td,
+  & > th {
+    border: 2px solid var(--color-secondary);
+    padding: 0.4em;
+    text-align: center;
+  }
+`;
+
+const Table = styled.table`
+  border-collapse: collapse;
+  width: 100%;
 `;
 
 const Thumbnail = styled.img`

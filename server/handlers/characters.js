@@ -47,6 +47,7 @@ const getCharacter = async (req, res) => {
     // Extract the required data from the response.
     const {
       name: character_name,
+      thumbnail_url,
       race: character_race,
       class: character_class,
       active_spec_name: character_spec,
@@ -62,6 +63,7 @@ const getCharacter = async (req, res) => {
       data: {
         character: {
           name: character_name,
+          thumbnail: thumbnail_url,
           race: character_race,
           class: character_class,
           spec: character_spec,

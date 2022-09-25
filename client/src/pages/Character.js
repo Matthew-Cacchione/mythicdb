@@ -3,6 +3,8 @@ import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import Loader from "../components/Loader";
+import Row from "../components/Table/Row";
+import Table from "../components/Table/Table";
 
 import { CharacterContext } from "../context/CharacterContext";
 import { STRINGS } from "../constants";
@@ -209,25 +211,25 @@ const Rating = styled.p`
   }
 `;
 
-const Row = styled.tr`
-  text-shadow: none;
+// const Row = styled.tr`
+//   text-shadow: none;
 
-  & > th {
-    background: var(--color-background);
-  }
+//   & > td,
+//   & > th {
+//     border: 2px solid var(--color-secondary);
+//     padding: 0.4em;
+//     text-align: center;
+//   }
+// `;
 
-  & > td,
-  & > th {
-    border: 2px solid var(--color-secondary);
-    padding: 0.4em;
-    text-align: center;
-  }
-`;
+// const Table = styled.table`
+//   border-collapse: collapse;
+//   width: 100%;
 
-const Table = styled.table`
-  border-collapse: collapse;
-  width: 100%;
-`;
+//   & > thead {
+//     background: var(--color-background);
+//   }
+// `;
 
 const Thumbnail = styled.img`
   border: 2px solid var(--color-background);

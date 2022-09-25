@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 import BlankLink from "../components/BlankLink";
 import Card from "../components/Card";
+import Row from "../components/Table/Row";
+import Table from "../components/Table/Table";
 
 import { DATA, PATHS, STRINGS } from "../constants";
 
@@ -82,20 +84,6 @@ const Note = styled.p`
   line-height: 1.3em;
   text-align: center;
   white-space: pre-wrap;
-`;
-
-const Row = styled.tr`
-  & > td,
-  & > th {
-    border: 2px solid var(--color-secondary);
-    text-align: center;
-    padding: 0.4em;
-  }
-`;
-
-const Table = styled.table`
-  border-collapse: collapse;
-  width: 100%;
 `;
 
 const Wrapper = styled.div`

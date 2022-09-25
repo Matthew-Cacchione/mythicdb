@@ -93,12 +93,18 @@ const Character = () => {
     <Wrapper>
       <Container>
         <Head>
-          <Name faction={character.faction}>{character.name}</Name>
+          <div>
+            <Thumbnail
+              src={character.thumbnail}
+              alt={`${character.name}'s profile picture.`}
+            />
+            <Name faction={character.faction}>{character.name}</Name>
+          </div>
           <Rating color={mythicPlus.color}>{mythicPlus.score}</Rating>
         </Head>
-        {/* <Media src={img_src} alt={`${character.name}'s character.`} /> */}
         <Details>
           {character.guild && <p>{`<${character.guild}>`}</p>}
+          <p>{`(US) ${character.realm}`}</p>
           <CharacterClass
             classColor={classColor(character.class)}
             faction={character.faction}
@@ -108,7 +114,6 @@ const Character = () => {
               {character.spec} {character.class}
             </span>
           </CharacterClass>
-          <p>{`(US) ${character.realm}`}</p>
         </Details>
       </Container>
     </Wrapper>
@@ -147,17 +152,22 @@ const Container = styled.div`
 `;
 
 const Details = styled.div`
-  align-items: center;
+  align-items: flex-start;
   display: flex;
   flex-direction: column;
   gap: 0.6em;
-  letter-spacing: 0.1rem;
 `;
 
 const Head = styled.div`
   align-items: center;
   display: flex;
   justify-content: space-between;
+
+  & > div {
+    align-items: center;
+    display: flex;
+    gap: 0.2rem;
+  }
 `;
 
 const Name = styled.h2`
@@ -180,6 +190,12 @@ const Rating = styled.p`
   @media only screen and (min-width: 1000px) {
     font-size: 2.4rem;
   }
+`;
+
+const Thumbnail = styled.img`
+  border: 2px solid var(--color-background);
+  height: 2.5rem;
+  width: 2.5rem;
 `;
 
 const Wrapper = styled.div`

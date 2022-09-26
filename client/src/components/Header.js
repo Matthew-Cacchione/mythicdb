@@ -26,7 +26,7 @@ const BlankLink = styled(Link)`
 
 const Container = styled.div`
   align-items: center;
-  background: var(--color-secondary-variant);
+  background: var(--color-primary);
   display: flex;
   justify-content: space-between;
 `;
@@ -37,7 +37,7 @@ const Title = styled.h1`
 
 const Wrapper = styled.header`
   align-items: center;
-  background: var(--color-secondary-variant);
+  background: var(--color-primary);
   display: flex;
   flex-direction: column;
   gap: 0.5em;

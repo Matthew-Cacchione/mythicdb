@@ -9,7 +9,7 @@ const Wrapper = styled.tr`
 
   & > td,
   & > th {
-    border: 2px solid var(--color-secondary);
+    border: 2px solid var(--color-primary);
     padding: 0.4em;
     text-align: center;
   }

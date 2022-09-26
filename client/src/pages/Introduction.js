@@ -13,10 +13,12 @@ const Introduction = () => {
       <Card
         description={STRINGS.newPlayer.introduction.description}
         title={STRINGS.newPlayer.introduction.title}
+        divider
       />
       <Card
         description={STRINGS.newPlayer.keyExplanation.description}
         title={STRINGS.newPlayer.keyExplanation.title}
+        divider
       >
         <Table>
           <thead>
@@ -41,6 +43,7 @@ const Introduction = () => {
       <Card
         description={STRINGS.newPlayer.gear.description}
         title={STRINGS.newPlayer.gear.title}
+        divider
       >
         <Table>
           <thead>
@@ -72,6 +75,7 @@ const Introduction = () => {
         <Card
           description={STRINGS.newPlayer.affixes.description}
           title={STRINGS.newPlayer.affixes.title}
+          divider
           filled
         />
       </BlankLink>

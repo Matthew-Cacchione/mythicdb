@@ -51,6 +51,7 @@ const Affixes = () => {
               </Centered>
             }
             description={affix.description}
+            divider
           />
         );
       })}

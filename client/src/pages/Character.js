@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
+import Card from "../components/Card";
 import Loader from "../components/Loader";
 import Row from "../components/Table/Row";
 import Table from "../components/Table/Table";
@@ -76,7 +77,7 @@ const Character = () => {
   if (error) {
     return (
       <Wrapper>
-        <Container>{error}</Container>
+        <Card>{error}</Card>
       </Wrapper>
     );
   }
@@ -85,16 +86,16 @@ const Character = () => {
   if (!hasLoaded) {
     return (
       <Wrapper>
-        <Container>
+        <Card>
           <Loader />
-        </Container>
+        </Card>
       </Wrapper>
     );
   }
 
   return (
     <Wrapper>
-      <Container>
+      <Card>
         <Head>
           <div>
             <Thumbnail
@@ -136,7 +137,7 @@ const Character = () => {
             })}
           </tbody>
         </Table>
-      </Container>
+      </Card>
     </Wrapper>
   );
 };
@@ -150,27 +151,13 @@ const CharacterClass = styled.p`
   }
 `;
 
-const Container = styled.div`
-  background: var(--color-surface);
-  border-radius: 0.2em;
-  box-shadow: 0 2px 4px 0 var(--color-on-primary);
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-  justify-content: center;
-  margin-bottom: 1.5em;
-  overflow: hidden;
-  padding: 1em;
-  transition: box-shadow 200ms;
-  width: 90%;
-`;
-
 const Details = styled.div`
   align-items: flex-start;
   display: flex;
   flex-direction: column;
   gap: 0.6em;
   text-shadow: 1px 1px black;
+  width: 100%;
 `;
 
 const Head = styled.div`
@@ -178,6 +165,7 @@ const Head = styled.div`
   display: flex;
   justify-content: space-between;
   text-shadow: 2px 2px black;
+  width: 100%;
 
   & > div {
     align-items: center;

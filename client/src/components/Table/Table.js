@@ -7,10 +7,6 @@ const Table = ({ children }) => {
 const Wrapper = styled.table`
   border-collapse: collapse;
   width: 100%;
-
-  & > thead {
-    background: var(--color-background);
-  }
 `;
 
 export default Table;

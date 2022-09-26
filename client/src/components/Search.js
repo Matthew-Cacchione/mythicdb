@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import Input from "../components/Input";
+
 import { STRINGS } from "../constants";
 
 const Search = () => {
@@ -37,19 +39,6 @@ const Search = () => {
     </Wrapper>
   );
 };
-
-const Input = styled.input`
-  background: var(--color-on-background);
-  border: 3px solid var(--color-primary);
-  border-radius: 0.2em;
-  font-size: 1rem;
-  height: 3em;
-  width: 100%;
-
-  &:focus {
-    outline: none;
-  }
-`;
 
 const Wrapper = styled.div`
   align-self: center;

@@ -2,9 +2,13 @@ import styled from "styled-components";
 import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
+import Card from "../components/Card";
 import Loader from "../components/Loader";
+import Row from "../components/Table/Row";
+import Table from "../components/Table/Table";
 
 import { CharacterContext } from "../context/CharacterContext";
+import { STRINGS } from "../constants";
 
 const Character = () => {
   // Extract the name and realm from the url.
@@ -73,7 +77,7 @@ const Character = () => {
   if (error) {
     return (
       <Wrapper>
-        <Container>{error}</Container>
+        <Card>{error}</Card>
       </Wrapper>
     );
   }
@@ -82,23 +86,29 @@ const Character = () => {
   if (!hasLoaded) {
     return (
       <Wrapper>
-        <Container>
+        <Card>
           <Loader />
-        </Container>
+        </Card>
       </Wrapper>
     );
   }
 
   return (
     <Wrapper>
-      <Container>
+      <Card>
         <Head>
-          <Name faction={character.faction}>{character.name}</Name>
+          <div>
+            <Thumbnail
+              src={character.thumbnail}
+              alt={`${character.name}'s profile picture.`}
+            />
+            <Name faction={character.faction}>{character.name}</Name>
+          </div>
           <Rating color={mythicPlus.color}>{mythicPlus.score}</Rating>
         </Head>
-        {/* <Media src={img_src} alt={`${character.name}'s character.`} /> */}
         <Details>
           {character.guild && <p>{`<${character.guild}>`}</p>}
+          <p>{`(US) ${character.realm}`}</p>
           <CharacterClass
             classColor={classColor(character.class)}
             faction={character.faction}
@@ -108,9 +118,26 @@ const Character = () => {
               {character.spec} {character.class}
             </span>
           </CharacterClass>
-          <p>{`(US) ${character.realm}`}</p>
         </Details>
-      </Container>
+        <Table>
+          <thead>
+            <Row>
+              <th>{STRINGS.dungeon}</th>
+              <th>{STRINGS.keyLevel}</th>
+            </Row>
+          </thead>
+          <tbody>
+            {mythicPlus.bestRuns.map((run) => {
+              return (
+                <Row key={run.dungeon}>
+                  <td>{run.dungeon}</td>
+                  <td>+{run.level}</td>
+                </Row>
+              );
+            })}
+          </tbody>
+        </Table>
+      </Card>
     </Wrapper>
   );
 };
@@ -118,68 +145,51 @@ const Character = () => {
 const CharacterClass = styled.p`
   color: ${({ faction }) =>
     faction === "Alliance" ? "var(--color-alliance)" : "var(--color-horde)"};
-  text-shadow: 1px 1px black;
 
   & > span {
     color: ${({ classColor }) => classColor};
-    text-shadow: none;
-  }
-`;
-
-const Container = styled.div`
-  background: var(--color-surface);
-  border-radius: 0.2em;
-  box-shadow: 0 2px 4px 0 var(--color-on-primary);
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-  justify-content: center;
-  margin-bottom: 1.5em;
-  overflow: hidden;
-  padding: 1em;
-  transition: box-shadow 200ms;
-  width: 90%;
-
-  @media only screen and (min-width: 1000px) {
-    font-size: 1.6rem;
-    max-width: 1000px;
   }
 `;
 
 const Details = styled.div`
-  align-items: center;
+  align-items: flex-start;
   display: flex;
   flex-direction: column;
   gap: 0.6em;
-  letter-spacing: 0.1rem;
+  text-shadow: 1px 1px black;
+  width: 100%;
 `;
 
 const Head = styled.div`
   align-items: center;
   display: flex;
   justify-content: space-between;
+  text-shadow: 2px 2px black;
+  width: 100%;
+
+  & > div {
+    align-items: center;
+    display: flex;
+    gap: 0.2rem;
+  }
 `;
 
 const Name = styled.h2`
   color: ${({ faction }) =>
     faction === "Alliance" ? "var(--color-alliance)" : "var(--color-horde)"};
   font-size: 1.3rem;
-  text-shadow: 2px 2px black;
-
-  @media only screen and (min-width: 1000px) {
-    font-size: 2.4rem;
-  }
 `;
 
 const Rating = styled.p`
   color: ${({ color }) => color};
   font-size: 1.3rem;
   font-weight: bold;
-  text-shadow: 2px 2px black;
+`;
 
-  @media only screen and (min-width: 1000px) {
-    font-size: 2.4rem;
-  }
+const Thumbnail = styled.img`
+  border: 2px solid var(--color-background);
+  height: 2.5rem;
+  width: 2.5rem;
 `;
 
 const Wrapper = styled.div`

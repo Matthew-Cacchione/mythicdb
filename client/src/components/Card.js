@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-const Card = ({ children, description, filled, title }) => {
+const Card = ({ children, description, divider, filled, title }) => {
   return (
     <Wrapper filled={filled}>
       {title && <Title>{title}</Title>}
-      <Divider />
+      {divider && <Divider />}
       {description && <Description>{description}</Description>}
       {children}
     </Wrapper>
@@ -25,10 +25,6 @@ const Divider = styled.div`
 const Title = styled.h2`
   font-size: 1.6rem;
   text-align: center;
-
-  @media only screen and (min-width: 1000px) {
-    font-size: 3rem;
-  }
 `;
 
 const Wrapper = styled.div`
@@ -38,7 +34,7 @@ const Wrapper = styled.div`
   border: ${(props) =>
     props.filled
       ? "2px solid var(--color-primary)"
-      : "2px solid var(--color-surface-variant)"};
+      : "2px solid var(--color-surface-light)"};
   border-radius: 0.2em;
   box-shadow: ${(props) =>
     props.filled ? "0 2px 4px 0 var(--color-on-primary)" : "none"};
@@ -53,11 +49,6 @@ const Wrapper = styled.div`
 
   &:hover {
     box-shadow: 0 8px 16px 0 var(--color-on-primary);
-  }
-
-  @media only screen and (min-width: 1000px) {
-    font-size: 2rem;
-    width: 1000px;
   }
 `;
 

@@ -20,7 +20,7 @@ const getCharacter = async (req, res) => {
   const { name, realm, region } = req.query;
 
   // Set the fetch URI based on the query.
-  const uri = `https://raider.io/api/v1/characters/profile?region=${region}&realm=${realm}&name=${name}&fields=guild%2Cmythic_plus_scores_by_season%3Acurrent`;
+  const uri = `https://raider.io/api/v1/characters/profile?region=${region}&realm=${realm}&name=${name}&fields=guild%2Cmythic_plus_scores_by_season%3Acurrent%2Cmythic_plus_best_runs`;
 
   try {
     // Fetch the character's data from the API.
@@ -47,6 +47,7 @@ const getCharacter = async (req, res) => {
     // Extract the required data from the response.
     const {
       name: character_name,
+      thumbnail_url,
       race: character_race,
       class: character_class,
       active_spec_name: character_spec,
@@ -54,7 +55,18 @@ const getCharacter = async (req, res) => {
       realm: character_realm,
       guild: character_guild,
       mythic_plus_scores_by_season,
+      mythic_plus_best_runs,
     } = response;
+
+    // Simplify the best run data for the response.
+    const bestRuns = mythic_plus_best_runs
+      .map((run) => {
+        return { dungeon: run.dungeon, level: run.mythic_level };
+      })
+      // Sort runs by keystone level in descending order.
+      .sort((a, b) => {
+        return b.level - a.level;
+      });
 
     // Respond with the required data.
     return res.status(200).json({
@@ -62,6 +74,7 @@ const getCharacter = async (req, res) => {
       data: {
         character: {
           name: character_name,
+          thumbnail: thumbnail_url,
           race: character_race,
           class: character_class,
           spec: character_spec,
@@ -72,6 +85,7 @@ const getCharacter = async (req, res) => {
         mythic_plus: {
           score: mythic_plus_scores_by_season[0].segments.all.score,
           color: mythic_plus_scores_by_season[0].segments.all.color,
+          bestRuns,
         },
       },
     });

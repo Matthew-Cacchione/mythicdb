@@ -11,11 +11,13 @@ const Home = () => {
       <Card
         description={STRINGS.cards.intro.description}
         title={STRINGS.cards.intro.title}
+        divider
       />
       <BlankLink path={PATHS.newPlayer}>
         <Card
           description={STRINGS.cards.newPlayer.description}
           title={STRINGS.cards.newPlayer.title}
+          divider
           filled
         />
       </BlankLink>
@@ -23,6 +25,7 @@ const Home = () => {
         <Card
           description={STRINGS.cards.affixes.description}
           title={STRINGS.cards.affixes.title}
+          divider
           filled
         />
       </BlankLink>

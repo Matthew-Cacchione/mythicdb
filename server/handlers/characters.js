@@ -59,9 +59,14 @@ const getCharacter = async (req, res) => {
     } = response;
 
     // Simplify the best run data for the response.
-    const bestRuns = mythic_plus_best_runs.map((run) => {
-      return { dungeon: run.dungeon, level: run.mythic_level };
-    });
+    const bestRuns = mythic_plus_best_runs
+      .map((run) => {
+        return { dungeon: run.dungeon, level: run.mythic_level };
+      })
+      // Sort runs by keystone level in descending order.
+      .sort((a, b) => {
+        return b.level - a.level;
+      });
 
     // Respond with the required data.
     return res.status(200).json({

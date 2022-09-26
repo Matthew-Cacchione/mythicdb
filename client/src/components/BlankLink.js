@@ -11,12 +11,6 @@ const Wrapper = styled(Link)`
   display: flex;
   justify-content: center;
   text-decoration: none;
-
-  @media only screen and (min-width: 1000px) {
-    &:first-child {
-      margin-top: 2em;
-    }
-  }
 `;
 
 export default BlankLink;

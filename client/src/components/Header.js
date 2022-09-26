@@ -33,10 +33,6 @@ const Container = styled.div`
 
 const Title = styled.h1`
   font-size: 2.2rem;
-
-  @media only screen and (min-width: 1000px) {
-    font-size: 4rem;
-  }
 `;
 
 const Wrapper = styled.header`

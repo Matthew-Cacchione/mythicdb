@@ -23,10 +23,6 @@ const Wrapper = styled.input`
   &:focus {
     outline: none;
   }
-
-  @media only screen and (min-width: 1000px) {
-    font-size: 1.6rem;
-  }
 `;
 
 export default Input;

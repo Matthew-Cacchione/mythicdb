@@ -49,11 +49,6 @@ const Input = styled.input`
   &:focus {
     outline: none;
   }
-
-  @media only screen and (min-width: 1000px) {
-    font-size: 1.6rem;
-    width: 1000px;
-  }
 `;
 
 const Wrapper = styled.div`

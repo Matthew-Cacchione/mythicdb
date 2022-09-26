@@ -163,11 +163,6 @@ const Container = styled.div`
   padding: 1em;
   transition: box-shadow 200ms;
   width: 90%;
-
-  @media only screen and (min-width: 1000px) {
-    font-size: 1.6rem;
-    max-width: 1000px;
-  }
 `;
 
 const Details = styled.div`
@@ -195,41 +190,13 @@ const Name = styled.h2`
   color: ${({ faction }) =>
     faction === "Alliance" ? "var(--color-alliance)" : "var(--color-horde)"};
   font-size: 1.3rem;
-
-  @media only screen and (min-width: 1000px) {
-    font-size: 2.4rem;
-  }
 `;
 
 const Rating = styled.p`
   color: ${({ color }) => color};
   font-size: 1.3rem;
   font-weight: bold;
-
-  @media only screen and (min-width: 1000px) {
-    font-size: 2.4rem;
-  }
 `;
-
-// const Row = styled.tr`
-//   text-shadow: none;
-
-//   & > td,
-//   & > th {
-//     border: 2px solid var(--color-secondary);
-//     padding: 0.4em;
-//     text-align: center;
-//   }
-// `;
-
-// const Table = styled.table`
-//   border-collapse: collapse;
-//   width: 100%;
-
-//   & > thead {
-//     background: var(--color-background);
-//   }
-// `;
 
 const Thumbnail = styled.img`
   border: 2px solid var(--color-background);

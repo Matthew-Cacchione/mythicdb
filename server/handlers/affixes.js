@@ -1,43 +1,47 @@
-// Affix related handlers will be hosted here.
+// Allows the use of the fetch API in Node.
+const fetch = (...args) =>
+  import("node-fetch").then(({ default: fetch }) => fetch(...args));
 
-// Require constants.
-const { AFFIX_ROTATION, AFFIXES } = require("../constants");
+// Set required fetch options.
+const options = {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+  },
+};
 
-// Get the affix data given an id.
-const getAffix = async (req, res) => {
-  const { id } = req.params;
+// Get the current affixes in rotation.
+const getAffixes = async (req, res) => {
+  // Extract the required data from the request.
+  const { region } = req.query;
+
+  // Set the URI for the fetch based on the region requested.
+  const uri = `https://raider.io/api/v1/mythic-plus/affixes?region=${region}&locale=en`;
 
   try {
-    const affix = AFFIXES.find((affix) => affix.id === Number(id));
+    const response = await (await fetch(uri, options)).json();
 
-    // Respond with a 404 if the affix wasn't found.
-    if (!affix) {
-      return res
-        .status(404)
-        .json({ status: 404, message: "Affix not found.", data: { id } });
+    // Verify that the region provided exists.
+    if (response.statusCode === 400) {
+      return res.status(400).json({
+        status: 400,
+        message: "No region found.",
+        data: { region },
+      });
     }
 
-    // Extract the required data.
-    const { name, description, imgSrc } = affix;
+    // Extract the required data from the response.
+    const affixes = response.affix_details;
 
-    return res.status(200).json({
-      status: 200,
-      data: { name, description, imgSrc },
-    });
+    return res.status(200).json({ status: 200, data: { affixes } });
   } catch (e) {
-    console.error("Error occurred fetching affix:", e);
+    console.error("Error getting affixes:", e);
     return res.status(500).json({
       status: 500,
-      message: "Something went wrong, please try again.",
+      message: "An unknown error occurred.",
+      data: { region },
     });
   }
 };
 
-// Get the affixes in rotation this week.
-const getAffixRotation = (req, res) => {
-  return res
-    .status(200)
-    .json({ status: 200, data: { rotation: AFFIX_ROTATION } });
-};
-
-module.exports = { getAffix, getAffixRotation };
+module.exports = { getAffixes };

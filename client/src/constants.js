@@ -35,35 +35,16 @@ export const DATA = {
 
 export const PATHS = {
   affixes: "/affixes",
-  character: "/characters/us/:realm/:name",
+  character: "/characters/:region/:realm/:name",
   leaderboard: "/leaderboard",
-  login: "/login",
-  mainCharacter: "/user/main-character",
   newPlayer: "/introduction",
-  settings: "/settings",
-  signUp: "/signup",
 };
 
 export const STRINGS = {
   app: "MythicDB",
-  changePassword: "Change Password",
-  confirmPassword: "Confirm Password",
-  currentPassword: "Current Password",
-  delete: "Delete",
-  deleteAccount: "Delete account",
-  deleteAccountWarning: "Warning, this action is irreversible!",
-  login: "Sign In",
-  name: "Name",
-  password: "Password",
-  realm: "Realm",
+  dungeon: "Dungeon",
+  keyLevel: "Level",
   searchPlaceholder: "Search characters as name-realm",
-  settings: "Settings",
-  setMain: "Set main",
-  signUp: "Sign Up",
-  submit: "Submit",
-  update: "Update",
-  username: "Username",
-  viewMain: "View Main",
   cards: {
     affixes: {
       title: "Affixes",
@@ -73,7 +54,7 @@ export const STRINGS = {
     intro: {
       title: "Welcome to the database!",
       description:
-        "Not sure where to go? Keep scrolling to find links to various pages.\n\nYou can also type a name into the search bar to find a character!",
+        "Not sure where to go? You can find links to various pages below.\n\nYou can also type a name into the search bar to find a character!",
     },
     leaderboard: {
       title: "Leaderboard",

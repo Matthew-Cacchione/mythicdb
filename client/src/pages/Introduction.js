@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
+import BlankLink from "../components/BlankLink";
 import Card from "../components/Card";
+import Row from "../components/Table/Row";
+import Table from "../components/Table/Table";
 
 import { DATA, PATHS, STRINGS } from "../constants";
 
@@ -10,10 +13,12 @@ const Introduction = () => {
       <Card
         description={STRINGS.newPlayer.introduction.description}
         title={STRINGS.newPlayer.introduction.title}
+        divider
       />
       <Card
         description={STRINGS.newPlayer.keyExplanation.description}
         title={STRINGS.newPlayer.keyExplanation.title}
+        divider
       >
         <Table>
           <thead>
@@ -38,6 +43,7 @@ const Introduction = () => {
       <Card
         description={STRINGS.newPlayer.gear.description}
         title={STRINGS.newPlayer.gear.title}
+        divider
       >
         <Table>
           <thead>
@@ -65,11 +71,14 @@ const Introduction = () => {
         </Table>
         <Note>{STRINGS.newPlayer.gear.note}</Note>
       </Card>
-      <Card
-        description={STRINGS.newPlayer.affixes.description}
-        path={PATHS.affixes}
-        title={STRINGS.newPlayer.affixes.title}
-      />
+      <BlankLink path={PATHS.affixes}>
+        <Card
+          description={STRINGS.newPlayer.affixes.description}
+          title={STRINGS.newPlayer.affixes.title}
+          divider
+          filled
+        />
+      </BlankLink>
     </Wrapper>
   );
 };
@@ -79,20 +88,6 @@ const Note = styled.p`
   line-height: 1.3em;
   text-align: center;
   white-space: pre-wrap;
-`;
-
-const Row = styled.tr`
-  & > td,
-  & > th {
-    border: 2px solid var(--color-secondary);
-    text-align: center;
-    padding: 0.4em;
-  }
-`;
-
-const Table = styled.table`
-  border-collapse: collapse;
-  width: 100%;
 `;
 
 const Wrapper = styled.div`

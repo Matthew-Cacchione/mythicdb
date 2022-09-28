@@ -2,42 +2,57 @@
 
 Endpoints are grouped into the following categories:
 
-- **affix** - relating to warcraft affixes
+- **affix** - relating to mythic+ affixes
 - **character** - relating to warcraft characters
-- **realm** - relating to warcraft realms
-- **user** - relating to users
 
 ## Affix Endpoints
 
 ### GET /api/affixes
 
-Get the affixes currently in rotation.
+Get the current affixes in rotation.
 
-Response will be in the following structure:
+Expects the following variables as a query:
 
-```json
-{
-  "status": 200,
-  "data": {
-    "rotation": [10, 8, 12, 131]
-  }
-}
+```js
+region = "<region code>";
 ```
 
-### GET /api/affixes/:id
-
-Get the data about the specified affix.
-
-Response will be in the following structure:
+Response will be in this structure:
 
 ```json
 {
   "status": 200,
-  "message": "If a message is required it will be here.",
   "data": {
-    "name": "Grievous",
-    "description": "Injured players suffer increasing damage over time until healed.",
-    "imgSrc": "https://render.worldofwarcraft.com/us/icons/56/ability_backstab.jpg"
+    "affixes": [
+      {
+        "id": 9,
+        "name": "Tyrannical",
+        "description": "Bosses have 30% more health. Bosses and their minions inflict up to 15% increased damage.",
+        "icon": "achievement_boss_archaedas",
+        "wowhead_url": "https://wowhead.com/affix=9"
+      },
+      {
+        "id": 123,
+        "name": "Spiteful",
+        "description": "Fiends rise from the corpses of non-boss enemies and pursue random players.",
+        "icon": "spell_holy_prayerofshadowprotection",
+        "wowhead_url": "https://wowhead.com/affix=123"
+      },
+      {
+        "id": 4,
+        "name": "Necrotic",
+        "description": "All enemies' melee attacks apply a stacking blight that inflicts damage over time and reduces healing received.",
+        "icon": "spell_deathknight_necroticplague",
+        "wowhead_url": "https://wowhead.com/affix=4"
+      },
+      {
+        "id": 131,
+        "name": "Shrouded",
+        "description": "Nathrezim infiltrators have disguised themselves among enemies throughout the dungeon. Cartel Ta will reward you handsomely for assisting in their capture.",
+        "icon": "spell_shadow_nethercloak",
+        "wowhead_url": "https://wowhead.com/affix=131"
+      }
+    ]
   }
 }
 ```
@@ -51,8 +66,9 @@ Get the data of the specified character.
 Expects the following variables as a query:
 
 ```js
-name = "character name";
-realm = "realm slug";
+name = "<character name>";
+realm = "<realm slug>";
+region = "<region code>";
 ```
 
 Response will be in this structure:
@@ -62,221 +78,19 @@ Response will be in this structure:
   "status": 200,
   "message": "If a message is required it will be here.",
   "data": {
-    "profile": {
+    "character": {
       "name": "Kyrasis",
-      "realm": "Area 52",
-      "faction": "Alliance",
       "race": "Dwarf",
       "class": "Death Knight",
       "spec": "Blood",
+      "faction": "Alliance",
+      "realm": "Area 52",
       "guild": "Not Idiot"
     },
     "mythic_plus": {
-      "rating": 2072.3765,
-      "rating_color": {
-        "r": 0,
-        "g": 112,
-        "b": 221,
-        "a": 1
-      }
+      "score": 3112.6,
+      "color": "#fe7e15"
     }
-  }
-}
-```
-
-## Realm Endpoints
-
-### GET /api/realms/slug
-
-Get the proper realm slug given realm name.
-
-Expects the following variables as a query. Do not use spaces in the realm name, e.g. Cenarion Circle should be cenarioncircle.
-
-```js
-realm = "realm name";
-```
-
-Response will be in this structure:
-
-```json
-{
-  "status": 200,
-  "message": "If a message is required it will be here.",
-  "data": {
-    "slug": "cenarion-circle"
-  }
-}
-```
-
-## User Endpoints
-
-### GET /api/user
-
-Get the user with given authentication token.
-
-Expects a header with the following structure:
-
-```json
-{
-  "Authorization": "Bearer eyJhbGciOiJIUzI1..."
-}
-```
-
-Response will be in this structure:
-
-```json
-{
-  "status": 200,
-  "message": "If a message is required it will be here.",
-  "data": {
-    "_id": "62ed3ff815cec80011eaca27",
-    "username": "username"
-  }
-}
-```
-
-### DELETE /api/user
-
-Delete the user with given authentication token.
-
-Expects a header with the following structure:
-
-```json
-{
-  "Authorization": "Bearer eyJhbGciOiJIUzI1..."
-}
-```
-
-Response will be in this structure:
-
-```json
-{
-  "status": 204,
-  "message": "If a message is required it will be here."
-}
-```
-
-### PATCH /api/user/main-character
-
-Set the user's main character.
-
-Expects a header with the following structure:
-
-```json
-{
-  "Authorization": "Bearer eyJhbGciOiJIUzI1...",
-  "Content-Type": "application/json"
-}
-```
-
-Expects a body with the following structure:
-
-```json
-{
-  "name": "name",
-  "realm": "realm slug"
-}
-```
-
-Response will be in this structure:
-
-```json
-{
-  "status": 200,
-  "message": "If a message is required it will be here.",
-  "data": {
-    "name": "name",
-    "realm": "realm slug"
-  }
-}
-```
-
-### PATCH /api/user
-
-Change the user's password with given authentication token.
-
-Expects a header with the following structure:
-
-```json
-{
-  "Authorization": "Bearer eyJhbGciOiJIUzI1...",
-  "Content-Type": "application/json"
-}
-```
-
-Expects a body with the following structure:
-
-```json
-{
-  "oldPassword": "oldPassword",
-  "newPassword": "newPassword"
-}
-```
-
-Response will be in this structure:
-
-```json
-{
-  "status": 200,
-  "message": "If a message is required it will be here.",
-  "data": {
-    "user": {
-      "_id": "62ed8d9226d3f14e42d79347",
-      "username": "username"
-    }
-  }
-}
-```
-
-### POST /api/users
-
-Create a new user.
-
-Expects a body with the following structure:
-
-```json
-{
-  "username": "username",
-  "password": "password"
-}
-```
-
-Response will be in this structure:
-
-```json
-{
-  "status": 201,
-  "message": "If a message is required it will be here.",
-  "data": {
-    "user": {
-      "_id": "62ed7a9decd60c19d0a0c6e4",
-      "username": "username"
-    }
-  }
-}
-```
-
-### POST /api/users/signIn
-
-Sign the user in.
-
-Expects a body with the following structure:
-
-```json
-{
-  "username": "username",
-  "password": "password"
-}
-```
-
-Response will be in this structure:
-
-```json
-{
-  "status": 200,
-  "message": "If a message is required it will be here.",
-  "data": {
-    "token": "eyJhbGciOiJIUzI1..."
   }
 }
 ```

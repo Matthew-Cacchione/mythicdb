@@ -1,17 +1,11 @@
 import styled from "styled-components";
-import { useState } from "react";
 
 import { Link } from "react-router-dom";
-import Menu from "./Menu";
-import Sandwich from "./Sandwich";
 import Search from "./Search";
 
 import { STRINGS } from "../constants";
 
 const Header = () => {
-  // State to track whether the menu is open.
-  const [open, setOpen] = useState(false);
-
   return (
     <>
       <Wrapper>
@@ -19,8 +13,6 @@ const Header = () => {
           <BlankLink to="/">
             <Title>{STRINGS.app}</Title>
           </BlankLink>
-          <Sandwich open={open} setOpen={setOpen} />
-          <Menu open={open} setOpen={setOpen} />
         </Container>
         <Search />
       </Wrapper>
@@ -34,21 +26,18 @@ const BlankLink = styled(Link)`
 
 const Container = styled.div`
   align-items: center;
-  background: var(--color-surface);
+  background: var(--color-primary);
   display: flex;
   justify-content: space-between;
 `;
 
 const Title = styled.h1`
   font-size: 2.2rem;
-
-  @media only screen and (min-width: 1000px) {
-    font-size: 4rem;
-  }
 `;
 
 const Wrapper = styled.header`
-  background: var(--color-surface);
+  align-items: center;
+  background: var(--color-primary);
   display: flex;
   flex-direction: column;
   gap: 0.5em;

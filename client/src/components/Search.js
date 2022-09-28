@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import Input from "../components/Input";
+
 import { STRINGS } from "../constants";
 
 const Search = () => {
@@ -20,25 +22,9 @@ const Search = () => {
     if (e.key === "Enter") {
       const [name, realm] = value.toLowerCase().split("-");
 
-      // Fetch the proper realm slug from the server.
-      const response = await fetch(`/api/realms/slug?realm=${realm}`);
-      const data = await response.json();
-
-      // If the realm name is correct redirect the user.
-      switch (data.status) {
-        case 200:
-          navigate(`/characters/us/${data.data.slug}/${name}`);
-          setValue("");
-          break;
-
-        case 404:
-          navigate(`/characters/us/null/${name}`);
-          break;
-
-        default:
-          navigate("/characters/us/error/error");
-          break;
-      }
+      // Redirect the user to the entered character's page.
+      navigate(`/characters/us/${realm}/${name}`);
+      setValue("");
     }
   };
 
@@ -53,23 +39,6 @@ const Search = () => {
     </Wrapper>
   );
 };
-
-const Input = styled.input`
-  background: var(--color-on-background);
-  border: 3px solid var(--color-primary);
-  border-radius: 0.2em;
-  height: 3em;
-  width: 100%;
-
-  &:focus {
-    outline: none;
-  }
-
-  @media only screen and (min-width: 1000px) {
-    font-size: 1.6rem;
-    width: 1000px;
-  }
-`;
 
 const Wrapper = styled.div`
   align-self: center;

@@ -1,34 +1,33 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 
 import Card from "../components/Card";
 import Loader from "../components/Loader";
 
+import { AffixContext } from "../context/AffixContext";
+
 const Affixes = () => {
-  // Track the data of affixes that are in rotation.
-  const [rotation, setRotation] = useState([]);
+  // Import the required affix data and functions.
+  const {
+    state: { affixes, hasLoaded },
+    actions: { affixesFetched },
+  } = useContext(AffixContext);
 
   useEffect(() => {
-    // Set the affix data in the state.
-    const setAffixes = async () => {
-      const result = [];
-      const affixes = await (await fetch("/api/affixes")).json();
+    // Fetch the affix data from the API.
+    const fetchAffixes = async () => {
+      const response = await (await fetch(`/api/affixes?region=us`)).json();
 
-      // Push each affix object into the result array.
-      const rotation = affixes.data.rotation;
-      for (let i = 0; i < rotation.length; i++) {
-        const data = await (await fetch(`/api/affixes/${rotation[i]}`)).json();
-
-        result.push(data.data);
-      }
-
-      setRotation(result);
+      // Set the affix data in context.
+      affixesFetched({ affixes: response.data.affixes });
     };
 
-    setAffixes();
+    fetchAffixes();
+    //eslint-disable-next-line
   }, []);
 
-  if (!rotation.length) {
+  // Render a loading indicator if the data is still loading.
+  if (!hasLoaded) {
     return (
       <Wrapper>
         <Loader />
@@ -38,16 +37,21 @@ const Affixes = () => {
 
   return (
     <Wrapper>
-      {rotation.map((affix) => {
+      {affixes.map((affix) => {
         return (
           <Card
+            key={affix.id}
             title={
               <Centered>
-                <Media src={affix.imgSrc} alt={`${affix.name} icon.`} />
+                <Media
+                  src={`/assets/${affix.icon}.png`}
+                  alt={`${affix.name} icon.`}
+                />
                 {affix.name}
               </Centered>
             }
             description={affix.description}
+            divider
           />
         );
       })}

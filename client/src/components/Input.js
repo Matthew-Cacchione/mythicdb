@@ -1,31 +1,25 @@
 import styled from "styled-components";
 
-const Input = ({ id, placeholder, type, width }) => {
+const Input = ({ onChange, onKeyUp, placeholder, value }) => {
   return (
     <Wrapper
-      id={id}
+      onChange={onChange}
+      onKeyUp={onKeyUp}
       placeholder={placeholder}
-      type={type}
-      width={width}
-      required
-    ></Wrapper>
+      value={value}
+    />
   );
 };
 
 const Wrapper = styled.input`
   background: var(--color-on-background);
-  border: 2px solid var(--color-secondary);
-  border-radius: 0.2em;
+  border: 3px solid var(--color-secondary);
+  font-size: 1rem;
   height: 3em;
-  margin-bottom: 1em;
-  width: ${({ width }) => (width ? width : "80%")};
+  width: 100%;
 
   &:focus {
     outline: none;
-  }
-
-  @media only screen and (min-width: 1000px) {
-    font-size: 1.6rem;
   }
 `;
 

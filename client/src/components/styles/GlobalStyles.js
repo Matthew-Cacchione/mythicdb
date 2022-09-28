@@ -3,11 +3,11 @@ import { createGlobalStyle } from "styled-components";
 export default createGlobalStyle`
 /* Variables */
 :root {
-    --color-primary: #bb86fc;
-    --color-primary-variant: #3700b3;
-    --color-secondary: #03dac6;
+    --color-primary: #007066;
+    --color-secondary: #b64f00;
     --color-background: #121212;
-    --color-surface: #292929;
+    --color-surface: #2b2b2b;
+    --color-surface-light: #737373;
     --color-error: #cf6679;
     --color-on-primary: #000000;
     --color-on-secondary: #000000;

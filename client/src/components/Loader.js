@@ -25,13 +25,6 @@ const Circle = styled.div`
   border-top: 8px solid var(--color-primary);
   height: 60px;
   width: 60px;
-
-  @media only screen and (min-width: 1000px) {
-    border: 16px solid var(--color-background);
-    border-top: 16px solid var(--color-primary);
-    height: 120px;
-    width: 120px;
-  }
 `;
 
 const Wrapper = styled.div`

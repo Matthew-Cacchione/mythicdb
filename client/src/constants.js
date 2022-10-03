@@ -38,6 +38,7 @@ export const PATHS = {
   character: "/characters/:region/:realm/:name",
   leaderboard: "/leaderboard",
   newPlayer: "/introduction",
+  searchResults: "/characters",
 };
 
 export const STRINGS = {

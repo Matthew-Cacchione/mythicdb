@@ -6,6 +6,7 @@ import GlobalStyles from "./styles/GlobalStyles";
 import Header from "./Header";
 import Home from "../pages/Home";
 import Introduction from "../pages/Introduction";
+import SearchResults from "../pages/SearchResults";
 
 import { CharacterProvider } from "../context/CharacterContext";
 import { PATHS } from "../constants";
@@ -29,7 +30,7 @@ const App = () => {
         />
 
         <Route exact path={PATHS.newPlayer} element={<Introduction />} />
-        {/* TODO: Implement leaderboard page. */}
+        <Route exact path={PATHS.searchResults} element={<SearchResults />} />
         <Route path="" element={<>No path found.</>} />
       </Routes>
     </Router>

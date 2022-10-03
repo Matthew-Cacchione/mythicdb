@@ -19,6 +19,14 @@ const options = {
 const getCharacter = async (req, res) => {
   const { name, realm, region } = req.query;
 
+  // If any parameters are missing respond with a bad request.
+  if (!name || !realm || !region) {
+    return res.status(400).json({
+      status: 400,
+      message: "Request is missing data.",
+    });
+  }
+
   // Set the fetch URI based on the query.
   const uri = `https://raider.io/api/v1/characters/profile?region=${region}&realm=${realm}&name=${name}&fields=guild%2Cmythic_plus_scores_by_season%3Acurrent%2Cmythic_plus_best_runs`;
 

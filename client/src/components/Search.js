@@ -20,11 +20,18 @@ const Search = () => {
   // Redirect to the entered character page on enter.
   const handleEnter = async (e) => {
     if (e.key === "Enter") {
-      const [name, realm] = value.toLowerCase().split("-");
+      // Split the user input on spaces and dashes to get the entered name and realm.
+      const [name, realm] = value.toLowerCase().split(/[\s-]+/);
 
-      // Redirect the user to the entered character's page.
-      navigate(`/characters/us/${realm}/${name}`);
-      setValue("");
+      // If no realm was given redirect to the search results.
+      if (!realm) {
+        navigate(`/characters?name=${name}`);
+        setValue("");
+      } else {
+        // Redirect the user to the entered character's page.
+        navigate(`/characters/us/${realm}/${name}`);
+        setValue("");
+      }
     }
   };
 

@@ -57,7 +57,7 @@ const SearchResults = () => {
                 />
                 <Name faction={character.faction}>{character.name}</Name>
               </div>
-              <p>{`(US) ${character.realm}`}</p>
+              <p>{`(${character.region.toUpperCase()}) ${character.realm}`}</p>
             </Details>
           </Card>
         );

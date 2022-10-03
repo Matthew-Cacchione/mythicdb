@@ -2,6 +2,13 @@
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
 
+// Require MongoDB related functions.
+const { MongoClient } = require("mongodb");
+
+// Require environment variables.
+require("dotenv").config();
+const { MONGO_URI } = process.env;
+
 // Require helper functions.
 const { capitalize } = require("../helpers/strings");
 
@@ -11,6 +18,12 @@ const options = {
   headers: {
     "Content-Type": "application/json",
   },
+};
+
+// Set MongoDB options.
+const mongoOptions = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 };
 
 // Handlers.
@@ -107,4 +120,27 @@ const getCharacter = async (req, res) => {
   }
 };
 
-module.exports = { getCharacter };
+// Get a list of searchable characters from the server.
+const getSearchableCharacters = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, mongoOptions);
+
+  try {
+    await client.connect();
+    const characters = client.db("master").collection("characters");
+
+    // Fetch the characters from MongoDB.
+    const response = await characters.find().toArray();
+
+    return res.status(200).json({ status: 200, data: response });
+  } catch (err) {
+    console.error("Error fetching searchable characters:", err);
+    return res.status(500).json({
+      status: 500,
+      message: "An unknown error occurred.",
+    });
+  } finally {
+    client.close();
+  }
+};
+
+module.exports = { getCharacter, getSearchableCharacters };

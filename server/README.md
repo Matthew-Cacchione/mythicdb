@@ -80,6 +80,7 @@ Response will be in this structure:
   "data": {
     "character": {
       "name": "Kyrasis",
+      "thumbnail": "https://render-us.worldofwarcraft.com/character/area-52/43/233016875-avatar.jpg?alt=wow/static/images/2d/avatar/3-0.jpg",
       "race": "Dwarf",
       "class": "Death Knight",
       "spec": "Blood",
@@ -88,8 +89,22 @@ Response will be in this structure:
       "guild": "Not Idiot"
     },
     "mythic_plus": {
-      "score": 3112.6,
-      "color": "#fe7e15"
+      "score": 3220.8,
+      "color": "#fd7c20",
+      "bestRuns": [
+        {
+          "dungeon": "Tazavesh: Streets of Wonder",
+          "level": 32
+        },
+        {
+          "dungeon": "Mechagon Junkyard",
+          "level": 31
+        },
+        {
+          "dungeon": "Grimrail Depot",
+          "level": 31
+        }
+      ]
     }
   }
 }

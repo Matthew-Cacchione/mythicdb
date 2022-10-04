@@ -101,7 +101,7 @@ const getCharacter = async (req, res) => {
           spec: character_spec,
           faction: capitalize(character_faction),
           realm: character_realm,
-          guild: character_guild.name,
+          guild: character_guild ? character_guild.name : "",
         },
         mythic_plus: {
           score: mythic_plus_scores_by_season[0].segments.all.score,

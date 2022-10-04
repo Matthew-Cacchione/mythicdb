@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useContext, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 
+import BlankLink from "../components/BlankLink";
 import Card from "../components/Card";
 import Loader from "../components/Loader";
 
@@ -48,18 +49,23 @@ const SearchResults = () => {
     <Wrapper>
       {matches.map((character) => {
         return (
-          <Card key={character._id}>
-            <Details>
-              <div>
-                <Thumbnail
-                  src={character.thumbnail}
-                  alt={`${character.name}'s class icon.`}
-                />
-                <Name faction={character.faction}>{character.name}</Name>
-              </div>
-              <p>{`(${character.region.toUpperCase()}) ${character.realm}`}</p>
-            </Details>
-          </Card>
+          <BlankLink
+            key={character._id}
+            path={`/characters/${character.region.toLowerCase()}/${character.realm.toLowerCase()}/${character.name.toLowerCase()}`}
+          >
+            <Card>
+              <Details>
+                <div>
+                  <Thumbnail
+                    src={character.thumbnail}
+                    alt={`${character.name}'s class icon.`}
+                  />
+                  <Name faction={character.faction}>{character.name}</Name>
+                </div>
+                <p>{`(${character.region}) ${character.realm}`}</p>
+              </Details>
+            </Card>
+          </BlankLink>
         );
       })}
     </Wrapper>

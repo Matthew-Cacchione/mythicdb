@@ -104,7 +104,9 @@ const Character = () => {
             />
             <Name faction={character.faction}>{character.name}</Name>
           </div>
-          <Rating color={mythicPlus.color}>{mythicPlus.score}</Rating>
+          <Rating color={mythicPlus.color}>
+            {mythicPlus.score.toFixed(1)}
+          </Rating>
         </Head>
         <Details>
           {character.guild && <p>{`<${character.guild}>`}</p>}

@@ -67,20 +67,21 @@ const getCharacter = async (req, res) => {
 
     // Extract the required data from the response.
     const {
-      name: character_name,
+      active_spec_name: characterSpec,
+      class: characterClass,
+      faction,
+      guild,
+      mythic_plus_scores_by_season: mythicPlusScores,
+      mythic_plus_best_runs: mythicPlusBestRuns,
+      name,
+      race,
+      realm,
+      region,
       thumbnail_url,
-      race: character_race,
-      class: character_class,
-      active_spec_name: character_spec,
-      faction: character_faction,
-      realm: character_realm,
-      guild: character_guild,
-      mythic_plus_scores_by_season,
-      mythic_plus_best_runs,
     } = response;
 
     // Simplify the best run data for the response.
-    const bestRuns = mythic_plus_best_runs
+    const bestRuns = mythicPlusBestRuns
       .map((run) => {
         return { dungeon: run.dungeon, level: run.mythic_level };
       })
@@ -94,18 +95,19 @@ const getCharacter = async (req, res) => {
       status: 200,
       data: {
         character: {
-          name: character_name,
+          class: characterClass,
+          faction: capitalize(faction),
+          guild: guild ? guild.name : "",
+          name,
+          race,
+          realm,
+          region: region.toUpperCase(),
+          spec: characterSpec,
           thumbnail: thumbnail_url,
-          race: character_race,
-          class: character_class,
-          spec: character_spec,
-          faction: capitalize(character_faction),
-          realm: character_realm,
-          guild: character_guild ? character_guild.name : "",
         },
         mythic_plus: {
-          score: mythic_plus_scores_by_season[0].segments.all.score,
-          color: mythic_plus_scores_by_season[0].segments.all.color,
+          color: mythicPlusScores[0].segments.all.color,
+          score: mythicPlusScores[0].segments.all.score,
           bestRuns,
         },
       },

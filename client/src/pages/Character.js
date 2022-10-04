@@ -41,6 +41,10 @@ const Character = () => {
           });
           break;
 
+        case 400:
+          characterError({ error: "Realm not found." });
+          break;
+
         case 404:
           characterError({ error: "No character found." });
           break;
@@ -110,7 +114,7 @@ const Character = () => {
         </Head>
         <Details>
           {character.guild && <p>{`<${character.guild}>`}</p>}
-          <p>{`(US) ${character.realm}`}</p>
+          <p>{`(${character.region}) ${character.realm}`}</p>
           <CharacterClass
             classColor={classColor(character.class)}
             faction={character.faction}

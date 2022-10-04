@@ -126,22 +126,32 @@ const Character = () => {
           </CharacterClass>
         </Details>
         <Table>
-          <thead>
-            <Row>
-              <th>{STRINGS.dungeon}</th>
-              <th>{STRINGS.keyLevel}</th>
-            </Row>
-          </thead>
-          <tbody>
-            {mythicPlus.bestRuns.map((run) => {
-              return (
-                <Row key={run.dungeon}>
-                  <td>{run.dungeon}</td>
-                  <td>+{run.level}</td>
+          {mythicPlus.bestRuns.length ? (
+            <>
+              <thead>
+                <Row>
+                  <th>{STRINGS.dungeon}</th>
+                  <th>{STRINGS.keyLevel}</th>
                 </Row>
-              );
-            })}
-          </tbody>
+              </thead>
+              <tbody>
+                {mythicPlus.bestRuns.map((run) => {
+                  return (
+                    <Row key={run.dungeon}>
+                      <td>{run.dungeon}</td>
+                      <td>+{run.level}</td>
+                    </Row>
+                  );
+                })}
+              </tbody>
+            </>
+          ) : (
+            <thead>
+              <Row>
+                <td>No runs found.</td>
+              </Row>
+            </thead>
+          )}
         </Table>
       </Card>
     </Wrapper>

@@ -30,6 +30,7 @@ const mongoOptions = {
 
 // Retrieve the given character's data from the API.
 const getCharacter = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, mongoOptions);
   const { name, realm, region } = req.query;
 
   // If any parameters are missing respond with a bad request.
@@ -44,6 +45,9 @@ const getCharacter = async (req, res) => {
   const uri = `https://raider.io/api/v1/characters/profile?region=${region}&realm=${realm}&name=${name}&fields=guild%2Cmythic_plus_scores_by_season%3Acurrent%2Cmythic_plus_best_runs`;
 
   try {
+    await client.connect();
+    const collection = client.db("master").collection("characters");
+
     // Fetch the character's data from the API.
     const response = await (await fetch(uri, options)).json();
 
@@ -79,6 +83,32 @@ const getCharacter = async (req, res) => {
       region,
       thumbnail_url,
     } = response;
+
+    // Check if the character is already in MongoDB.
+    const characters = await collection.find().toArray();
+
+    const isInDatabase = characters.some((character) => {
+      const isNameMatch = character.name === name;
+      const isRealmMatch = character.realm === realm;
+      const isRegionMatch = character.region === region.toUpperCase();
+
+      return isNameMatch && isRealmMatch && isRegionMatch;
+    });
+
+    // If the character was not in Mongo then create a document.
+    if (!isInDatabase) {
+      const document = {
+        name,
+        realm,
+        region: region.toUpperCase(),
+        faction: capitalize(faction),
+        thumbnail: `/assets/classicon_${characterClass
+          .toLowerCase()
+          .replace(" ", "")}.png`,
+      };
+
+      await collection.insertOne(document);
+    }
 
     // Simplify the best run data for the response.
     const bestRuns = mythicPlusBestRuns
@@ -119,6 +149,8 @@ const getCharacter = async (req, res) => {
       message: "An unknown error occurred.",
       data: { name, realm, region },
     });
+  } finally {
+    client.close();
   }
 };
 

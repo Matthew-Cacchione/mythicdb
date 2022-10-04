@@ -200,7 +200,7 @@ const Thumbnail = styled.img`
 
 const Wrapper = styled.div`
   display: flex;
-  margin: 2em 0;
+  margin: 1em 0;
   justify-content: center;
 `;
 

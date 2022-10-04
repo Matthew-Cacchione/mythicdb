@@ -41,9 +41,13 @@ const SearchResults = () => {
   }
 
   // Filter the characters to only names that match the query.
-  const matches = characters.filter((character) => {
-    return character.name.toLowerCase().includes(query.get("name"));
-  });
+  const matches = characters
+    .filter((character) => {
+      return character.name.toLowerCase().includes(query.get("name"));
+    })
+    .sort((a, b) => {
+      return a.name.localeCompare(b.name);
+    });
 
   return (
     <Wrapper>

@@ -42,11 +42,13 @@ const Character = () => {
           break;
 
         case 400:
-          characterError({ error: "Realm not found." });
+          characterError({ error: `Failed to find realm ${realm}.` });
           break;
 
         case 404:
-          characterError({ error: "No character found." });
+          characterError({
+            error: `Failed to find character ${name}-${realm}.`,
+          });
           break;
 
         default:
@@ -81,7 +83,9 @@ const Character = () => {
   if (error) {
     return (
       <Wrapper>
-        <Card>{error}</Card>
+        <Card>
+          <Error>{error}</Error>
+        </Card>
       </Wrapper>
     );
   }
@@ -174,6 +178,10 @@ const Details = styled.div`
   gap: 0.6em;
   text-shadow: 1px 1px black;
   width: 100%;
+`;
+
+const Error = styled.p`
+  text-align: center;
 `;
 
 const Head = styled.div`

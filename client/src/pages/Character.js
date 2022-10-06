@@ -42,13 +42,7 @@ const Character = () => {
           break;
 
         case 400:
-          characterError({ error: `Failed to find realm ${realm}.` });
-          break;
-
-        case 404:
-          characterError({
-            error: `Failed to find character ${name}-${realm}.`,
-          });
+          characterError({ error: response.message });
           break;
 
         default:

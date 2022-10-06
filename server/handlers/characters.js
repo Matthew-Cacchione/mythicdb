@@ -53,20 +53,10 @@ const getCharacter = async (req, res) => {
 
     // Verify if the API returned a bad request.
     if (response.statusCode === 400) {
-      switch (response.message) {
-        // Properly return a 404 if the character is not found.
-        case "Could not find requested character":
-          return res.status(404).json({
-            status: 404,
-            message: "No character found.",
-          });
-
-        default:
-          return res.status(400).json({
-            status: 400,
-            message: response.message,
-          });
-      }
+      return res.status(400).json({
+        status: 400,
+        message: response.message.concat("."),
+      });
     }
 
     // Extract the required data from the response.

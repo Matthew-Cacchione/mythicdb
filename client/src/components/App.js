@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+import AddCharacter from "../pages/AddCharacter";
 import Affixes from "../pages/Affixes";
 import Character from "../pages/Character";
 import GlobalStyles from "./styles/GlobalStyles";
@@ -31,6 +32,7 @@ const App = () => {
 
         <Route exact path={PATHS.newPlayer} element={<Introduction />} />
         <Route exact path={PATHS.searchResults} element={<SearchResults />} />
+        <Route exact path={PATHS.addCharacter} element={<AddCharacter />} />
         <Route path="" element={<>No path found.</>} />
       </Routes>
     </Router>

@@ -6,6 +6,7 @@ import BlankLink from "../components/BlankLink";
 import Card from "../components/Card";
 import Loader from "../components/Loader";
 
+import { PATHS, STRINGS } from "../constants";
 import { SearchContext } from "../context/SearchContext";
 
 const SearchResults = () => {
@@ -57,7 +58,7 @@ const SearchResults = () => {
             key={character._id}
             path={`/characters/${character.region.toLowerCase()}/${character.realm.toLowerCase()}/${character.name.toLowerCase()}`}
           >
-            <Card>
+            <Card filled>
               <Details>
                 <div>
                   <Thumbnail
@@ -72,6 +73,10 @@ const SearchResults = () => {
           </BlankLink>
         );
       })}
+      <Divider />
+      <BlankLink path={PATHS.addCharacter}>
+        <Card description={STRINGS.cards.addCharacter.description} filled />
+      </BlankLink>
     </Wrapper>
   );
 };
@@ -89,6 +94,12 @@ const Details = styled.div`
     display: flex;
     gap: 0.2rem;
   }
+`;
+
+const Divider = styled.div`
+  border-bottom: 3px solid var(--color-secondary);
+  margin-bottom: 1.5em;
+  width: 65%;
 `;
 
 const Name = styled.h2`

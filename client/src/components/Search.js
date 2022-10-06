@@ -38,6 +38,7 @@ const Search = () => {
   return (
     <Wrapper>
       <Input
+        color={"secondary"}
         placeholder={STRINGS.searchPlaceholder}
         onChange={handleChange}
         onKeyUp={handleEnter}

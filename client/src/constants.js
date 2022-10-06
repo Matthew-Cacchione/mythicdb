@@ -50,7 +50,7 @@ export const STRINGS = {
   nameLabel: "Name",
   realmLabel: "Realm",
   regionLabel: "Region",
-  searchPlaceholder: "Search characters as name-realm",
+  searchPlaceholder: "Search for characters",
   cards: {
     addCharacter: {
       description:

@@ -34,18 +34,28 @@ export const DATA = {
 };
 
 export const PATHS = {
+  addCharacter: "/characters/add",
   affixes: "/affixes",
   character: "/characters/:region/:realm/:name",
   leaderboard: "/leaderboard",
   newPlayer: "/introduction",
+  searchResults: "/characters",
 };
 
 export const STRINGS = {
   app: "MythicDB",
+  addBtn: "Add",
   dungeon: "Dungeon",
   keyLevel: "Level",
-  searchPlaceholder: "Search characters as name-realm",
+  nameLabel: "Name",
+  realmLabel: "Realm",
+  regionLabel: "Region",
+  searchPlaceholder: "Search for characters",
   cards: {
+    addCharacter: {
+      description:
+        "Can't find your character?\n\nClick here to add them to the database.",
+    },
     affixes: {
       title: "Affixes",
       description:
@@ -55,10 +65,6 @@ export const STRINGS = {
       title: "Welcome to the database!",
       description:
         "Not sure where to go? You can find links to various pages below.\n\nYou can also type a name into the search bar to find a character!",
-    },
-    leaderboard: {
-      title: "Leaderboard",
-      description: "View the top players for each role.",
     },
     newPlayer: {
       title: "New Players",

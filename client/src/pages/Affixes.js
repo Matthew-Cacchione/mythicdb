@@ -22,7 +22,10 @@ const Affixes = () => {
       affixesFetched({ affixes: response.data.affixes });
     };
 
-    fetchAffixes();
+    // Only fetch the affixes if they aren't yet loaded.
+    if (!hasLoaded) {
+      fetchAffixes();
+    }
     //eslint-disable-next-line
   }, []);
 

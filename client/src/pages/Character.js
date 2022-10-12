@@ -41,8 +41,8 @@ const Character = () => {
           });
           break;
 
-        case 404:
-          characterError({ error: "No character found." });
+        case 400:
+          characterError({ error: response.message });
           break;
 
         default:
@@ -77,7 +77,9 @@ const Character = () => {
   if (error) {
     return (
       <Wrapper>
-        <Card>{error}</Card>
+        <Card>
+          <Error>{error}</Error>
+        </Card>
       </Wrapper>
     );
   }
@@ -104,11 +106,13 @@ const Character = () => {
             />
             <Name faction={character.faction}>{character.name}</Name>
           </div>
-          <Rating color={mythicPlus.color}>{mythicPlus.score}</Rating>
+          <Rating color={mythicPlus.color}>
+            {mythicPlus.score.toFixed(1)}
+          </Rating>
         </Head>
         <Details>
           {character.guild && <p>{`<${character.guild}>`}</p>}
-          <p>{`(US) ${character.realm}`}</p>
+          <p>{`(${character.region}) ${character.realm}`}</p>
           <CharacterClass
             classColor={classColor(character.class)}
             faction={character.faction}
@@ -120,22 +124,32 @@ const Character = () => {
           </CharacterClass>
         </Details>
         <Table>
-          <thead>
-            <Row>
-              <th>{STRINGS.dungeon}</th>
-              <th>{STRINGS.keyLevel}</th>
-            </Row>
-          </thead>
-          <tbody>
-            {mythicPlus.bestRuns.map((run) => {
-              return (
-                <Row key={run.dungeon}>
-                  <td>{run.dungeon}</td>
-                  <td>+{run.level}</td>
+          {mythicPlus.bestRuns.length ? (
+            <>
+              <thead>
+                <Row>
+                  <th>{STRINGS.dungeon}</th>
+                  <th>{STRINGS.keyLevel}</th>
                 </Row>
-              );
-            })}
-          </tbody>
+              </thead>
+              <tbody>
+                {mythicPlus.bestRuns.map((run) => {
+                  return (
+                    <Row key={run.dungeon}>
+                      <td>{run.dungeon}</td>
+                      <td>+{run.level}</td>
+                    </Row>
+                  );
+                })}
+              </tbody>
+            </>
+          ) : (
+            <thead>
+              <Row>
+                <td>No runs found.</td>
+              </Row>
+            </thead>
+          )}
         </Table>
       </Card>
     </Wrapper>
@@ -158,6 +172,10 @@ const Details = styled.div`
   gap: 0.6em;
   text-shadow: 1px 1px black;
   width: 100%;
+`;
+
+const Error = styled.p`
+  text-align: center;
 `;
 
 const Head = styled.div`
@@ -194,7 +212,7 @@ const Thumbnail = styled.img`
 
 const Wrapper = styled.div`
   display: flex;
-  margin: 2em 0;
+  margin: 1em 0;
   justify-content: center;
 `;
 

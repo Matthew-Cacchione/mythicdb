@@ -2,6 +2,13 @@
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
 
+// Require MongoDB related functions.
+const { MongoClient } = require("mongodb");
+
+// Require environment variables.
+require("dotenv").config();
+const { MONGO_URI } = process.env;
+
 // Require helper functions.
 const { capitalize } = require("../helpers/strings");
 
@@ -13,53 +20,88 @@ const options = {
   },
 };
 
+// Set MongoDB options.
+const mongoOptions = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+};
+
 // Handlers.
 
 // Retrieve the given character's data from the API.
 const getCharacter = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, mongoOptions);
   const { name, realm, region } = req.query;
+
+  // If any parameters are missing respond with a bad request.
+  if (!name || !realm || !region) {
+    return res.status(400).json({
+      status: 400,
+      message: "Request is missing data.",
+    });
+  }
 
   // Set the fetch URI based on the query.
   const uri = `https://raider.io/api/v1/characters/profile?region=${region}&realm=${realm}&name=${name}&fields=guild%2Cmythic_plus_scores_by_season%3Acurrent%2Cmythic_plus_best_runs`;
 
   try {
+    await client.connect();
+    const collection = client.db("master").collection("characters");
+
     // Fetch the character's data from the API.
     const response = await (await fetch(uri, options)).json();
 
     // Verify if the API returned a bad request.
     if (response.statusCode === 400) {
-      switch (response.message) {
-        // Properly return a 404 if the character is not found.
-        case "Could not find requested character":
-          return res.status(404).json({
-            status: 404,
-            message: "No character found.",
-          });
-
-        default:
-          return res.status(400).json({
-            status: 400,
-            message: response.message,
-          });
-      }
+      return res.status(400).json({
+        status: 400,
+        message: response.message.concat("."),
+      });
     }
 
     // Extract the required data from the response.
     const {
-      name: character_name,
+      active_spec_name: characterSpec,
+      class: characterClass,
+      faction,
+      guild,
+      mythic_plus_scores_by_season: mythicPlusScores,
+      mythic_plus_best_runs: mythicPlusBestRuns,
+      name,
+      race,
+      realm,
+      region,
       thumbnail_url,
-      race: character_race,
-      class: character_class,
-      active_spec_name: character_spec,
-      faction: character_faction,
-      realm: character_realm,
-      guild: character_guild,
-      mythic_plus_scores_by_season,
-      mythic_plus_best_runs,
     } = response;
 
+    // Check if the character is already in MongoDB.
+    const characters = await collection.find().toArray();
+
+    const isInDatabase = characters.some((character) => {
+      const isNameMatch = character.name === name;
+      const isRealmMatch = character.realm === realm;
+      const isRegionMatch = character.region === region.toUpperCase();
+
+      return isNameMatch && isRealmMatch && isRegionMatch;
+    });
+
+    // If the character was not in Mongo then create a document.
+    if (!isInDatabase) {
+      const document = {
+        name,
+        realm,
+        region: region.toUpperCase(),
+        faction: capitalize(faction),
+        thumbnail: `/assets/classicon_${characterClass
+          .toLowerCase()
+          .replace(" ", "")}.png`,
+      };
+
+      await collection.insertOne(document);
+    }
+
     // Simplify the best run data for the response.
-    const bestRuns = mythic_plus_best_runs
+    const bestRuns = mythicPlusBestRuns
       .map((run) => {
         return { dungeon: run.dungeon, level: run.mythic_level };
       })
@@ -73,18 +115,19 @@ const getCharacter = async (req, res) => {
       status: 200,
       data: {
         character: {
-          name: character_name,
+          class: characterClass,
+          faction: capitalize(faction),
+          guild: guild ? guild.name : "",
+          name,
+          race,
+          realm,
+          region: region.toUpperCase(),
+          spec: characterSpec,
           thumbnail: thumbnail_url,
-          race: character_race,
-          class: character_class,
-          spec: character_spec,
-          faction: capitalize(character_faction),
-          realm: character_realm,
-          guild: character_guild.name,
         },
         mythic_plus: {
-          score: mythic_plus_scores_by_season[0].segments.all.score,
-          color: mythic_plus_scores_by_season[0].segments.all.color,
+          color: mythicPlusScores[0].segments.all.color,
+          score: mythicPlusScores[0].segments.all.score,
           bestRuns,
         },
       },
@@ -96,7 +139,32 @@ const getCharacter = async (req, res) => {
       message: "An unknown error occurred.",
       data: { name, realm, region },
     });
+  } finally {
+    client.close();
   }
 };
 
-module.exports = { getCharacter };
+// Get a list of searchable characters from the server.
+const getSearchableCharacters = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, mongoOptions);
+
+  try {
+    await client.connect();
+    const characters = client.db("master").collection("characters");
+
+    // Fetch the characters from MongoDB.
+    const response = await characters.find().toArray();
+
+    return res.status(200).json({ status: 200, data: response });
+  } catch (err) {
+    console.error("Error fetching searchable characters:", err);
+    return res.status(500).json({
+      status: 500,
+      message: "An unknown error occurred.",
+    });
+  } finally {
+    client.close();
+  }
+};
+
+module.exports = { getCharacter, getSearchableCharacters };

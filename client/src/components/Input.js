@@ -7,6 +7,7 @@ const Input = ({ onChange, onKeyUp, placeholder, value }) => {
       onKeyUp={onKeyUp}
       placeholder={placeholder}
       value={value}
+      required
     />
   );
 };

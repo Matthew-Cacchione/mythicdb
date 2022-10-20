@@ -1,9 +1,9 @@
 import { Affix } from "./Affix";
 
-export interface AffixResponse {
+export interface Response {
   statusCode: number;
   region: string;
   title: string;
   leaderboard_url: string;
-  affix_details: Array<Affix>;
+  affix_details: Affix[];
 }

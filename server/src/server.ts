@@ -1,4 +1,4 @@
-const express = require("express");
+import express, { Response, Request } from "express";
 
 const PORT = 8000;
 
@@ -13,7 +13,7 @@ app.use(express.static("public"));
 app.use(require("./routes/affixes"));
 app.use(require("./routes/characters"));
 
-app.get("*", (req, res) => {
+app.get("*", (req: Request, res: Response) => {
   return res.status(404).json({ status: 404, message: "No endpoint found." });
 });
 

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { AffixResponse } from "../models/AffixResponse";
+import { Response as ApiResponse } from "../models/api/Response";
 import { Response, Request } from "express";
 
 // Set required axios options.
@@ -28,7 +28,7 @@ const getAffixes = async (req: Request, res: Response) => {
   const uri = `https://raider.io/api/v1/mythic-plus/affixes?region=${region}&locale=en`;
 
   try {
-    const response: AffixResponse = await (await axios(uri, options)).data;
+    const response: ApiResponse = await (await axios(uri, options)).data;
 
     // Verify that the region provided exists.
     if (response.statusCode === 400) {

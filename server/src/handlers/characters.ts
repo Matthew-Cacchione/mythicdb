@@ -1,9 +1,14 @@
-// Allows the use of the fetch API in Node.
-const fetch = (...args) =>
-  import("node-fetch").then(({ default: fetch }) => fetch(...args));
+// Import axios to fetch data from the API.
+import axios from "axios";
 
-// Require MongoDB related functions.
-const { MongoClient } = require("mongodb");
+// Import required models.
+import { Character as ApiCharacter } from "../models/api/Character";
+import { Character } from "../models/server/Character";
+import { Response, Request } from "express";
+import { Run } from "../models/api/Run";
+
+// Import MongoDB related functions.
+import { MongoClient, OptionalId } from "mongodb";
 
 // Require environment variables.
 require("dotenv").config();
@@ -20,17 +25,11 @@ const options = {
   },
 };
 
-// Set MongoDB options.
-const mongoOptions = {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-};
-
 // Handlers.
 
 // Retrieve the given character's data from the API.
-const getCharacter = async (req, res) => {
-  const client = new MongoClient(MONGO_URI, mongoOptions);
+const getCharacter = async (req: Request, res: Response) => {
+  const client = new MongoClient(MONGO_URI!);
   const { name, realm, region } = req.query;
 
   // If any parameters are missing respond with a bad request.
@@ -46,10 +45,10 @@ const getCharacter = async (req, res) => {
 
   try {
     await client.connect();
-    const collection = client.db("master").collection("characters");
+    const collection = client.db("master").collection<Character>("characters");
 
     // Fetch the character's data from the API.
-    const response = await (await fetch(uri, options)).json();
+    const response = await (await axios(uri, options)).data;
 
     // Verify if the API returned a bad request.
     if (response.statusCode === 400) {
@@ -87,7 +86,7 @@ const getCharacter = async (req, res) => {
 
     // If the character was not in Mongo then create a document.
     if (!isInDatabase) {
-      const document = {
+      const document: OptionalId<Character> = {
         name,
         realm,
         region: region.toUpperCase(),
@@ -102,12 +101,12 @@ const getCharacter = async (req, res) => {
 
     // Simplify the best run data for the response.
     const bestRuns = mythicPlusBestRuns
-      .map((run) => {
-        return { dungeon: run.dungeon, level: run.mythic_level };
-      })
       // Sort runs by keystone level in descending order.
-      .sort((a, b) => {
-        return b.level - a.level;
+      .sort((a: Run, b: Run) => {
+        return b.mythic_level - a.mythic_level;
+      })
+      .map((run: Run) => {
+        return { dungeon: run.dungeon, level: run.mythic_level };
       });
 
     // Respond with the required data.
@@ -145,8 +144,8 @@ const getCharacter = async (req, res) => {
 };
 
 // Get a list of searchable characters from the server.
-const getSearchableCharacters = async (req, res) => {
-  const client = new MongoClient(MONGO_URI, mongoOptions);
+const getSearchableCharacters = async (req: Request, res: Response) => {
+  const client = new MongoClient(MONGO_URI!);
 
   try {
     await client.connect();

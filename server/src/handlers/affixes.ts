@@ -1,8 +1,9 @@
-// Allows the use of the fetch API in Node.
-const fetch = (...args) =>
-  import("node-fetch").then(({ default: fetch }) => fetch(...args));
+import axios from "axios";
 
-// Set required fetch options.
+import { AffixResponse } from "../models/AffixResponse";
+import { Response, Request } from "express";
+
+// Set required axios options.
 const options = {
   method: "GET",
   headers: {
@@ -11,7 +12,7 @@ const options = {
 };
 
 // Get the current affixes in rotation.
-const getAffixes = async (req, res) => {
+const getAffixes = async (req: Request, res: Response) => {
   // Extract the required data from the request.
   const { region } = req.query;
 
@@ -27,7 +28,7 @@ const getAffixes = async (req, res) => {
   const uri = `https://raider.io/api/v1/mythic-plus/affixes?region=${region}&locale=en`;
 
   try {
-    const response = await (await fetch(uri, options)).json();
+    const response: AffixResponse = await (await axios(uri, options)).data;
 
     // Verify that the region provided exists.
     if (response.statusCode === 400) {

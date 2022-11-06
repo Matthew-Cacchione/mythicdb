@@ -2,7 +2,6 @@
 import axios from "axios";
 
 // Import required models.
-import { Character as ApiCharacter } from "../models/api/Character";
 import { Character } from "../models/server/Character";
 import { Response, Request } from "express";
 import { Run } from "../models/api/Run";
@@ -17,7 +16,7 @@ const { MONGO_URI } = process.env;
 // Require helper functions.
 const { capitalize } = require("../helpers/strings");
 
-// Set required fetch options.
+// Set required axios options.
 const options = {
   method: "GET",
   headers: {

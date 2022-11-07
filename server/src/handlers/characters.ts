@@ -165,4 +165,4 @@ const getSearchableCharacters = async (req: Request, res: Response) => {
   }
 };
 
-module.exports = { getCharacter, getSearchableCharacters };
+export { getCharacter, getSearchableCharacters };

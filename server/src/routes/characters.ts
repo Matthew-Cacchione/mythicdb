@@ -1,3 +1,5 @@
+import { defaultMaxListeners } from "events";
+
 // Character related routes will be hosted here.
 const router = require("express").Router();
 
@@ -15,4 +17,4 @@ router.get("/api/characters", getCharacter);
 // Get the characters that can be searched for.
 router.get("/api/characters/search", getSearchableCharacters);
 
-module.exports = router;
+export default router;

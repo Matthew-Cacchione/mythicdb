@@ -53,4 +53,4 @@ const getAffixes = async (req: Request, res: Response) => {
   }
 };
 
-module.exports = { getAffixes };
+export { getAffixes };

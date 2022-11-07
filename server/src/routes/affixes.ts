@@ -9,4 +9,4 @@ const { getAffixes } = require("../handlers/affixes");
 // Get the current affixes in rotation.
 router.get("/api/affixes", getAffixes);
 
-module.exports = router;
+export default router;

@@ -1,5 +1,10 @@
+// Required libraries.
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+// Required types and interfaces.
+import { FC } from "react";
+
+// Required pages.
 import AddCharacter from "../pages/AddCharacter";
 import Affixes from "../pages/Affixes";
 import Character from "../pages/Character";
@@ -9,19 +14,19 @@ import Home from "../pages/Home";
 import Introduction from "../pages/Introduction";
 import SearchResults from "../pages/SearchResults";
 
+// Required context and constants.
 import { CharacterProvider } from "../context/CharacterContext";
 import { PATHS } from "../constants";
 
-const App = () => {
+const App: FC = () => {
   return (
     <Router>
       <GlobalStyles />
       <Header />
       <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route exact path={PATHS.affixes} element={<Affixes />} />
+        <Route path="/" element={<Home />} />
+        <Route path={PATHS.affixes} element={<Affixes />} />
         <Route
-          exact
           path={PATHS.character}
           element={
             <CharacterProvider>
@@ -29,10 +34,9 @@ const App = () => {
             </CharacterProvider>
           }
         />
-
-        <Route exact path={PATHS.newPlayer} element={<Introduction />} />
-        <Route exact path={PATHS.searchResults} element={<SearchResults />} />
-        <Route exact path={PATHS.addCharacter} element={<AddCharacter />} />
+        <Route path={PATHS.newPlayer} element={<Introduction />} />
+        <Route path={PATHS.searchResults} element={<SearchResults />} />
+        <Route path={PATHS.addCharacter} element={<AddCharacter />} />
         <Route path="" element={<>No path found.</>} />
       </Routes>
     </Router>

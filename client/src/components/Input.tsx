@@ -1,6 +1,11 @@
+// Required libraries.
 import styled from "styled-components";
 
-const Input = ({ onChange, onKeyUp, placeholder, value }) => {
+// Required types and interfaces.
+import { FC } from "react";
+import InputProps from "../models/InputProps";
+
+const Input: FC<InputProps> = ({ onChange, onKeyUp, placeholder, value }) => {
   return (
     <Wrapper
       onChange={onChange}

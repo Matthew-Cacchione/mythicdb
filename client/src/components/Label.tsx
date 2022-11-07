@@ -1,6 +1,11 @@
+// Required libraries.
 import styled from "styled-components";
 
-const Label = ({ text }) => {
+// Required types and interfaces.
+import { FC } from "react";
+import Props from "../models/Props";
+
+const Label: FC<Props> = ({ text }) => {
   return <Wrapper>{text}</Wrapper>;
 };
 

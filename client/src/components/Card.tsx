@@ -1,6 +1,12 @@
+// Required libraries.
 import styled from "styled-components";
 
-const Card = ({ children, description, divider, filled, title }) => {
+// Required types and interfaces.
+import { FC } from "react";
+import Props from "../models/Props";
+import StyledProps from "../models/StyledProps";
+
+const Card: FC<Props> = ({ children, description, divider, filled, title }) => {
   return (
     <Wrapper filled={filled}>
       {title && <Title>{title}</Title>}
@@ -27,7 +33,7 @@ const Title = styled.h2`
   text-align: center;
 `;
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<StyledProps>`
   align-items: center;
   background: ${(props) =>
     props.filled ? "var(--color-surface)" : "transparent"};

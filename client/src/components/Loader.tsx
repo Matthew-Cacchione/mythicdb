@@ -1,3 +1,4 @@
+// Required libraries.
 import styled, { keyframes } from "styled-components";
 
 const Loader = () => {

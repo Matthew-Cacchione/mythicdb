@@ -1,8 +1,12 @@
+// Required libraries.
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-import { Link } from "react-router-dom";
+// Required types and interfaces.
+import { FC } from "react";
+import Props from "../models/Props";
 
-const BlankLink = ({ children, path }) => {
+const BlankLink: FC<Props> = ({ children, path }) => {
   return <Wrapper to={path}>{children}</Wrapper>;
 };
 

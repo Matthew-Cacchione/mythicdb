@@ -1,6 +1,11 @@
+// Required libraries.
 import styled from "styled-components";
 
-const Button = ({ label }) => {
+// Required types and interfaces.
+import { FC } from "react";
+import Props from "../models/Props";
+
+const Button: FC<Props> = ({ label }) => {
   return <Wrapper>{label}</Wrapper>;
 };
 

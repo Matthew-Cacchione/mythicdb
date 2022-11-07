@@ -1,8 +1,11 @@
+// Required libraries.
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-import { Link } from "react-router-dom";
+// Required components.
 import Search from "./Search";
 
+// Required constants.
 import { STRINGS } from "../constants";
 
 const Header = () => {

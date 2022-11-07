@@ -1,6 +1,11 @@
+// Required libraries.
 import styled from "styled-components";
 
-const Table = ({ children }) => {
+// Required types and interfaces.
+import { FC } from "react";
+import { Props } from "../../models/Props";
+
+const Table: FC<Props> = ({ children }) => {
   return <Wrapper>{children}</Wrapper>;
 };
 

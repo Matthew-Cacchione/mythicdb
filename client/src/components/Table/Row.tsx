@@ -1,6 +1,9 @@
+import { FC } from "react";
 import styled from "styled-components";
 
-const Row = ({ children }) => {
+import { Props } from "../../models/Props";
+
+const Row: FC<Props> = ({ children }) => {
   return <Wrapper>{children}</Wrapper>;
 };
 

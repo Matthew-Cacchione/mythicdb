@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 // Required types and interfaces.
 import { FC } from "react";
-import Props from "../models/Props";
+import Props from "../models/props/Card";
 import StyledProps from "../models/StyledProps";
 
 const Card: FC<Props> = ({ children, description, divider, filled, title }) => {

@@ -3,10 +3,10 @@ import styled from "styled-components";
 
 // Required types and interfaces.
 import { FC } from "react";
-import Props from "../models/Props";
+import Props from "../models/props/Label";
 
-const Label: FC<Props> = ({ text }) => {
-  return <Wrapper>{text}</Wrapper>;
+const Label: FC<Props> = ({ label }) => {
+  return <Wrapper>{label}</Wrapper>;
 };
 
 const Wrapper = styled.label`

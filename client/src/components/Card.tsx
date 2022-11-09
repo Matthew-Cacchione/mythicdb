@@ -4,7 +4,6 @@ import styled from "styled-components";
 // Required types and interfaces.
 import { FC } from "react";
 import Props from "../models/props/Card";
-import StyledProps from "../models/StyledProps";
 
 const Card: FC<Props> = ({ children, description, divider, filled, title }) => {
   return (
@@ -33,7 +32,7 @@ const Title = styled.h2`
   text-align: center;
 `;
 
-const Wrapper = styled.div<StyledProps>`
+const Wrapper = styled.div<Props>`
   align-items: center;
   background: ${(props) =>
     props.filled ? "var(--color-surface)" : "transparent"};

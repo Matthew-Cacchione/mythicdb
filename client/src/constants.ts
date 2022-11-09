@@ -1,3 +1,4 @@
+// Constant data relating to mythic+.
 export const DATA = {
   keystones: [
     {
@@ -33,6 +34,7 @@ export const DATA = {
   ],
 };
 
+// Paths used in app to navigate around pages.
 export const PATHS = {
   addCharacter: "/characters/add",
   affixes: "/affixes",
@@ -42,6 +44,7 @@ export const PATHS = {
   searchResults: "/characters",
 };
 
+// Strings needed in app.
 export const STRINGS = {
   app: "MythicDB",
   addBtn: "Add",

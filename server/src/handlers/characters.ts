@@ -49,14 +49,6 @@ const getCharacter = async (req: Request, res: Response) => {
     // Fetch the character's data from the API.
     const response = await (await axios(uri, options)).data;
 
-    // Verify if the API returned a bad request.
-    if (response.statusCode === 400) {
-      return res.status(400).json({
-        status: 400,
-        message: response.message.concat("."),
-      });
-    }
-
     // Extract the required data from the response.
     const {
       active_spec_name: characterSpec,
@@ -130,13 +122,22 @@ const getCharacter = async (req: Request, res: Response) => {
         },
       },
     });
-  } catch (e) {
-    console.error("Error fetching character:", e);
-    return res.status(500).json({
-      status: 500,
-      message: "An unknown error occurred.",
-      data: { name, realm, region },
-    });
+  } catch (e: any) {
+    switch (e.response.status) {
+      case 400:
+        return res.status(400).json({
+          status: 400,
+          message: e.response.data.message.concat("."),
+        });
+
+      default:
+        console.error("Error fetching character:", e);
+        return res.status(500).json({
+          status: 500,
+          message: "An unknown error occurred.",
+          data: { name, realm, region },
+        });
+    }
   } finally {
     client.close();
   }

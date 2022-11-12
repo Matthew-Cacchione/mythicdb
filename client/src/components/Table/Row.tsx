@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 // Required types and interfaces.
 import { FC } from "react";
-import Props from "../../models/props/Default";
+import Props from "../../models/components/Default";
 
 const Row: FC<Props> = ({ children }) => {
   return <Wrapper>{children}</Wrapper>;

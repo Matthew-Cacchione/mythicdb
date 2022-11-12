@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 // Required types and interfaces.
 import { FC } from "react";
-import Props from "../models/props/Input";
+import Props from "../models/components/Input";
 
 const Input: FC<Props> = ({ onChange, onKeyUp, placeholder, value }) => {
   return (

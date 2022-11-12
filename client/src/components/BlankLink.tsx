@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 // Required types and interfaces.
 import { FC } from "react";
-import Props from "../models/props/Link";
+import Props from "../models/components/Link";
 
 const BlankLink: FC<Props> = ({ children, path }) => {
   return <Wrapper to={path}>{children}</Wrapper>;

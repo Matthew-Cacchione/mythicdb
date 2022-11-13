@@ -36,5 +36,5 @@ export interface Action extends State {
 
 export interface Context {
   state: State;
-  actions: Object;
+  actions: any;
 }

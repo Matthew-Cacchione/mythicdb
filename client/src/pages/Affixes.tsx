@@ -1,8 +1,11 @@
+// Required libraries.
 import styled from "styled-components";
 import { useContext, useEffect } from "react";
 
+// Required components.
 import Loader from "../components/Loader";
 
+// Required context.
 import { AffixContext } from "../context/AffixContext";
 
 const Affixes = () => {

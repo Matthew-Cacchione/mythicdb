@@ -2,7 +2,7 @@
 import { ReactNode } from "react";
 
 export default interface Props {
-  children: ReactNode;
+  children?: ReactNode;
   description?: string;
   divider?: boolean;
   filled?: boolean;

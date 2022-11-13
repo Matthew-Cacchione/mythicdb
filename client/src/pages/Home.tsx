@@ -1,8 +1,11 @@
+// Required libraries.
 import styled from "styled-components";
 
+// Required components.
 import BlankLink from "../components/BlankLink";
 import Card from "../components/Card";
 
+// Required constants.
 import { PATHS, STRINGS } from "../constants";
 
 const Home = () => {

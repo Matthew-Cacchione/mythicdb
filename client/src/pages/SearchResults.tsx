@@ -1,11 +1,14 @@
+// Required libraries.
 import styled from "styled-components";
 import { useContext, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 
+// Required components.
 import BlankLink from "../components/BlankLink";
 import Card from "../components/Card";
 import Loader from "../components/Loader";
 
+// Required constants and context.
 import { PATHS, STRINGS } from "../constants";
 import { SearchContext } from "../context/SearchContext";
 
@@ -14,10 +17,7 @@ const SearchResults = () => {
   const [query] = useSearchParams();
 
   // Import the required search data from context.
-  const {
-    state: { characters, hasLoaded },
-    actions: { charactersFetched },
-  } = useContext(SearchContext);
+  const context = useContext(SearchContext);
 
   useEffect(() => {
     // Fetch the characters from the server.
@@ -25,7 +25,7 @@ const SearchResults = () => {
       const response = await (await fetch("/api/characters/search")).json();
 
       // Set the search data in context.
-      charactersFetched({ characters: response.data });
+      context?.actions.charactersFetched({ characters: response.data });
     };
 
     fetchCharacters();
@@ -33,7 +33,7 @@ const SearchResults = () => {
   }, []);
 
   // Render a loading indicator if the data is still loading.
-  if (!hasLoaded) {
+  if (!context?.state.hasLoaded) {
     return (
       <Wrapper>
         <Loader />
@@ -42,9 +42,9 @@ const SearchResults = () => {
   }
 
   // Filter the characters to only names that match the query.
-  const matches = characters
+  const matches = context.state.characters
     .filter((character) => {
-      return character.name.toLowerCase().includes(query.get("name"));
+      return character.name.toLowerCase().includes(query.get("name")!);
     })
     .sort((a, b) => {
       return a.name.localeCompare(b.name);
@@ -102,7 +102,7 @@ const Divider = styled.div`
   width: 65%;
 `;
 
-const Name = styled.h2`
+const Name = styled.h2<any>`
   color: ${(props) =>
     props.faction === "Alliance"
       ? "var(--color-alliance)"

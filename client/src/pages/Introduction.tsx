@@ -1,10 +1,13 @@
+// Required libraries.
 import styled from "styled-components";
 
+// Required components.
 import BlankLink from "../components/BlankLink";
 import Card from "../components/Card";
 import Row from "../components/Table/Row";
 import Table from "../components/Table/Table";
 
+// Required constants.
 import { DATA, PATHS, STRINGS } from "../constants";
 
 const Introduction = () => {

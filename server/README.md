@@ -76,20 +76,35 @@ Response will be in this structure:
 ```json
 {
   "status": 200,
-  "message": "If a message is required it will be here.",
   "data": {
     "character": {
+      "class": "Death Knight",
+      "faction": "Alliance",
+      "guild": "Not Idiot",
       "name": "Kyrasis",
       "race": "Dwarf",
-      "class": "Death Knight",
-      "spec": "Blood",
-      "faction": "Alliance",
       "realm": "Area 52",
-      "guild": "Not Idiot"
+      "region": "US",
+      "spec": "Blood",
+      "thumbnail": "https://render-us.worldofwarcraft.com/character/area-52/43/233016875-avatar.jpg?alt=wow/static/images/2d/avatar/3-0.jpg"
     },
     "mythic_plus": {
-      "score": 3112.6,
-      "color": "#fe7e15"
+      "color": "#fd7c20",
+      "score": 3220.8,
+      "bestRuns": [
+        {
+          "dungeon": "Tazavesh: Streets of Wonder",
+          "level": 32
+        },
+        {
+          "dungeon": "Mechagon Junkyard",
+          "level": 31
+        },
+        {
+          "dungeon": "Grimrail Depot",
+          "level": 31
+        }
+      ]
     }
   }
 }

@@ -1,13 +1,33 @@
+// Required libraries.
 import { createContext, useReducer } from "react";
 
-const initialState = {
-  character: null,
-  mythicPlus: null,
-  error: null,
+// Required types and interfaces.
+import { Action, Context, State } from "../models/context/Character";
+import { FC } from "react";
+import Props from "../models/components/Default";
+
+const initialState: State = {
+  character: {
+    class: "",
+    faction: "",
+    guild: "",
+    name: "",
+    race: "",
+    realm: "",
+    region: "",
+    spec: "",
+    thumbnail: "",
+  },
+  mythicPlus: {
+    bestRuns: [],
+    color: "",
+    score: 0,
+  },
+  error: "",
   hasLoaded: false,
 };
 
-const reducer = (state, action) => {
+const reducer = (state: State, action: Action) => {
   switch (action.type) {
     case "character-error":
       return {
@@ -30,17 +50,17 @@ const reducer = (state, action) => {
       };
 
     default:
-      throw new Error("Unrecognized action:", action.type);
+      throw new Error(`Unrecognized action: ${action.type}`);
   }
 };
 
-export const CharacterContext = createContext(null);
+export const CharacterContext = createContext<Context | null>(null);
 
-export const CharacterProvider = ({ children }) => {
+export const CharacterProvider: FC<Props> = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   // Indicate that the character data has been fetched.
-  const characterFetched = (data) => {
+  const characterFetched = (data: State) => {
     dispatch({
       type: "character-fetched",
       ...data,
@@ -48,7 +68,7 @@ export const CharacterProvider = ({ children }) => {
   };
 
   // Indicate that an error has occurred.
-  const characterError = (data) => {
+  const characterError = (data: State) => {
     dispatch({
       type: "character-error",
       ...data,
@@ -57,7 +77,10 @@ export const CharacterProvider = ({ children }) => {
 
   // Reset the character data.
   const resetCharacter = () => {
-    dispatch({ type: "reset-character" });
+    dispatch({
+      type: "reset-character",
+      ...initialState,
+    });
   };
 
   return (

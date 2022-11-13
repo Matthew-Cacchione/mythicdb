@@ -1,3 +1,4 @@
+// Interface needed for exports.
 interface Affix {
   id: number;
   name: string;
@@ -6,17 +7,17 @@ interface Affix {
   wowhead_url: string;
 }
 
-export interface Action {
-  type: string;
+// Export interfaces needed for context.
+export interface State {
   affixes: Array<Affix>;
+  hasLoaded: boolean;
+}
+
+export interface Action extends State {
+  type: string;
 }
 
 export interface Context {
   state: State;
   actions: Object;
-}
-
-export interface State {
-  affixes: Array<Affix>;
-  hasLoaded: boolean;
 }

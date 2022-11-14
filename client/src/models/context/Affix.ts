@@ -10,6 +10,7 @@ interface Affix {
 // Export interfaces needed for context.
 export interface State {
   affixes: Array<Affix>;
+  error: string;
   hasLoaded: boolean;
 }
 
@@ -17,7 +18,12 @@ export interface Action extends State {
   type: string;
 }
 
+export interface Actions {
+  affixError: Function;
+  affixSuccess: Function;
+}
+
 export interface Context {
   state: State;
-  actions: any;
+  actions: Actions;
 }

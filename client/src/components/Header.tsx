@@ -10,16 +10,14 @@ import { STRINGS } from "../constants";
 
 const Header = () => {
   return (
-    <>
-      <Wrapper>
-        <Container>
-          <BlankLink path="/">
-            <Title>{STRINGS.app}</Title>
-          </BlankLink>
-        </Container>
-        <Search />
-      </Wrapper>
-    </>
+    <Wrapper>
+      <Container>
+        <BlankLink path="/">
+          <Title>{STRINGS.app}</Title>
+        </BlankLink>
+      </Container>
+      <Search />
+    </Wrapper>
   );
 };
 

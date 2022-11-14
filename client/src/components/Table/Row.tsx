@@ -9,6 +9,7 @@ const Row: FC<Props> = ({ children }) => {
   return <Wrapper>{children}</Wrapper>;
 };
 
+// Styled components.
 const Wrapper = styled.tr`
   text-shadow: none;
 

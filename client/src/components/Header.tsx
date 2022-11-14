@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 // Required components.
+import BlankLink from "./BlankLink";
 import Search from "./Search";
 
 // Required constants.
@@ -13,7 +14,7 @@ const Header = () => {
     <>
       <Wrapper>
         <Container>
-          <BlankLink to="/">
+          <BlankLink path="/">
             <Title>{STRINGS.app}</Title>
           </BlankLink>
         </Container>
@@ -23,10 +24,7 @@ const Header = () => {
   );
 };
 
-const BlankLink = styled(Link)`
-  text-decoration: none;
-`;
-
+// Styled components.
 const Container = styled.div`
   align-items: center;
   background: var(--color-primary);

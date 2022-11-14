@@ -1,5 +1,4 @@
 // Required libraries.
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 // Required components.

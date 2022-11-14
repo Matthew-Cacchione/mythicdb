@@ -16,6 +16,7 @@ const Card: FC<Props> = ({ children, description, divider, filled, title }) => {
   );
 };
 
+// Styled components.
 const Description = styled.p`
   line-height: 1.3em;
   text-align: center;

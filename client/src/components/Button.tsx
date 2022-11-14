@@ -9,6 +9,7 @@ const Button: FC<Props> = ({ label }) => {
   return <Wrapper>{label}</Wrapper>;
 };
 
+// Styled components.
 const Wrapper = styled.button`
   background: var(--color-primary);
   border: none;

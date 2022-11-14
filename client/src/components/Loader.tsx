@@ -14,6 +14,7 @@ const Loader = () => {
   );
 };
 
+// Animation keyframes.
 const spin = keyframes`
 0% {
   transform: rotate(0deg);
@@ -24,6 +25,7 @@ const spin = keyframes`
 }
 `;
 
+// Styled components.
 const Spinner = styled.div`
   display: inline-block;
   height: 80px;

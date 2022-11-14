@@ -17,6 +17,7 @@ const Input: FC<Props> = ({ onChange, onKeyUp, placeholder, value }) => {
   );
 };
 
+// Styled components.
 const Wrapper = styled.input`
   background: var(--color-on-background);
   border: 3px solid var(--color-secondary);

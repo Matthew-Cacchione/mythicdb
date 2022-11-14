@@ -9,9 +9,9 @@ const Card: FC<Props> = ({ children, description, divider, filled, title }) => {
   return (
     <Wrapper filled={filled}>
       {title && <Title>{title}</Title>}
+      {children}
       {divider && <Divider />}
       {description && <Description>{description}</Description>}
-      {children}
     </Wrapper>
   );
 };

@@ -6,7 +6,6 @@ import { Action, Actions, Context, State } from "../models/context/Affix";
 import { FC } from "react";
 import Props from "../models/components/Default";
 
-// Empty state and actions on initialization.
 const initialState: State = {
   affixes: [],
   error: "",
@@ -18,7 +17,6 @@ const initialActions: Actions = {
   affixSuccess: () => {},
 };
 
-// Reducer function to handle possible events.
 const reducer = (state: State, action: Action) => {
   switch (action.type) {
     case "affix-error":
@@ -47,7 +45,6 @@ export const AffixContext = createContext<Context>({
 export const AffixProvider: FC<Props> = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  // Error occurred while fetching the affixes.
   const affixError = (data: State) => {
     dispatch({
       type: "affix-error",
@@ -55,7 +52,6 @@ export const AffixProvider: FC<Props> = ({ children }) => {
     });
   };
 
-  // Affixes successfully fetched.
   const affixSuccess = (data: State) => {
     dispatch({
       type: "affix-success",
@@ -63,14 +59,10 @@ export const AffixProvider: FC<Props> = ({ children }) => {
     });
   };
 
-  // Combining actions in a single variable.
-  const actions: Actions = {
-    affixError,
-    affixSuccess,
-  };
-
   return (
-    <AffixContext.Provider value={{ state, actions }}>
+    <AffixContext.Provider
+      value={{ state, actions: { affixError, affixSuccess } }}
+    >
       {children}
     </AffixContext.Provider>
   );

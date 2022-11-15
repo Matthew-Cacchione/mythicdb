@@ -34,7 +34,13 @@ export interface Action extends State {
   type: string;
 }
 
+export interface Actions {
+  characterError: Function;
+  characterSuccess: Function;
+  characterReset: Function;
+}
+
 export interface Context {
   state: State;
-  actions: any;
+  actions: Actions;
 }

@@ -17,7 +17,7 @@ const initialActions: Actions = {
 
 const reducer = (state: State, action: Action) => {
   switch (action.type) {
-    case "characters-fetched":
+    case "search-success":
       return {
         ...state,
         characters: action.characters,

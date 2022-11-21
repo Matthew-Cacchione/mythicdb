@@ -2,10 +2,6 @@
 
 MythicDB is a React application that is focused around the Mythic+ system in World of Warcraft. The application is intended as a resource for players to be able to research information relating to Mythic+, mainly to view scores of themselves or others.
 
-## Screenshots
-
-<img src="http://url.to/image.png" height="48" width="48" >
-
 ## Getting Started
 
 The following instructions will get the project up and running on your local machine for development, testing, or viewing purposes.

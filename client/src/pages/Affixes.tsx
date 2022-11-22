@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useContext, useEffect } from "react";
 
 // Required components.
+import Card from "../components/Card";
 import Loader from "../components/Loader";
 
 // Required context.
@@ -10,7 +11,7 @@ import { AffixContext } from "../context/AffixContext";
 
 const Affixes = () => {
   // Import the required affix data and functions.
-  const context = useContext(AffixContext);
+  const { state, actions } = useContext(AffixContext);
 
   useEffect(() => {
     // Fetch the affix data from the API.
@@ -18,18 +19,18 @@ const Affixes = () => {
       const response = await (await fetch(`/api/affixes?region=us`)).json();
 
       // Set the affix data in context.
-      context?.actions.affixesFetched({ affixes: response.data.affixes });
+      actions.affixSuccess({ affixes: response.data.affixes });
     };
 
     // Only fetch the affixes if they aren't yet loaded.
-    if (!context?.state.hasLoaded) {
+    if (!state.hasLoaded) {
       fetchAffixes();
     }
     //eslint-disable-next-line
   }, []);
 
   // Render a loading indicator if the data is still loading.
-  if (!context?.state.hasLoaded) {
+  if (!state.hasLoaded) {
     return (
       <Wrapper>
         <Loader />
@@ -39,9 +40,10 @@ const Affixes = () => {
 
   return (
     <Wrapper>
-      {context.state.affixes.map((affix) => {
+      {/* Create a card to display each affix. */}
+      {state.affixes.map((affix) => {
         return (
-          <Card key={affix.id}>
+          <Card key={affix.id} description={affix.description} divider>
             <Centered>
               <Media
                 src={`/assets/${affix.icon}.png`}
@@ -49,8 +51,6 @@ const Affixes = () => {
               />
               {affix.name}
             </Centered>
-            <Divider />
-            <Description>{affix.description}</Description>
           </Card>
         );
       })}
@@ -58,25 +58,7 @@ const Affixes = () => {
   );
 };
 
-const Card = styled.div`
-  align-items: center;
-  background: transparent;
-  border: 2px solid var(--color-surface-light);
-  border-radius: 0.2em;
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-  justify-content: center;
-  margin-bottom: 1.5em;
-  padding: 1em;
-  transition: box-shadow 200ms;
-  width: 90vw;
-
-  &:hover {
-    box-shadow: 0 8px 16px 0 var(--color-on-primary);
-  }
-`;
-
+// Styled components.
 const Centered = styled.div`
   align-items: center;
   display: flex;
@@ -84,17 +66,6 @@ const Centered = styled.div`
   font-weight: bold;
   gap: 0.3em;
   text-align: center;
-`;
-
-const Description = styled.p`
-  line-height: 1.3em;
-  text-align: center;
-  white-space: pre-wrap;
-`;
-
-const Divider = styled.div`
-  border-bottom: 3px solid var(--color-secondary);
-  width: 15%;
 `;
 
 const Media = styled.img`

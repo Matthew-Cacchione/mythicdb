@@ -63,6 +63,7 @@ const Search = () => {
   );
 };
 
+// Styled components.
 const Error = styled.p`
   color: var(--color-error);
   font-weight: bold;

@@ -9,6 +9,7 @@ const Table: FC<Props> = ({ children }) => {
   return <Wrapper>{children}</Wrapper>;
 };
 
+// Styled components.
 const Wrapper = styled.table`
   border-collapse: collapse;
   width: 100%;

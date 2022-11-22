@@ -9,13 +9,14 @@ const Card: FC<Props> = ({ children, description, divider, filled, title }) => {
   return (
     <Wrapper filled={filled}>
       {title && <Title>{title}</Title>}
+      {children}
       {divider && <Divider />}
       {description && <Description>{description}</Description>}
-      {children}
     </Wrapper>
   );
 };
 
+// Styled components.
 const Description = styled.p`
   line-height: 1.3em;
   text-align: center;

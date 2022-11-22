@@ -17,7 +17,7 @@ const SearchResults = () => {
   const [query] = useSearchParams();
 
   // Import the required search data from context.
-  const context = useContext(SearchContext);
+  const { state, actions } = useContext(SearchContext);
 
   useEffect(() => {
     // Fetch the characters from the server.
@@ -25,7 +25,7 @@ const SearchResults = () => {
       const response = await (await fetch("/api/characters/search")).json();
 
       // Set the search data in context.
-      context?.actions.charactersFetched({ characters: response.data });
+      actions.searchSuccess({ characters: response.data });
     };
 
     fetchCharacters();
@@ -33,7 +33,7 @@ const SearchResults = () => {
   }, []);
 
   // Render a loading indicator if the data is still loading.
-  if (!context?.state.hasLoaded) {
+  if (!state.hasLoaded) {
     return (
       <Wrapper>
         <Loader />
@@ -42,7 +42,7 @@ const SearchResults = () => {
   }
 
   // Filter the characters to only names that match the query.
-  const matches = context.state.characters
+  const matches = state.characters
     .filter((character) => {
       return character.name.toLowerCase().includes(query.get("name")!);
     })
@@ -52,6 +52,7 @@ const SearchResults = () => {
 
   return (
     <Wrapper>
+      {/* Create a card for each character that matches the query. */}
       {matches.map((character) => {
         return (
           <BlankLink
@@ -81,6 +82,7 @@ const SearchResults = () => {
   );
 };
 
+// Styled components.
 const Details = styled.div`
   align-items: center;
   display: flex;

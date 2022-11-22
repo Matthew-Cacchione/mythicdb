@@ -9,6 +9,7 @@ const Label: FC<Props> = ({ label }) => {
   return <Wrapper>{label}</Wrapper>;
 };
 
+// Styled components.
 const Wrapper = styled.label`
   font-size: 1.3rem;
   margin: 0.4em;

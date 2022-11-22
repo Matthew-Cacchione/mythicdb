@@ -10,6 +10,7 @@ const BlankLink: FC<Props> = ({ children, path }) => {
   return <Wrapper to={path}>{children}</Wrapper>;
 };
 
+// Styled components.
 const Wrapper = styled(Link)`
   cursor: pointer;
   display: flex;

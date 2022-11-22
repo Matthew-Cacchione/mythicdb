@@ -24,5 +24,5 @@ export interface Actions {
 
 export interface Context {
   state: State;
-  actions: any;
+  actions: Actions;
 }

@@ -1,22 +1,20 @@
-// Import axios to fetch data from the API.
+// Required packages.
 import axios from "axios";
+import { MongoClient, OptionalId } from "mongodb";
 
-// Import required models.
+// Required models.
 import { Character } from "../models/server/Character";
 import { Response, Request } from "express";
 import { Run } from "../models/api/Run";
 
-// Import MongoDB related functions.
-import { MongoClient, OptionalId } from "mongodb";
-
-// Require environment variables.
+// Required environment variables.
 require("dotenv").config();
 const { MONGO_URI } = process.env;
 
-// Require helper functions.
+// Required helper functions.
 const { capitalize } = require("../helpers/strings");
 
-// Set required axios options.
+// Set axios options.
 const options = {
   method: "GET",
   headers: {
@@ -24,16 +22,14 @@ const options = {
   },
 };
 
-// Handlers.
-
 // Retrieve the given character's data from the API.
-const getCharacter = async (req: Request, res: Response) => {
+const getCharacter = async (request: Request, response: Response) => {
   const client = new MongoClient(MONGO_URI!);
-  const { name, realm, region } = req.query;
+  const { name, realm, region } = request.query;
 
   // If any parameters are missing respond with a bad request.
   if (!name || !realm || !region) {
-    return res.status(400).json({
+    return response.status(400).json({
       status: 400,
       message: "Request is missing data.",
     });
@@ -47,9 +43,8 @@ const getCharacter = async (req: Request, res: Response) => {
     const collection = client.db("master").collection<Character>("characters");
 
     // Fetch the character's data from the API.
-    const response = await (await axios(uri, options)).data;
+    const data = await (await axios(uri, options)).data;
 
-    // Extract the required data from the response.
     const {
       active_spec_name: characterSpec,
       class: characterClass,
@@ -62,7 +57,7 @@ const getCharacter = async (req: Request, res: Response) => {
       realm,
       region,
       thumbnail_url,
-    } = response;
+    } = data;
 
     // Check if the character is already in MongoDB.
     const characters = await collection.find().toArray();
@@ -92,16 +87,15 @@ const getCharacter = async (req: Request, res: Response) => {
 
     // Simplify the best run data for the response.
     const bestRuns = mythicPlusBestRuns
-      // Sort runs by keystone level in descending order.
-      .sort((a: Run, b: Run) => {
-        return b.mythic_level - a.mythic_level;
+      .sort((run1: Run, run2: Run) => {
+        return run2.mythic_level - run1.mythic_level;
       })
       .map((run: Run) => {
         return { dungeon: run.dungeon, level: run.mythic_level };
       });
 
     // Respond with the required data.
-    return res.status(200).json({
+    return response.status(200).json({
       status: 200,
       data: {
         character: {
@@ -122,17 +116,17 @@ const getCharacter = async (req: Request, res: Response) => {
         },
       },
     });
-  } catch (e: any) {
-    switch (e.response.status) {
+  } catch (error: any) {
+    switch (error.response.status) {
       case 400:
-        return res.status(400).json({
+        return response.status(400).json({
           status: 400,
-          message: e.response.data.message.concat("."),
+          message: error.response.data.message.concat("."),
         });
 
       default:
-        console.error("Error fetching character:", e);
-        return res.status(500).json({
+        console.error("Error fetching character:", error);
+        return response.status(500).json({
           status: 500,
           message: "An unknown error occurred.",
           data: { name, realm, region },
@@ -144,7 +138,10 @@ const getCharacter = async (req: Request, res: Response) => {
 };
 
 // Get a list of searchable characters from the server.
-const getSearchableCharacters = async (req: Request, res: Response) => {
+const getSearchableCharacters = async (
+  request: Request,
+  response: Response
+) => {
   const client = new MongoClient(MONGO_URI!);
 
   try {
@@ -152,12 +149,12 @@ const getSearchableCharacters = async (req: Request, res: Response) => {
     const characters = client.db("master").collection("characters");
 
     // Fetch the characters from MongoDB.
-    const response = await characters.find().toArray();
+    const data = await characters.find().toArray();
 
-    return res.status(200).json({ status: 200, data: response });
-  } catch (err) {
-    console.error("Error fetching searchable characters:", err);
-    return res.status(500).json({
+    return response.status(200).json({ status: 200, data });
+  } catch (error) {
+    console.error("Error fetching searchable characters:", error);
+    return response.status(500).json({
       status: 500,
       message: "An unknown error occurred.",
     });

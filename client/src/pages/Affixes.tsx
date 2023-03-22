@@ -43,7 +43,12 @@ const Affixes = () => {
       {/* Create a card to display each affix. */}
       {state.affixes.map((affix) => {
         return (
-          <Card key={affix.id} description={affix.description} divider>
+          <Card
+            key={affix.id}
+            description={affix.description}
+            divider
+            position="top"
+          >
             <Centered>
               <Media
                 src={`/assets/${affix.icon}.png`}

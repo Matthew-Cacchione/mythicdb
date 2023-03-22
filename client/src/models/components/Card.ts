@@ -6,5 +6,6 @@ export default interface Props {
   description?: string;
   divider?: boolean;
   filled?: boolean;
+  position?: string;
   title?: string;
 }

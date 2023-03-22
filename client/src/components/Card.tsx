@@ -5,13 +5,21 @@ import styled from "styled-components";
 import { FC } from "react";
 import Props from "../models/components/Card";
 
-const Card: FC<Props> = ({ children, description, divider, filled, title }) => {
+const Card: FC<Props> = ({
+  children,
+  description,
+  divider,
+  filled,
+  position,
+  title,
+}) => {
   return (
     <Wrapper filled={filled}>
       {title && <Title>{title}</Title>}
-      {children}
+      {position === "top" && children}
       {divider && <Divider />}
       {description && <Description>{description}</Description>}
+      {position !== "top" && children}
     </Wrapper>
   );
 };

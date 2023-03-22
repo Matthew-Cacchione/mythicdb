@@ -1,4 +1,4 @@
-// Required libraries.
+// Required packages.
 import styled from "styled-components";
 
 // Required components.
@@ -7,7 +7,7 @@ import Card from "../components/Card";
 import Row from "../components/Table/Row";
 import Table from "../components/Table/Table";
 
-// Required constants.
+// Required data.
 import { DATA, PATHS, STRINGS } from "../constants";
 
 const Introduction = () => {
@@ -23,6 +23,7 @@ const Introduction = () => {
         title={STRINGS.newPlayer.keyExplanation.title}
         divider
       >
+        {/* Show keystone scaling data. */}
         <Table>
           <thead>
             <Row>
@@ -48,6 +49,7 @@ const Introduction = () => {
         title={STRINGS.newPlayer.gear.title}
         divider
       >
+        {/* Show keystone reward data. */}
         <Table>
           <thead>
             <Row>
@@ -86,6 +88,7 @@ const Introduction = () => {
   );
 };
 
+// Styled components.
 const Note = styled.p`
   color: var(--color-error);
   line-height: 1.3em;

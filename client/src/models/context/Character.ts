@@ -1,4 +1,3 @@
-// Interfaces needed for exports.
 interface Character {
   class: string;
   faction: string;
@@ -22,7 +21,7 @@ interface MythicPlus {
   score: number;
 }
 
-// Export interfaces needed for context.
+// Export types needed for context.
 export interface State {
   character: Character;
   mythicPlus: MythicPlus;

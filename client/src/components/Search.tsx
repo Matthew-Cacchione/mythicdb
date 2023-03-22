@@ -1,4 +1,4 @@
-// Required libraries.
+// Required packages.
 import styled from "styled-components";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -9,7 +9,7 @@ import { ChangeEvent, KeyboardEvent } from "react";
 // Required components.
 import Input from "../components/Input";
 
-// Required constants.
+// Required data.
 import { STRINGS } from "../constants";
 
 const Search = () => {
@@ -42,7 +42,6 @@ const Search = () => {
         setError("");
         setValue("");
       } else {
-        // Redirect the user to the entered character's page.
         navigate(`/characters/us/${realm}/${name}`);
         setError("");
         setValue("");

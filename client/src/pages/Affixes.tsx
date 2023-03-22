@@ -1,4 +1,4 @@
-// Required libraries.
+// Required packages.
 import styled from "styled-components";
 import { useContext, useEffect } from "react";
 
@@ -6,19 +6,16 @@ import { useContext, useEffect } from "react";
 import Card from "../components/Card";
 import Loader from "../components/Loader";
 
-// Required context.
+// Required data.
 import { AffixContext } from "../context/AffixContext";
 
 const Affixes = () => {
-  // Import the required affix data and functions.
   const { state, actions } = useContext(AffixContext);
 
   useEffect(() => {
-    // Fetch the affix data from the API.
     const fetchAffixes = async () => {
       const response = await (await fetch(`/api/affixes?region=us`)).json();
 
-      // Set the affix data in context.
       actions.affixSuccess({ affixes: response.data.affixes });
     };
 
@@ -26,6 +23,7 @@ const Affixes = () => {
     if (!state.hasLoaded) {
       fetchAffixes();
     }
+
     //eslint-disable-next-line
   }, []);
 

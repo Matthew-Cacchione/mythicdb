@@ -1,4 +1,4 @@
-// Required libraries.
+// Required packages.
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
@@ -11,7 +11,7 @@ import Card from "../components/Card";
 import Input from "../components/Input";
 import Label from "../components/Label";
 
-// Required constants.
+// Required data.
 import { STRINGS } from "../constants";
 
 const AddCharacter = () => {
@@ -24,7 +24,6 @@ const AddCharacter = () => {
     const target = e.target as typeof e.target &
       [{ value: string }, { value: string }, { value: string }];
 
-    // Extract input values from the form.
     const name = target[0].value.toLowerCase();
     const realm = target[1].value.toLowerCase();
     const region = target[2].value.toLowerCase();
@@ -49,6 +48,7 @@ const AddCharacter = () => {
   );
 };
 
+// Styled components.
 const Form = styled.form`
   display: flex;
   flex-direction: column;

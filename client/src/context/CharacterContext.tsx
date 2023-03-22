@@ -1,7 +1,7 @@
-// Required libraries.
+// Required packages.
 import { createContext, useReducer } from "react";
 
-// Required types and interfaces.
+// Required types.
 import { Action, Actions, Context, State } from "../models/context/Character";
 import { FC } from "react";
 import Props from "../models/components/Default";

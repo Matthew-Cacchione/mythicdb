@@ -1,4 +1,4 @@
-// Required libraries.
+// Required packages.
 import styled from "styled-components";
 import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -9,7 +9,7 @@ import Loader from "../components/Loader";
 import Row from "../components/Table/Row";
 import Table from "../components/Table/Table";
 
-// Required constants and context.
+// Required data.
 import { CharacterContext } from "../context/CharacterContext";
 import { STRINGS } from "../constants";
 
@@ -21,7 +21,6 @@ const Character = () => {
     const getCharacter = async () => {
       actions.characterReset();
 
-      // Fetch the character from the server.
       const response = await (
         await fetch(
           `/api/characters?name=${name}&realm=${realm}&region=${region}`

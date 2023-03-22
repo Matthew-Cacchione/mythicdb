@@ -65,7 +65,7 @@ export const STRINGS = {
         "View the affixes for this week and get information on what they do.",
     },
     intro: {
-      title: "Welcome to the database!",
+      title: "Welcome to the database",
       description:
         "Not sure where to go? You can find links to various pages below.\n\nYou can also type a name into the search bar to find a character!",
     },
@@ -86,13 +86,13 @@ export const STRINGS = {
         "In addition to having more health and damage, keystones also add challenges called affixes that further increase the difficulty of the dungeon.\n\nAffixes are on a weekly rotation, and you can view the active affixes for this week by clicking here.",
     },
     gear: {
-      title: "Gear!",
+      title: "Gear",
       description:
         "As a reward for completing these challenging dungeons you'll also receive progressively better gear.\n\nGear is obtained in two ways, from the end of dungeon chest and from your weekly great vault options. Here's the breakdown;",
       note: "Note: Gear rewards cap at +15",
     },
     introduction: {
-      title: "What is Mythic+?",
+      title: "What is Mythic+",
       description:
         "Mythic+ is a type of infinitely scaling content that allows dungeons to remain challenging throughout an expansion.\n\nNo matter your skill level there will always be a key level that provides sufficient challenge for you.",
     },

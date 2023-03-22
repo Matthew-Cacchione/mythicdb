@@ -1,17 +1,13 @@
-import { defaultMaxListeners } from "events";
-
-// Character related routes will be hosted here.
+// Required packages.
 const router = require("express").Router();
 
-// Require character handlers.
+// Required handlers.
 const {
   getCharacter,
   getSearchableCharacters,
 } = require("../handlers/characters");
 
-// #Endpoints.
-
-// Get the character data.
+// Get a character.
 router.get("/api/characters", getCharacter);
 
 // Get the characters that can be searched for.

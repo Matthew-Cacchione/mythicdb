@@ -22,6 +22,7 @@ Response will be in this structure:
 ```json
 {
   "status": 200,
+  "message": "If a message is required it will be here.",
   "data": {
     "affixes": [
       {
@@ -76,6 +77,7 @@ Response will be in this structure:
 ```json
 {
   "status": 200,
+  "message": "If a message is required it will be here.",
   "data": {
     "character": {
       "class": "Death Knight",
@@ -95,17 +97,32 @@ Response will be in this structure:
         {
           "dungeon": "Tazavesh: Streets of Wonder",
           "level": 32
-        },
-        {
-          "dungeon": "Mechagon Junkyard",
-          "level": 31
-        },
-        {
-          "dungeon": "Grimrail Depot",
-          "level": 31
         }
       ]
     }
   }
+}
+```
+
+### GET /api/characters/search
+
+Get a list of searchable characters.
+
+Response will be in this structure:
+
+```json
+{
+  "status": 200,
+  "message": "If a message is required it will be here.",
+  "data": [
+    {
+      "_id": "63b342a2952b56bc4c31567f",
+      "name": "Kyrasis",
+      "realm": "Area 52",
+      "region": "US",
+      "faction": "Alliance",
+      "thumbnail": "/assets/classicon_deathknight.png"
+    }
+  ]
 }
 ```

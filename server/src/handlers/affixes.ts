@@ -16,7 +16,6 @@ const options = {
 // Get the current affixes in rotation.
 const getAffixes = async (request: Request, response: Response) => {
   const { region } = request.query;
-  console.log(region);
 
   // Set the URI for the fetch based on the region requested.
   const uri = `https://raider.io/api/v1/mythic-plus/affixes?region=${region}&locale=en`;

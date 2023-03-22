@@ -16,6 +16,7 @@ const options = {
 // Get the current affixes in rotation.
 const getAffixes = async (request: Request, response: Response) => {
   const { region } = request.query;
+  console.log(region);
 
   // Set the URI for the fetch based on the region requested.
   const uri = `https://raider.io/api/v1/mythic-plus/affixes?region=${region}&locale=en`;
@@ -23,26 +24,27 @@ const getAffixes = async (request: Request, response: Response) => {
   try {
     const data: ApiResponse = await (await axios(uri, options)).data;
 
-    // Verify that the region provided exists.
-    if (data.statusCode === 400) {
-      return response.status(404).json({
-        status: 404,
-        message: "No region found.",
-        data: { region },
-      });
-    }
-
     // Extract the required data from the response.
     const affixes = data.affix_details;
 
     return response.status(200).json({ status: 200, data: { affixes } });
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error getting affixes:", error);
-    return response.status(500).json({
-      status: 500,
-      message: "An unknown error occurred.",
-      data: { region },
-    });
+    switch (error.response.status) {
+      case 400:
+        return response.status(404).json({
+          status: 404,
+          message: "No region found.",
+          data: { region },
+        });
+
+      default:
+        return response.status(500).json({
+          status: 500,
+          message: "An unknown error occurred.",
+          data: { region },
+        });
+    }
   }
 };
 

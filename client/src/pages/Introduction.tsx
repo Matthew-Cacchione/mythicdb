@@ -59,19 +59,15 @@ const Introduction = () => {
             </Row>
           </thead>
           <tbody>
-            {DATA.keystones
-              .filter((keystone) => {
-                return keystone.level < 16;
-              })
-              .map((keystone) => {
-                return (
-                  <Row key={keystone.level}>
-                    <td>+{keystone.level}</td>
-                    <td>{keystone.chest}</td>
-                    <td>{keystone.vault}</td>
-                  </Row>
-                );
-              })}
+            {DATA.keystones.map((keystone) => {
+              return (
+                <Row key={keystone.level}>
+                  <td>+{keystone.level}</td>
+                  <td>{keystone.chest}</td>
+                  <td>{keystone.vault}</td>
+                </Row>
+              );
+            })}
           </tbody>
         </Table>
         <Note>{STRINGS.newPlayer.gear.note}</Note>

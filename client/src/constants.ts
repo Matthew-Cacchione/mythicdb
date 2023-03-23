@@ -89,7 +89,7 @@ export const STRINGS = {
       title: "Gear",
       description:
         "As a reward for completing these challenging dungeons you'll also receive progressively better gear.\n\nGear is obtained in two ways, from the end of dungeon chest and from your weekly great vault options. Here's the breakdown;",
-      note: "Note: Gear rewards cap at +15",
+      note: "Note: Gear rewards cap at +20",
     },
     introduction: {
       title: "What is Mythic+",

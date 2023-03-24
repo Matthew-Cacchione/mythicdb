@@ -1,4 +1,5 @@
 // Required packages.
+import axios from "axios";
 import styled from "styled-components";
 import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -21,23 +22,21 @@ const Character = () => {
     const getCharacter = async () => {
       actions.characterReset();
 
-      const response = await (
-        await fetch(
-          `/api/characters?name=${name}&realm=${realm}&region=${region}`
-        )
-      ).json();
+      const response = await axios(
+        `/api/characters?name=${name}&realm=${realm}&region=${region}`
+      );
 
       // Only set the character if the response is 200.
-      switch (response.status) {
+      switch (response.data.status) {
         case 200:
           actions.characterSuccess({
-            character: response.data.character,
-            mythicPlus: response.data.mythic_plus,
+            character: response.data.data.character,
+            mythicPlus: response.data.data.mythic_plus,
           });
           break;
 
         case 400:
-          actions.characterError({ error: response.message });
+          actions.characterError({ error: response.data.message });
           break;
 
         default:

@@ -1,4 +1,5 @@
 // Required packages.
+import axios from "axios";
 import styled from "styled-components";
 import { useContext, useEffect } from "react";
 
@@ -14,9 +15,8 @@ const Affixes = () => {
 
   useEffect(() => {
     const fetchAffixes = async () => {
-      const response = await (await fetch(`/api/affixes?region=us`)).json();
-
-      actions.affixSuccess({ affixes: response.data.affixes });
+      const response = await axios(`/api/affixes?region=us`);
+      actions.affixSuccess({ affixes: response.data.data.affixes });
     };
 
     // Only fetch the affixes if they aren't yet loaded.

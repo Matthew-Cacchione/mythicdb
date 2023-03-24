@@ -1,4 +1,5 @@
 // Required packages.
+import axios from "axios";
 import styled from "styled-components";
 import { useContext, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
@@ -20,9 +21,9 @@ const SearchResults = () => {
 
   useEffect(() => {
     const fetchCharacters = async () => {
-      const response = await (await fetch("/api/characters/search")).json();
+      const response = await axios("/api/characters/search");
 
-      actions.searchSuccess({ characters: response.data });
+      actions.searchSuccess({ characters: response.data.data });
     };
 
     fetchCharacters();

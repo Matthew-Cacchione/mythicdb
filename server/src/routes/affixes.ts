@@ -1,10 +1,8 @@
-// Affix related routes will be hosted here.
+// Required packages.
 const router = require("express").Router();
 
-// Require affix handlers.
+// Required handlers.
 const { getAffixes } = require("../handlers/affixes");
-
-// #Endpoints.
 
 // Get the current affixes in rotation.
 router.get("/api/affixes", getAffixes);

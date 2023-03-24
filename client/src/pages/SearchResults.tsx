@@ -1,4 +1,5 @@
-// Required libraries.
+// Required packages.
+import axios from "axios";
 import styled from "styled-components";
 import { useContext, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
@@ -8,7 +9,7 @@ import BlankLink from "../components/BlankLink";
 import Card from "../components/Card";
 import Loader from "../components/Loader";
 
-// Required constants and context.
+// Required data.
 import { PATHS, STRINGS } from "../constants";
 import { SearchContext } from "../context/SearchContext";
 
@@ -16,16 +17,13 @@ const SearchResults = () => {
   // Get the query from the url.
   const [query] = useSearchParams();
 
-  // Import the required search data from context.
   const { state, actions } = useContext(SearchContext);
 
   useEffect(() => {
-    // Fetch the characters from the server.
     const fetchCharacters = async () => {
-      const response = await (await fetch("/api/characters/search")).json();
+      const response = await axios("/api/characters/search");
 
-      // Set the search data in context.
-      actions.searchSuccess({ characters: response.data });
+      actions.searchSuccess({ characters: response.data.data });
     };
 
     fetchCharacters();
@@ -46,8 +44,8 @@ const SearchResults = () => {
     .filter((character) => {
       return character.name.toLowerCase().includes(query.get("name")!);
     })
-    .sort((a, b) => {
-      return a.name.localeCompare(b.name);
+    .sort((character1, character2) => {
+      return character1.name.localeCompare(character2.name);
     });
 
   return (

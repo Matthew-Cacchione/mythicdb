@@ -1,3 +1,4 @@
+// Required types.
 import { Guild } from "./Guild";
 import { Run } from "./Run";
 import { SeasonScores } from "./SeasonScores";

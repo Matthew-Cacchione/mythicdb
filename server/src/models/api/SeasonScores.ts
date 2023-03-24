@@ -1,3 +1,4 @@
+// Required types.
 import { Segments } from "./Segments";
 import { Scores } from "./Scores";
 

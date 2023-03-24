@@ -1,4 +1,5 @@
-// Required libraries.
+// Required packages.
+import axios from "axios";
 import styled from "styled-components";
 import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -9,7 +10,7 @@ import Loader from "../components/Loader";
 import Row from "../components/Table/Row";
 import Table from "../components/Table/Table";
 
-// Required constants and context.
+// Required data.
 import { CharacterContext } from "../context/CharacterContext";
 import { STRINGS } from "../constants";
 
@@ -21,24 +22,21 @@ const Character = () => {
     const getCharacter = async () => {
       actions.characterReset();
 
-      // Fetch the character from the server.
-      const response = await (
-        await fetch(
-          `/api/characters?name=${name}&realm=${realm}&region=${region}`
-        )
-      ).json();
+      const response = await axios(
+        `/api/characters?name=${name}&realm=${realm}&region=${region}`
+      );
 
       // Only set the character if the response is 200.
-      switch (response.status) {
+      switch (response.data.status) {
         case 200:
           actions.characterSuccess({
-            character: response.data.character,
-            mythicPlus: response.data.mythic_plus,
+            character: response.data.data.character,
+            mythicPlus: response.data.data.mythic_plus,
           });
           break;
 
         case 400:
-          actions.characterError({ error: response.message });
+          actions.characterError({ error: response.data.message });
           break;
 
         default:

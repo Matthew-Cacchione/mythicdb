@@ -1,4 +1,4 @@
-// Required libraries.
+// Required packages.
 import styled, { keyframes } from "styled-components";
 
 const Loader = () => {
@@ -14,7 +14,7 @@ const Loader = () => {
   );
 };
 
-// Animation keyframes.
+// Styled components.
 const spin = keyframes`
 0% {
   transform: rotate(0deg);
@@ -25,7 +25,6 @@ const spin = keyframes`
 }
 `;
 
-// Styled components.
 const Spinner = styled.div`
   display: inline-block;
   height: 80px;

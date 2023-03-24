@@ -1,7 +1,7 @@
-// Required libraries.
+// Required packages.
 import styled from "styled-components";
 
-// Required types and interfaces.
+// Required types.
 import { FC } from "react";
 import Props from "../models/components/Label";
 

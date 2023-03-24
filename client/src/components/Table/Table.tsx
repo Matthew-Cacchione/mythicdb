@@ -1,4 +1,4 @@
-// Required libraries.
+// Required packages.
 import styled from "styled-components";
 
 // Required types and interfaces.

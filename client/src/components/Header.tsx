@@ -1,11 +1,11 @@
-// Required libraries.
+// Required packages.
 import styled from "styled-components";
 
 // Required components.
 import BlankLink from "./BlankLink";
 import Search from "./Search";
 
-// Required constants.
+// Required data.
 import { STRINGS } from "../constants";
 
 const Header = () => {

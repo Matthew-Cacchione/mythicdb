@@ -1,4 +1,5 @@
-// Required libraries.
+// Required packages.
+import axios from "axios";
 import styled from "styled-components";
 import { useContext, useEffect } from "react";
 
@@ -6,26 +7,23 @@ import { useContext, useEffect } from "react";
 import Card from "../components/Card";
 import Loader from "../components/Loader";
 
-// Required context.
+// Required data.
 import { AffixContext } from "../context/AffixContext";
 
 const Affixes = () => {
-  // Import the required affix data and functions.
   const { state, actions } = useContext(AffixContext);
 
   useEffect(() => {
-    // Fetch the affix data from the API.
     const fetchAffixes = async () => {
-      const response = await (await fetch(`/api/affixes?region=us`)).json();
-
-      // Set the affix data in context.
-      actions.affixSuccess({ affixes: response.data.affixes });
+      const response = await axios(`/api/affixes?region=us`);
+      actions.affixSuccess({ affixes: response.data.data.affixes });
     };
 
     // Only fetch the affixes if they aren't yet loaded.
     if (!state.hasLoaded) {
       fetchAffixes();
     }
+
     //eslint-disable-next-line
   }, []);
 
@@ -43,7 +41,12 @@ const Affixes = () => {
       {/* Create a card to display each affix. */}
       {state.affixes.map((affix) => {
         return (
-          <Card key={affix.id} description={affix.description} divider>
+          <Card
+            key={affix.id}
+            description={affix.description}
+            divider
+            positioned
+          >
             <Centered>
               <Media
                 src={`/assets/${affix.icon}.png`}

@@ -33,8 +33,8 @@ export default styled.createGlobalStyle`
     --color-warlock: #8788ee;
     --color-warrior: #c69b6d;
 
-    --font-heading: "Poppins", sans-serif;
-    --font-body: "Poppins", sans-serif;
+    --font-heading: "Rubik", sans-serif;
+    --font-body: "Rubik", sans-serif;
   }
 
   /* CSS Reset */

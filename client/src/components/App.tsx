@@ -8,7 +8,7 @@ import { FC } from "react";
 import AddCharacter from "../pages/AddCharacter";
 import Affixes from "../pages/Affixes";
 import Character from "../pages/Character";
-import GlobalStyles from "./styles/GlobalStyles";
+import GlobalStyles from "./GlobalStyles";
 import Header from "./Header";
 import Home from "../pages/Home";
 import Introduction from "../pages/Introduction";

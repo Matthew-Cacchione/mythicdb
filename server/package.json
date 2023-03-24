@@ -2,9 +2,8 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
   "scripts": {
-    "dev": "nodemon ./src/server.ts"
+    "dev": "nodemon ./src/main.ts"
   },
   "keywords": [],
   "author": "",

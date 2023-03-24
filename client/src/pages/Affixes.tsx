@@ -45,7 +45,7 @@ const Affixes = () => {
             key={affix.id}
             description={affix.description}
             divider
-            position="top"
+            positioned
           >
             <Centered>
               <Media

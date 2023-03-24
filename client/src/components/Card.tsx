@@ -10,16 +10,16 @@ const Card: FC<Props> = ({
   description,
   divider,
   filled,
-  position,
+  positioned,
   title,
 }) => {
   return (
     <Wrapper filled={filled}>
       {title && <Title>{title}</Title>}
-      {position === "top" && children}
+      {positioned && children}
       {divider && <Divider />}
       {description && <Description>{description}</Description>}
-      {position !== "top" && children}
+      {!positioned && children}
     </Wrapper>
   );
 };

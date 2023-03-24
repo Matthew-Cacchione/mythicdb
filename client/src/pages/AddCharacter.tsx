@@ -17,11 +17,11 @@ import { STRINGS } from "../constants";
 const AddCharacter = () => {
   const navigate = useNavigate();
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
     // Type assertion on form inputs.
-    const target = e.target as typeof e.target &
+    const target = event.target as typeof event.target &
       [{ value: string }, { value: string }, { value: string }];
 
     const name = target[0].value.toLowerCase();
@@ -52,6 +52,7 @@ const AddCharacter = () => {
 const Form = styled.form`
   display: flex;
   flex-direction: column;
+  width: 100%;
 
   & > input {
     margin-bottom: 0.7em;

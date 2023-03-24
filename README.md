@@ -8,7 +8,7 @@ The following instructions will get the project up and running on your local mac
 
 ### Prerequisites
 
-You will need to install [Node.js](https://nodejs.org/en/download/) to run the environment.
+You will need to install [Node.js](https://nodejs.org/en) to run the environment.
 
 ### Installation
 

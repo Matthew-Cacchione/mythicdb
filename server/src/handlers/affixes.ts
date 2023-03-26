@@ -17,6 +17,14 @@ const options = {
 const getAffixes = async (request: Request, response: Response) => {
   const { region } = request.query;
 
+  if (!region) {
+    return response.status(400).json({
+      status: 400,
+      message: "Request query is missing data.",
+      data: { region: "<region code>" },
+    });
+  }
+
   // Set the URI for the fetch based on the region requested.
   const uri = `https://raider.io/api/v1/mythic-plus/affixes?region=${region}&locale=en`;
 

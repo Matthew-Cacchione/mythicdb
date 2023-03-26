@@ -31,7 +31,12 @@ const getCharacter = async (request: Request, response: Response) => {
   if (!name || !realm || !region) {
     return response.status(400).json({
       status: 400,
-      message: "Request is missing data.",
+      message: "Request query is missing data.",
+      data: {
+        name: name || "<character name>",
+        realm: realm || "<realm slug>",
+        region: region || "<region code>",
+      },
     });
   }
 

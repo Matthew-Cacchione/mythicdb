@@ -31,27 +31,6 @@ Response will be in this structure:
         "description": "Bosses have 30% more health. Bosses and their minions inflict up to 15% increased damage.",
         "icon": "achievement_boss_archaedas",
         "wowhead_url": "https://wowhead.com/affix=9"
-      },
-      {
-        "id": 123,
-        "name": "Spiteful",
-        "description": "Fiends rise from the corpses of non-boss enemies and pursue random players.",
-        "icon": "spell_holy_prayerofshadowprotection",
-        "wowhead_url": "https://wowhead.com/affix=123"
-      },
-      {
-        "id": 4,
-        "name": "Necrotic",
-        "description": "All enemies' melee attacks apply a stacking blight that inflicts damage over time and reduces healing received.",
-        "icon": "spell_deathknight_necroticplague",
-        "wowhead_url": "https://wowhead.com/affix=4"
-      },
-      {
-        "id": 131,
-        "name": "Shrouded",
-        "description": "Nathrezim infiltrators have disguised themselves among enemies throughout the dungeon. Cartel Ta will reward you handsomely for assisting in their capture.",
-        "icon": "spell_shadow_nethercloak",
-        "wowhead_url": "https://wowhead.com/affix=131"
       }
     ]
   }
@@ -60,7 +39,7 @@ Response will be in this structure:
 
 ## Character Endpoints
 
-### GET /api/characters
+### GET /api/character
 
 Get the data of the specified character.
 
@@ -104,7 +83,7 @@ Response will be in this structure:
 }
 ```
 
-### GET /api/characters/search
+### GET /api/characters
 
 Get a list of searchable characters.
 

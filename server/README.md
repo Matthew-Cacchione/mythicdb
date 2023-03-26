@@ -39,7 +39,7 @@ Response will be in this structure:
 
 ## Character Endpoints
 
-### GET /api/characters
+### GET /api/character
 
 Get the data of the specified character.
 
@@ -83,7 +83,7 @@ Response will be in this structure:
 }
 ```
 
-### GET /api/characters/search
+### GET /api/characters
 
 Get a list of searchable characters.
 

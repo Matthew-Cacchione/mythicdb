@@ -23,7 +23,7 @@ const Character = () => {
       actions.characterReset();
 
       const response = await axios(
-        `/api/characters?name=${name}&realm=${realm}&region=${region}`
+        `/api/character?name=${name}&realm=${realm}&region=${region}`
       );
 
       // Only set the character if the response is 200.

@@ -8,9 +8,9 @@ const {
 } = require("../handlers/characters");
 
 // Get a character.
-router.get("/api/characters", getCharacter);
+router.get("/api/character", getCharacter);
 
 // Get the characters that can be searched for.
-router.get("/api/characters/search", getSearchableCharacters);
+router.get("/api/characters", getSearchableCharacters);
 
 export default router;

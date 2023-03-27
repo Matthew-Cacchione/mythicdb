@@ -1,8 +1,8 @@
-// Required libraries.
+// Required packages.
 import { createContext, useReducer } from "react";
 
-// Required types and interfaces.
-import { Action, Context, State } from "../models/context/Character";
+// Required types.
+import { Action, Actions, Context, State } from "../models/context/Character";
 import { FC } from "react";
 import Props from "../models/components/Default";
 
@@ -27,6 +27,12 @@ const initialState: State = {
   hasLoaded: false,
 };
 
+const initialActions: Actions = {
+  characterError: () => {},
+  characterSuccess: () => {},
+  characterReset: () => {},
+};
+
 const reducer = (state: State, action: Action) => {
   switch (action.type) {
     case "character-error":
@@ -36,7 +42,7 @@ const reducer = (state: State, action: Action) => {
         hasLoaded: false,
       };
 
-    case "character-fetched":
+    case "character-success":
       return {
         ...state,
         character: action.character,
@@ -44,7 +50,7 @@ const reducer = (state: State, action: Action) => {
         hasLoaded: true,
       };
 
-    case "reset-character":
+    case "character-reset":
       return {
         ...initialState,
       };
@@ -54,20 +60,14 @@ const reducer = (state: State, action: Action) => {
   }
 };
 
-export const CharacterContext = createContext<Context | null>(null);
+export const CharacterContext = createContext<Context>({
+  state: initialState,
+  actions: initialActions,
+});
 
 export const CharacterProvider: FC<Props> = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  // Indicate that the character data has been fetched.
-  const characterFetched = (data: State) => {
-    dispatch({
-      type: "character-fetched",
-      ...data,
-    });
-  };
-
-  // Indicate that an error has occurred.
   const characterError = (data: State) => {
     dispatch({
       type: "character-error",
@@ -75,10 +75,16 @@ export const CharacterProvider: FC<Props> = ({ children }) => {
     });
   };
 
-  // Reset the character data.
-  const resetCharacter = () => {
+  const characterSuccess = (data: State) => {
     dispatch({
-      type: "reset-character",
+      type: "character-success",
+      ...data,
+    });
+  };
+
+  const characterReset = () => {
+    dispatch({
+      type: "character-reset",
       ...initialState,
     });
   };
@@ -87,7 +93,7 @@ export const CharacterProvider: FC<Props> = ({ children }) => {
     <CharacterContext.Provider
       value={{
         state,
-        actions: { characterFetched, characterError, resetCharacter },
+        actions: { characterError, characterSuccess, characterReset },
       }}
     >
       {children}

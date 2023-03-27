@@ -1,7 +1,7 @@
-// Required libraries.
+// Required packages.
 import styled from "styled-components";
 
-// Required types and interfaces.
+// Required types.
 import { FC } from "react";
 import Props from "../models/components/Input";
 
@@ -17,11 +17,13 @@ const Input: FC<Props> = ({ onChange, onKeyUp, placeholder, value }) => {
   );
 };
 
+// Styled components.
 const Wrapper = styled.input`
   background: var(--color-on-background);
   border: 3px solid var(--color-secondary);
   font-size: 1rem;
   height: 3em;
+  padding: 0 0.5em;
   width: 100%;
 
   &:focus {

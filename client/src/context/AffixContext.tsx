@@ -1,19 +1,31 @@
-// Required libraries.
+// Required packages.
 import { createContext, useReducer } from "react";
 
-// Required types and interfaces.
-import { Action, Context, State } from "../models/context/Affix";
+// Required types.
+import { Action, Actions, Context, State } from "../models/context/Affix";
 import { FC } from "react";
 import Props from "../models/components/Default";
 
 const initialState: State = {
   affixes: [],
+  error: "",
   hasLoaded: false,
+};
+
+const initialActions: Actions = {
+  affixError: () => {},
+  affixSuccess: () => {},
 };
 
 const reducer = (state: State, action: Action) => {
   switch (action.type) {
-    case "affixes-fetched":
+    case "affix-error":
+      return {
+        ...initialState,
+        error: action.error,
+      };
+
+    case "affix-success":
       return {
         ...state,
         affixes: action.affixes,
@@ -25,21 +37,32 @@ const reducer = (state: State, action: Action) => {
   }
 };
 
-export const AffixContext = createContext<Context | null>(null);
+export const AffixContext = createContext<Context>({
+  state: initialState,
+  actions: initialActions,
+});
 
 export const AffixProvider: FC<Props> = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  // Indicate that the affix data has been fetched.
-  const affixesFetched = (data: State) => {
+  const affixError = (data: State) => {
     dispatch({
-      type: "affixes-fetched",
+      type: "affix-error",
+      ...data,
+    });
+  };
+
+  const affixSuccess = (data: State) => {
+    dispatch({
+      type: "affix-success",
       ...data,
     });
   };
 
   return (
-    <AffixContext.Provider value={{ state, actions: { affixesFetched } }}>
+    <AffixContext.Provider
+      value={{ state, actions: { affixError, affixSuccess } }}
+    >
       {children}
     </AffixContext.Provider>
   );

@@ -1,21 +1,30 @@
-// Required libraries.
+// Required packages.
 import styled from "styled-components";
 
-// Required types and interfaces.
+// Required types.
 import { FC } from "react";
 import Props from "../models/components/Card";
 
-const Card: FC<Props> = ({ children, description, divider, filled, title }) => {
+const Card: FC<Props> = ({
+  children,
+  description,
+  divider,
+  filled,
+  positioned,
+  title,
+}) => {
   return (
     <Wrapper filled={filled}>
       {title && <Title>{title}</Title>}
+      {positioned && children}
       {divider && <Divider />}
       {description && <Description>{description}</Description>}
-      {children}
+      {!positioned && children}
     </Wrapper>
   );
 };
 
+// Styled components.
 const Description = styled.p`
   line-height: 1.3em;
   text-align: center;

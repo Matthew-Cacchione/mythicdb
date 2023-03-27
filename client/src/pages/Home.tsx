@@ -1,11 +1,11 @@
-// Required libraries.
+// Required packages.
 import styled from "styled-components";
 
 // Required components.
 import BlankLink from "../components/BlankLink";
 import Card from "../components/Card";
 
-// Required constants.
+// Required data.
 import { PATHS, STRINGS } from "../constants";
 
 const Home = () => {
@@ -36,6 +36,7 @@ const Home = () => {
   );
 };
 
+// Styled components.
 const Wrapper = styled.div`
   align-items: center;
   display: flex;

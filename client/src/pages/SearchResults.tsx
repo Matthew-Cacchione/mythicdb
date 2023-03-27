@@ -1,4 +1,5 @@
-// Required libraries.
+// Required packages.
+import axios from "axios";
 import styled from "styled-components";
 import { useContext, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
@@ -8,7 +9,7 @@ import BlankLink from "../components/BlankLink";
 import Card from "../components/Card";
 import Loader from "../components/Loader";
 
-// Required constants and context.
+// Required data.
 import { PATHS, STRINGS } from "../constants";
 import { SearchContext } from "../context/SearchContext";
 
@@ -16,16 +17,13 @@ const SearchResults = () => {
   // Get the query from the url.
   const [query] = useSearchParams();
 
-  // Import the required search data from context.
-  const context = useContext(SearchContext);
+  const { state, actions } = useContext(SearchContext);
 
   useEffect(() => {
-    // Fetch the characters from the server.
     const fetchCharacters = async () => {
-      const response = await (await fetch("/api/characters/search")).json();
+      const response = await axios("/api/characters");
 
-      // Set the search data in context.
-      context?.actions.charactersFetched({ characters: response.data });
+      actions.searchSuccess({ characters: response.data.data });
     };
 
     fetchCharacters();
@@ -33,7 +31,7 @@ const SearchResults = () => {
   }, []);
 
   // Render a loading indicator if the data is still loading.
-  if (!context?.state.hasLoaded) {
+  if (!state.hasLoaded) {
     return (
       <Wrapper>
         <Loader />
@@ -42,16 +40,17 @@ const SearchResults = () => {
   }
 
   // Filter the characters to only names that match the query.
-  const matches = context.state.characters
+  const matches = state.characters
     .filter((character) => {
       return character.name.toLowerCase().includes(query.get("name")!);
     })
-    .sort((a, b) => {
-      return a.name.localeCompare(b.name);
+    .sort((character1, character2) => {
+      return character1.name.localeCompare(character2.name);
     });
 
   return (
     <Wrapper>
+      {/* Create a card for each character that matches the query. */}
       {matches.map((character) => {
         return (
           <BlankLink
@@ -81,6 +80,7 @@ const SearchResults = () => {
   );
 };
 
+// Styled components.
 const Details = styled.div`
   align-items: center;
   display: flex;

@@ -1,20 +1,20 @@
-// Required libraries.
+// Required packages.
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-// Required types and interfaces.
+// Required types.
 import { FC } from "react";
 
 // Required pages.
 import AddCharacter from "../pages/AddCharacter";
 import Affixes from "../pages/Affixes";
 import Character from "../pages/Character";
-import GlobalStyles from "./styles/GlobalStyles";
+import GlobalStyles from "./GlobalStyles";
 import Header from "./Header";
 import Home from "../pages/Home";
 import Introduction from "../pages/Introduction";
 import SearchResults from "../pages/SearchResults";
 
-// Required context and constants.
+// Required data.
 import { CharacterProvider } from "../context/CharacterContext";
 import { PATHS } from "../constants";
 

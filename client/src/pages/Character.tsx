@@ -1,4 +1,5 @@
-// Required libraries.
+// Required packages.
+import axios from "axios";
 import styled from "styled-components";
 import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -9,44 +10,37 @@ import Loader from "../components/Loader";
 import Row from "../components/Table/Row";
 import Table from "../components/Table/Table";
 
-// Required constants and context.
+// Required data.
 import { CharacterContext } from "../context/CharacterContext";
 import { STRINGS } from "../constants";
 
 const Character = () => {
-  // Extract the name and realm from the url.
   const { name, realm, region } = useParams();
-
-  // Context to track the character's details.
-  const context = useContext(CharacterContext);
+  const { state, actions } = useContext(CharacterContext);
 
   useEffect(() => {
     const getCharacter = async () => {
-      // Reset the character so the loading indicator is displayed.
-      context?.actions.resetCharacter();
+      actions.characterReset();
 
-      // Fetch the character from the server.
-      const response = await (
-        await fetch(
-          `/api/characters?name=${name}&realm=${realm}&region=${region}`
-        )
-      ).json();
+      const response = await axios(
+        `/api/character?name=${name}&realm=${realm}&region=${region}`
+      );
 
-      // Only set the character if the response is OK.
-      switch (response.status) {
+      // Only set the character if the response is 200.
+      switch (response.data.status) {
         case 200:
-          context?.actions.characterFetched({
-            character: response.data.character,
-            mythicPlus: response.data.mythic_plus,
+          actions.characterSuccess({
+            character: response.data.data.character,
+            mythicPlus: response.data.data.mythic_plus,
           });
           break;
 
         case 400:
-          context?.actions.characterError({ error: response.message });
+          actions.characterError({ error: response.data.message });
           break;
 
         default:
-          context?.actions.characterError({
+          actions.characterError({
             error: "An unknown error occurred, please try again.",
           });
           break;
@@ -57,7 +51,7 @@ const Character = () => {
     //eslint-disable-next-line
   }, [name, realm, region]);
 
-  // Determine the class color.
+  // Determine the class color to use.
   const classColor = (characterClass: string) => {
     const lower = characterClass.toLowerCase();
 
@@ -74,18 +68,18 @@ const Character = () => {
   };
 
   // Display the error if one has occurred.
-  if (context?.state.error) {
+  if (state.error) {
     return (
       <Wrapper>
         <Card>
-          <Error>{context.state.error}</Error>
+          <Error>{state.error}</Error>
         </Card>
       </Wrapper>
     );
   }
 
   // Return a loading indicator if the data isn't available.
-  if (!context?.state.hasLoaded) {
+  if (!state.hasLoaded) {
     return (
       <Wrapper>
         <Card>
@@ -101,34 +95,33 @@ const Character = () => {
         <Head>
           <div>
             <Thumbnail
-              src={context.state.character.thumbnail}
-              alt={`${context.state.character.name}'s profile picture.`}
+              src={state.character.thumbnail}
+              alt={`${state.character.name}'s profile picture.`}
             />
-            <Name faction={context.state.character.faction}>
-              {context.state.character.name}
+            <Name faction={state.character.faction}>
+              {state.character.name}
             </Name>
           </div>
-          <Rating color={context.state.mythicPlus.color}>
-            {context.state.mythicPlus.score.toFixed(1)}
+          <Rating color={state.mythicPlus.color}>
+            {state.mythicPlus.score.toFixed(1)}
           </Rating>
         </Head>
         <Details>
-          {context.state.character.guild && (
-            <p>{`<${context.state.character.guild}>`}</p>
-          )}
-          <p>{`(${context.state.character.region}) ${context.state.character.realm}`}</p>
+          {state.character.guild && <p>{`<${state.character.guild}>`}</p>}
+          <p>{`(${state.character.region}) ${state.character.realm}`}</p>
           <CharacterClass
-            classColor={classColor(context.state.character.class)}
-            faction={context.state.character.faction}
+            classColor={classColor(state.character.class)}
+            faction={state.character.faction}
           >
-            {context.state.character.race}{" "}
+            {state.character.race}{" "}
             <span>
-              {context.state.character.spec} {context.state.character.class}
+              {state.character.spec} {state.character.class}
             </span>
           </CharacterClass>
         </Details>
+        {/* Create a table to display the character's best run data. */}
         <Table>
-          {context.state.mythicPlus.bestRuns.length ? (
+          {state.mythicPlus.bestRuns.length ? (
             <>
               <thead>
                 <Row>
@@ -137,7 +130,7 @@ const Character = () => {
                 </Row>
               </thead>
               <tbody>
-                {context.state.mythicPlus.bestRuns.map((run) => {
+                {state.mythicPlus.bestRuns.map((run) => {
                   return (
                     <Row key={run.dungeon}>
                       <td>{run.dungeon}</td>
@@ -160,6 +153,7 @@ const Character = () => {
   );
 };
 
+// Styled components.
 const CharacterClass = styled.p<any>`
   color: ${({ faction }) =>
     faction === "Alliance" ? "var(--color-alliance)" : "var(--color-horde)"};

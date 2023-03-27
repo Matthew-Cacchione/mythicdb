@@ -1,11 +1,11 @@
-// Required libraries.
+// Required packages.
 import React from "react";
 import ReactDOM from "react-dom/client";
 
 // Required components.
 import App from "./components/App";
 
-// Required context.
+// Required data.
 import { AffixProvider } from "./context/AffixContext";
 import { SearchProvider } from "./context/SearchContext";
 

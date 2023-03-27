@@ -1,9 +1,11 @@
+// Required packages.
 import axios from "axios";
 
+// Required types.
 import { Response as ApiResponse } from "../models/api/Response";
 import { Response, Request } from "express";
 
-// Set required axios options.
+// Set axios options.
 const options = {
   method: "GET",
   headers: {
@@ -12,15 +14,14 @@ const options = {
 };
 
 // Get the current affixes in rotation.
-const getAffixes = async (req: Request, res: Response) => {
-  // Extract the required data from the request.
-  const { region } = req.query;
+const getAffixes = async (request: Request, response: Response) => {
+  const { region } = request.query;
 
-  // If no region was provided respond with a bad request.
   if (!region) {
-    return res.status(400).json({
+    return response.status(400).json({
       status: 400,
-      message: "Request is missing data.",
+      message: "Request query is missing data.",
+      data: { region: "<region code>" },
     });
   }
 
@@ -28,28 +29,29 @@ const getAffixes = async (req: Request, res: Response) => {
   const uri = `https://raider.io/api/v1/mythic-plus/affixes?region=${region}&locale=en`;
 
   try {
-    const response: ApiResponse = await (await axios(uri, options)).data;
-
-    // Verify that the region provided exists.
-    if (response.statusCode === 400) {
-      return res.status(400).json({
-        status: 400,
-        message: "No region found.",
-        data: { region },
-      });
-    }
+    const data: ApiResponse = await (await axios(uri, options)).data;
 
     // Extract the required data from the response.
-    const affixes = response.affix_details;
+    const affixes = data.affix_details;
 
-    return res.status(200).json({ status: 200, data: { affixes } });
-  } catch (e) {
-    console.error("Error getting affixes:", e);
-    return res.status(500).json({
-      status: 500,
-      message: "An unknown error occurred.",
-      data: { region },
-    });
+    return response.status(200).json({ status: 200, data: { affixes } });
+  } catch (error: any) {
+    console.error("Error getting affixes:", error);
+    switch (error.response.status) {
+      case 400:
+        return response.status(404).json({
+          status: 404,
+          message: "No region found.",
+          data: { region },
+        });
+
+      default:
+        return response.status(500).json({
+          status: 500,
+          message: "An unknown error occurred.",
+          data: { region },
+        });
+    }
   }
 };
 

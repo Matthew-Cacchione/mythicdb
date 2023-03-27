@@ -1,32 +1,27 @@
-// Required libraries.
-import { Link } from "react-router-dom";
+// Required packages.
 import styled from "styled-components";
 
 // Required components.
+import BlankLink from "./BlankLink";
 import Search from "./Search";
 
-// Required constants.
+// Required data.
 import { STRINGS } from "../constants";
 
 const Header = () => {
   return (
-    <>
-      <Wrapper>
-        <Container>
-          <BlankLink to="/">
-            <Title>{STRINGS.app}</Title>
-          </BlankLink>
-        </Container>
-        <Search />
-      </Wrapper>
-    </>
+    <Wrapper>
+      <Container>
+        <BlankLink path="/">
+          <Title>{STRINGS.app}</Title>
+        </BlankLink>
+      </Container>
+      <Search />
+    </Wrapper>
   );
 };
 
-const BlankLink = styled(Link)`
-  text-decoration: none;
-`;
-
+// Styled components.
 const Container = styled.div`
   align-items: center;
   background: var(--color-primary);

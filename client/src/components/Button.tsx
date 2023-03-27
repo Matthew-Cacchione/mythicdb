@@ -1,7 +1,7 @@
-// Required libraries.
+// Required packages.
 import styled from "styled-components";
 
-// Required types and interfaces.
+// Required types.
 import { FC } from "react";
 import Props from "../models/components/Label";
 
@@ -9,6 +9,7 @@ const Button: FC<Props> = ({ label }) => {
   return <Wrapper>{label}</Wrapper>;
 };
 
+// Styled components.
 const Wrapper = styled.button`
   background: var(--color-primary);
   border: none;

@@ -1,3 +1,4 @@
+// Required types.
 import { Affix } from "./Affix";
 
 export interface Response {

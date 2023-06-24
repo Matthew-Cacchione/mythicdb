@@ -14,7 +14,7 @@ You will need to install [Node.js](https://nodejs.org/en) to run the environment
 
 Open a terminal in the project's directory and launch the server.
 
-```powershell
+```console
 cd server
 yarn install
 yarn dev
@@ -26,7 +26,7 @@ npm run dev
 
 Open another terminal in the project's directory and launch the application.
 
-```powershell
+```console
 cd client
 yarn install
 yarn dev

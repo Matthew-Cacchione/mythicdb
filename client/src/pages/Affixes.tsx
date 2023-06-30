@@ -15,11 +15,12 @@ const Affixes = () => {
 
   useEffect(() => {
     const fetchAffixes = async () => {
-      console.log("fetching affixes");
       try {
+        console.log("fetching affixes");
         const response = await axios(
           `https://mythicdb.onrender.com/api/affixes?region=us`
         );
+        console.log("fetching complete");
         actions.affixSuccess({ affixes: response.data.data.affixes });
       } catch (error: any) {
         actions.affixError({

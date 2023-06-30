@@ -38,7 +38,7 @@ export const DATA = {
 export const PATHS = {
   addCharacter: "/characters/add",
   affixes: "/affixes",
-  api: "https://mythicdb.onrender.com",
+  api: "https://mythicdb.onrender.com/api",
   character: "/characters/:region/:realm/:name",
   leaderboard: "/leaderboard",
   newPlayer: "/introduction",

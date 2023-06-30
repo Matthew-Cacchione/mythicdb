@@ -2,34 +2,34 @@
 export const DATA = {
   keystones: [
     {
-      chest: 376,
+      chest: 402,
       level: 2,
       scaling: 0,
-      vault: 382,
+      vault: 415,
     },
     {
-      chest: 379,
+      chest: 408,
       level: 5,
       scaling: 26,
-      vault: 389,
+      vault: 421,
     },
     {
-      chest: 392,
+      chest: 415,
       level: 10,
       scaling: 85,
-      vault: 398,
+      vault: 431,
     },
     {
-      chest: 398,
+      chest: 424,
       level: 15,
       scaling: 198,
-      vault: 411,
+      vault: 437,
     },
     {
-      chest: 405,
+      chest: 431,
       level: 20,
       scaling: 380,
-      vault: 421,
+      vault: 447,
     },
   ],
 };

@@ -10,7 +10,7 @@ const PORT = 8000;
 
 const app = express();
 
-app.use(cors);
+// app.use(cors);
 app.use(express.json());
 
 // Requests for static files will look in public.

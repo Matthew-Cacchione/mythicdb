@@ -15,8 +15,14 @@ const Affixes = () => {
 
   useEffect(() => {
     const fetchAffixes = async () => {
-      const response = await axios(`/api/affixes?region=us`);
-      actions.affixSuccess({ affixes: response.data.data.affixes });
+      try {
+        const response = await axios(`/api/affixes?region=us`);
+        actions.affixSuccess({ affixes: response.data.data.affixes });
+      } catch (error: any) {
+        actions.affixError({
+          error: "An unknown error has occurred, please try again.",
+        });
+      }
     };
 
     // Only fetch the affixes if they aren't yet loaded.

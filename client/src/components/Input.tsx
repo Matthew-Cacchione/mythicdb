@@ -23,6 +23,7 @@ const Wrapper = styled.input`
   border: 3px solid var(--color-secondary);
   font-size: 1rem;
   height: 3em;
+  max-width: var(--width-clamp);
   padding: 0 0.5em;
   width: 100%;
 

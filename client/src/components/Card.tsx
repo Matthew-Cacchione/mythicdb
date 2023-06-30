@@ -57,6 +57,7 @@ const Wrapper = styled.div<Props>`
   gap: 1em;
   justify-content: center;
   margin-bottom: 1.5em;
+  max-width: var(--width-clamp);
   padding: 1em;
   transition: box-shadow 200ms;
   width: 90vw;

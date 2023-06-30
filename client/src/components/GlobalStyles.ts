@@ -35,6 +35,8 @@ export default styled.createGlobalStyle`
 
     --font-heading: "Rubik", sans-serif;
     --font-body: "Rubik", sans-serif;
+
+    --width-clamp: 800px;
   }
 
   /* CSS Reset */

@@ -71,6 +71,7 @@ const Error = styled.p`
 `;
 
 const Wrapper = styled.div`
+  align-items: center;
   align-self: center;
   display: flex;
   flex-direction: column;

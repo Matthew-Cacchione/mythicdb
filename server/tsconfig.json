@@ -1,20 +1,21 @@
 {
   "compilerOptions": {
-    "target": "es2020",
-    "lib": ["esnext"],
     "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "strict": true,
+    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "lib": ["esnext"],
     "module": "commonjs",
     "moduleResolution": "node",
+    "noEmit": false,
+    "outDir": "./build",
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "es2020",
     "typeRoots": ["./node_modules/@types", "./src/@types"]
   },
   "exclude": ["node_modules"],
-  "include": ["src"]
+  "include": ["src/**/*"]
 }

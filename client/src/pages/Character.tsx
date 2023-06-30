@@ -12,7 +12,7 @@ import Table from "../components/Table/Table";
 
 // Required data.
 import { CharacterContext } from "../context/CharacterContext";
-import { STRINGS } from "../constants";
+import { PATHS, STRINGS } from "../constants";
 
 const Character = () => {
   const { name, realm, region } = useParams();
@@ -22,28 +22,28 @@ const Character = () => {
     const getCharacter = async () => {
       actions.characterReset();
 
-      const response = await axios(
-        `/api/character?name=${name}&realm=${realm}&region=${region}`
-      );
+      try {
+        const response = await axios(
+          `${PATHS.api}/character?name=${name}&realm=${realm}&region=${region}`
+        );
 
-      // Only set the character if the response is 200.
-      switch (response.data.status) {
-        case 200:
-          actions.characterSuccess({
-            character: response.data.data.character,
-            mythicPlus: response.data.data.mythic_plus,
-          });
-          break;
+        actions.characterSuccess({
+          character: response.data.data.character,
+          mythicPlus: response.data.data.mythic_plus,
+        });
+      } catch (error: any) {
+        switch (error.response.status) {
+          case 400:
+            actions.characterError({ error: error.response.data.message });
+            break;
 
-        case 400:
-          actions.characterError({ error: response.data.message });
-          break;
-
-        default:
-          actions.characterError({
-            error: "An unknown error occurred, please try again.",
-          });
-          break;
+          default:
+            console.error("Error fetching character:", error);
+            actions.characterError({
+              error: "An unknown error occurred, please try again.",
+            });
+            break;
+        }
       }
     };
 
@@ -155,11 +155,13 @@ const Character = () => {
 
 // Styled components.
 const CharacterClass = styled.p<any>`
-  color: ${({ faction }) =>
-    faction === "Alliance" ? "var(--color-alliance)" : "var(--color-horde)"};
+  color: ${(props: any) =>
+    props.faction === "Alliance"
+      ? "var(--color-alliance)"
+      : "var(--color-horde)"};
 
   & > span {
-    color: ${({ classColor }) => classColor};
+    color: ${(props: any) => props.classColor};
   }
 `;
 
@@ -191,8 +193,10 @@ const Head = styled.div`
 `;
 
 const Name = styled.h2<any>`
-  color: ${({ faction }) =>
-    faction === "Alliance" ? "var(--color-alliance)" : "var(--color-horde)"};
+  color: ${(props: any) =>
+    props.faction === "Alliance"
+      ? "var(--color-alliance)"
+      : "var(--color-horde)"};
   font-size: 1.3rem;
 `;
 

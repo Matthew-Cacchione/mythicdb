@@ -34,10 +34,11 @@ export const DATA = {
   ],
 };
 
-// Paths used in app to navigate around pages.
+// Paths used in app.
 export const PATHS = {
   addCharacter: "/characters/add",
   affixes: "/affixes",
+  api: "https://mythicdb.onrender.com/api",
   character: "/characters/:region/:realm/:name",
   leaderboard: "/leaderboard",
   newPlayer: "/introduction",

@@ -1,9 +1,11 @@
 {
+  "license": "ISC",
   "name": "server",
   "version": "1.1.0",
-  "license": "ISC",
   "scripts": {
-    "dev": "nodemon ./src/main.ts"
+    "build": "tsc",
+    "dev": "nodemon ./src/main.ts",
+    "start": "node ./build/main.js"
   },
   "dependencies": {
     "axios": "^1.4.0",

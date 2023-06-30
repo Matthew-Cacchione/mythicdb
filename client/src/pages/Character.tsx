@@ -12,7 +12,7 @@ import Table from "../components/Table/Table";
 
 // Required data.
 import { CharacterContext } from "../context/CharacterContext";
-import { STRINGS } from "../constants";
+import { PATHS, STRINGS } from "../constants";
 
 const Character = () => {
   const { name, realm, region } = useParams();
@@ -24,7 +24,7 @@ const Character = () => {
 
       try {
         const response = await axios(
-          `https://mythicdb.onrender.com/api/character?name=${name}&realm=${realm}&region=${region}`
+          `${PATHS.api}/character?name=${name}&realm=${realm}&region=${region}`
         );
 
         actions.characterSuccess({

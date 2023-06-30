@@ -9,6 +9,7 @@ import Loader from "../components/Loader";
 
 // Required data.
 import { AffixContext } from "../context/AffixContext";
+import { PATHS } from "../constants";
 
 const Affixes = () => {
   const { state, actions } = useContext(AffixContext);
@@ -16,11 +17,7 @@ const Affixes = () => {
   useEffect(() => {
     const fetchAffixes = async () => {
       try {
-        console.log("fetching affixes");
-        const response = await axios(
-          `https://mythicdb.onrender.com/api/affixes?region=us`
-        );
-        console.log("fetching complete");
+        const response = await axios(`${PATHS.api}/affixes?region=us`);
         actions.affixSuccess({ affixes: response.data.data.affixes });
       } catch (error: any) {
         actions.affixError({

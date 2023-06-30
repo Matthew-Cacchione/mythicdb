@@ -21,7 +21,7 @@ const SearchResults = () => {
 
   useEffect(() => {
     const fetchCharacters = async () => {
-      const response = await axios("/api/characters");
+      const response = await axios(`${PATHS.api}/characters`);
 
       actions.searchSuccess({ characters: response.data.data });
     };
@@ -49,38 +49,46 @@ const SearchResults = () => {
     });
 
   return (
-    <Wrapper>
-      {/* Create a card for each character that matches the query. */}
-      {matches.map((character) => {
-        return (
-          <BlankLink
-            key={character._id}
-            path={`/characters/${character.region.toLowerCase()}/${character.realm.toLowerCase()}/${character.name.toLowerCase()}`}
-          >
-            <Card filled>
-              <Details>
-                <div>
-                  <Thumbnail
-                    src={character.thumbnail}
-                    alt={`${character.name}'s class icon.`}
-                  />
-                  <Name faction={character.faction}>{character.name}</Name>
-                </div>
-                <p>{`(${character.region}) ${character.realm}`}</p>
-              </Details>
-            </Card>
-          </BlankLink>
-        );
-      })}
-      <Divider />
-      <BlankLink path={PATHS.addCharacter}>
-        <Card description={STRINGS.cards.addCharacter.description} filled />
-      </BlankLink>
-    </Wrapper>
+    <Centered>
+      <Wrapper>
+        {/* Create a card for each character that matches the query. */}
+        {matches.map((character) => {
+          return (
+            <BlankLink
+              key={character._id}
+              path={`/characters/${character.region.toLowerCase()}/${character.realm.toLowerCase()}/${character.name.toLowerCase()}`}
+            >
+              <Card filled>
+                <Details>
+                  <div>
+                    <Thumbnail
+                      src={character.thumbnail}
+                      alt={`${character.name}'s class icon.`}
+                    />
+                    <Name faction={character.faction}>{character.name}</Name>
+                  </div>
+                  <p>{`(${character.region}) ${character.realm}`}</p>
+                </Details>
+              </Card>
+            </BlankLink>
+          );
+        })}
+        <Divider />
+        <BlankLink path={PATHS.addCharacter}>
+          <Card description={STRINGS.cards.addCharacter.description} filled />
+        </BlankLink>
+      </Wrapper>
+    </Centered>
   );
 };
 
 // Styled components.
+const Centered = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+`;
+
 const Details = styled.div`
   align-items: center;
   display: flex;

@@ -16,24 +16,24 @@ Open a terminal in the project's directory and launch the server.
 
 ```js
 cd server
-npm install
-npm start
-
-// if using yarn
-cd server
 yarn install
-yarn start
+yarn dev
+
+// if using npm
+cd server
+npm install
+npm run dev
 ```
 
 Open another terminal in the project's directory and launch the application.
 
 ```js
 cd client
-npm install
-npm start
-
-// if using yarn
-cd client
 yarn install
-yarn start
+yarn dev
+
+// if using npm
+cd client
+npm install
+npm run dev
 ```

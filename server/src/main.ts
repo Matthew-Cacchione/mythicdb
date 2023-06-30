@@ -1,4 +1,5 @@
 // Required packages.
+import cors from "cors";
 import express, { Response, Request } from "express";
 
 // Required routers.
@@ -9,6 +10,7 @@ const PORT = 8000;
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 // Requests for static files will look in public.

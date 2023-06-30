@@ -21,7 +21,9 @@ const SearchResults = () => {
 
   useEffect(() => {
     const fetchCharacters = async () => {
-      const response = await axios("/api/characters");
+      const response = await axios(
+        "https://mythicdb.onrender.com/api/characters"
+      );
 
       actions.searchSuccess({ characters: response.data.data });
     };

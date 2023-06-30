@@ -24,7 +24,7 @@ const Character = () => {
 
       try {
         const response = await axios(
-          `/api/character?name=${name}&realm=${realm}&region=${region}`
+          `https://mythicdb.onrender.com/api/character?name=${name}&realm=${realm}&region=${region}`
         );
 
         actions.characterSuccess({

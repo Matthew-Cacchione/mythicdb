@@ -16,7 +16,9 @@ const Affixes = () => {
   useEffect(() => {
     const fetchAffixes = async () => {
       try {
-        const response = await axios(`/api/affixes?region=us`);
+        const response = await axios(
+          `https://mythicdb.onrender.com/api/affixes?region=us`
+        );
         actions.affixSuccess({ affixes: response.data.data.affixes });
       } catch (error: any) {
         actions.affixError({
